@@ -1,0 +1,6 @@
+syntax = "proto3";
+option go_package = ".;protobuf_test";
+
+message hello {
+  string hello = 1;
+}
