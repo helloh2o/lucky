@@ -7,14 +7,23 @@ import (
 	"lucky-day/core/iencrypt/little"
 	"lucky-day/core/inet"
 	"lucky-day/core/iproto"
+	"lucky-day/example/tcp_encrypt/msg/code"
+	"lucky-day/example/tcp_encrypt/protobuf"
 	"lucky-day/log"
-	"lucky-day/sc_demo/msg/code"
-	"lucky-day/sc_demo/protobuf"
 	"net"
 	"time"
 )
 
 func main() {
+	max := 1000
+	for i := 1; i <= max; i++ {
+		go runClient(i)
+		time.Sleep(time.Millisecond * 100)
+	}
+	select {}
+}
+
+func runClient(id int) {
 	hello := protobuf.Hello{Hello: "hello protobuf 3."}
 	/*hbytes, err := proto.Marshal(&hello)
 	if err != nil {
@@ -41,7 +50,7 @@ func main() {
 	i := 1
 	p.RegisterHandler(code.Hello, &protobuf.Hello{}, func(args ...interface{}) {
 		_msg := args[0].(*protobuf.Hello)
-		log.Debug("Times %d, msg:: %s", i, _msg.Hello)
+		log.Debug("Id %d, Times %d, msg:: %s", id, i, _msg.Hello)
 		i++
 		conn := args[1].(iduck.IConnection)
 		time.Sleep(time.Millisecond * 100)
@@ -73,7 +82,6 @@ func main() {
 			p.OnReceivedMsg(ic, bf[:ln])
 		}
 	}()
-	select {}
 }
 
 func clientSetEncrypt(p iduck.Processor) {

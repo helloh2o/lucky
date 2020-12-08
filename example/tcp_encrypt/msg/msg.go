@@ -4,9 +4,9 @@ import (
 	"lucky-day/core/iduck"
 	"lucky-day/core/iencrypt/little"
 	"lucky-day/core/iproto"
-	"lucky-day/sc_demo/logic"
-	"lucky-day/sc_demo/msg/code"
-	"lucky-day/sc_demo/protobuf"
+	"lucky-day/example/tcp_encrypt/logic"
+	"lucky-day/example/tcp_encrypt/msg/code"
+	"lucky-day/example/tcp_encrypt/protobuf"
 )
 
 var Processor = iproto.NewPBProcessor()
