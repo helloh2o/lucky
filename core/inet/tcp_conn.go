@@ -2,9 +2,9 @@ package inet
 
 import (
 	"encoding/binary"
-	"github.com/sirupsen/logrus"
 	"io"
 	"lucky-day/core/duck"
+	"lucky-day/log"
 	"net"
 	"time"
 )
@@ -33,13 +33,13 @@ func NewTcpConn(conn net.Conn, processor duck.Processor) *TCPConn {
 				}
 				_, err := tc.Write(pkg)
 				if err != nil {
-					logrus.Error("tcp write %v", err)
+					log.Error("tcp write %v", err)
 					break
 				}
 			}
 			// write over or error
 			_ = conn.Close()
-			logrus.Debugf("Conn %s <=> %s closed.", tc.Conn.LocalAddr(), tc.Conn.RemoteAddr())
+			log.Debug("Conn %s <=> %s closed.", tc.Conn.LocalAddr(), tc.Conn.RemoteAddr())
 		}
 	}()
 	return tc
@@ -55,23 +55,23 @@ func (tc *TCPConn) ReadMsg() {
 		// read length
 		_, err := io.ReadAtLeast(tc, bf[:2], 2)
 		if err != nil {
-			logrus.Errorf("TCPConn read message head error %s", err.Error())
+			log.Error("TCPConn read message head error %s", err.Error())
 			return
 		}
 		var ln uint16
-		if tc.processor.GetBigOrder() {
+		if tc.processor.GetBigEndian() {
 			ln = binary.BigEndian.Uint16(bf[:2])
 		} else {
 			ln = binary.LittleEndian.Uint16(bf[:2])
 		}
 		if ln < 1 || ln > 2048 {
-			logrus.Errorf("TCPConn message length %d invalid", ln)
+			log.Error("TCPConn message length %d invalid", ln)
 			return
 		}
 		// read data
 		_, err = io.ReadFull(tc, bf[:ln])
 		if err != nil {
-			logrus.Errorf("TCPConn read data err %s", err.Error())
+			log.Error("TCPConn read data err %s", err.Error())
 			return
 		}
 		// clean
@@ -82,14 +82,18 @@ func (tc *TCPConn) ReadMsg() {
 }
 
 func (tc *TCPConn) WriteMsg(message interface{}) {
-	err, pkg := tc.processor.OnWarpMsg(message)
+	err, pkg := tc.processor.WarpMsg(message)
 	if err != nil {
-		logrus.Error("OnWarpMsg package error %s", err)
+		log.Error("OnWarpMsg package error %s", err)
 	} else {
 		select {
 		case tc.writeChan <- pkg:
 		default:
-			logrus.Error(" =============== Drop message, write chan is full  %d  =============== ", len(tc.writeChan))
+			log.Error(" =============== Drop message, write chan is full  %d  =============== ", len(tc.writeChan))
 		}
 	}
+}
+
+func (tc *TCPConn) Close() error {
+	return tc.Conn.Close()
 }

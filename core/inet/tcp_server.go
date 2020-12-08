@@ -1,8 +1,8 @@
 package inet
 
 import (
-	"github.com/sirupsen/logrus"
 	"lucky-day/core/duck"
+	"lucky-day/log"
 	"net"
 	"runtime/debug"
 	"sync"
@@ -32,7 +32,7 @@ func NewTcpServer(addr string, processor duck.Processor) (s *tcpServer, err erro
 }
 
 func (s *tcpServer) Run() error {
-	logrus.Infof("Starting tcp server on %s", s.addr)
+	log.Release("Starting tcp server on %s", s.addr)
 	for {
 		conn, err := s.ln.Accept()
 		if err != nil {
@@ -46,7 +46,7 @@ func (s *tcpServer) Run() error {
 func (s *tcpServer) Handle(conn net.Conn) {
 	defer func() {
 		if r := recover(); r != nil {
-			logrus.Errorf("PANIC %v TCP handle, stack %s", r, string(debug.Stack()))
+			log.Error("PANIC %v TCP handle, stack %s", r, string(debug.Stack()))
 		}
 		s.mu.Lock()
 		delete(s.Conns, conn.RemoteAddr())

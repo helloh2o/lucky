@@ -1,6 +1,6 @@
 package little
 
-import "log"
+import "lucky-day/log"
 
 type Cipher struct {
 	// 编码用的密码

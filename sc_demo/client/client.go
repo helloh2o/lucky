@@ -7,12 +7,12 @@ import (
 	"io"
 	"log"
 	"lucky-day/core/iproto"
-	"lucky-day/servers/test_c_s/protobuf_test"
+	"lucky-day/sc_demo/protobuf"
 	"net"
 )
 
 func main() {
-	hello := protobuf_test.Hello{Hello: "hello protobuf 3."}
+	hello := protobuf.Hello{Hello: "hello protobuf 3."}
 	hbytes, err := proto.Marshal(&hello)
 	if err != nil {
 		panic(err)
@@ -36,6 +36,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	go func() {
 		bf := make([]byte, 2048)
 		for {

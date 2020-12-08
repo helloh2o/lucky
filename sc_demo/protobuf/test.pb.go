@@ -4,7 +4,7 @@
 // 	protoc        v3.14.0
 // source: test.proto
 
-package protobuf_test
+package protobuf
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

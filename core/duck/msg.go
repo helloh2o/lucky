@@ -6,11 +6,10 @@ type Encrypt interface {
 }
 
 type Processor interface {
-	SetBytesOrder(big bool)
-	GetBigOrder() bool //big
+	SetBigEndian(big bool)
+	GetBigEndian() bool
 	SetEncrypt(enc Encrypt)
-	GetEncrypt() Encrypt
 	OnReceivedMsg(IConnection, []byte)
-	OnWarpMsg(interface{}) (error, []byte)
+	WarpMsg(interface{}) (error, []byte)
 	RegisterHandler(id int, entity interface{}, handle func(args ...interface{}))
 }

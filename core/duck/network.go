@@ -12,4 +12,5 @@ type Server interface {
 type IConnection interface {
 	ReadMsg()
 	WriteMsg(message interface{})
+	Close() error
 }

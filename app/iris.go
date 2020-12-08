@@ -13,8 +13,8 @@ var (
 	app = iris.New()
 )
 
-func init() {
-	app.Logger().SetLevel("debug")
+func Run(addr, logLevel string) error {
+	app.Logger().SetLevel(logLevel)
 	app.Use(recover.New())
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Options{
@@ -25,14 +25,7 @@ func init() {
 		AllowedHeaders:   []string{"*"},
 	}))
 	app.AllowMethods(iris.MethodOptions)
-	//// 同时写文件日志与控制台日志
-	//app.Logger().SetOutput(io.MultiWriter(f, os.Stdout))
-	//// or 使用下面这个
-	//// 日志只生成到文件
 	app.Logger().SetOutput(os.Stdout)
-}
-
-func Run(addr string) error {
 	return app.Listen(addr)
 }
 
