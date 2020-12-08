@@ -25,22 +25,20 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 		processor: processor,
 	}
 	go func() {
-		for {
-			for pkg := range tc.writeChan {
-				// read over
-				if pkg == nil {
-					break
-				}
-				_, err := tc.Write(pkg)
-				if err != nil {
-					log.Error("tcp write %v", err)
-					break
-				}
+		for pkg := range tc.writeChan {
+			// read over
+			if pkg == nil {
+				break
 			}
-			// write over or error
-			_ = conn.Close()
-			log.Debug("Conn %s <=> %s closed.", tc.Conn.LocalAddr(), tc.Conn.RemoteAddr())
+			_, err := tc.Write(pkg)
+			if err != nil {
+				log.Error("tcp write %v", err)
+				break
+			}
 		}
+		// write over or error
+		_ = conn.Close()
+		log.Release("Conn %s <=> %s closed.", tc.Conn.LocalAddr(), tc.Conn.RemoteAddr())
 	}()
 	return tc
 }
@@ -48,6 +46,7 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 func (tc *TCPConn) ReadMsg() {
 	defer func() {
 		tc.writeChan <- nil
+		tc.processor.Close()
 	}()
 	bf := make([]byte, 2048)
 	// 第一个包默认5秒
@@ -78,8 +77,8 @@ func (tc *TCPConn) ReadMsg() {
 		}
 		// clean
 		_ = tc.SetDeadline(time.Time{})
-		// throw out the msg
-		tc.processor.OnReceivedMsg(tc, bf[:ln])
+		// the package
+		tc.processor.OnReceivedPackage(tc, bf[:ln])
 		// after first pack | check heartbeat
 		timeout = time.Second * 15
 	}

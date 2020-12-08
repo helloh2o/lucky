@@ -8,6 +8,7 @@ import (
 	"lucky-day/core/iduck"
 	"lucky-day/log"
 	"reflect"
+	"runtime/debug"
 )
 
 /*
@@ -22,19 +23,59 @@ type PbfProcessor struct {
 	enc       iduck.Encrypt
 	msgTypes  map[reflect.Type]int
 	handlers  map[int]msgInfo
+	callChan  chan *callData
+	cacheCap  int
+	closeChan chan struct{}
+}
+
+type callData struct {
+	mId  uint32
+	call func(args ...interface{})
+	args []interface{}
 }
 
 // PB processor
 func NewPBProcessor() *PbfProcessor {
-	pbp := PbfProcessor{
+	pb := PbfProcessor{
 		msgTypes: make(map[reflect.Type]int),
 		handlers: make(map[int]msgInfo),
+		cacheCap: 100,
 	}
-	return &pbp
+	// cache msg 100
+	pb.callChan = make(chan *callData, pb.cacheCap)
+	// message call logic
+	pb.execCall()
+	return &pb
 }
 
-// do message
-func (pbf *PbfProcessor) OnReceivedMsg(conn iduck.IConnection, body []byte) {
+// exec the call back logic handlers
+func (pbf *PbfProcessor) execCall() {
+	go func() {
+		for cb := range pbf.callChan {
+			select {
+			case <-pbf.closeChan:
+				break
+			default:
+				func() {
+					defer func() {
+						if r := recover(); r != nil {
+							log.Error("%v", r)
+							log.Error("panic at msg %d handler, stack %s", cb.mId, string(debug.Stack()))
+						}
+					}()
+					cb.call(cb.args...)
+				}()
+			}
+		}
+	}()
+}
+
+func (pbf *PbfProcessor) Close() {
+	pbf.closeChan <- struct{}{}
+}
+
+// 收到完整数据包
+func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) {
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -58,8 +99,12 @@ func (pbf *PbfProcessor) OnReceivedMsg(conn iduck.IConnection, body []byte) {
 		log.Error("UnmarshalMerge pack.contents error by id %d", pack.Id)
 		return
 	}
-	// route
-	info.msgCallback(msg, conn)
+	// write to logic chan
+	select {
+	case pbf.callChan <- &callData{pack.Id, info.msgCallback, []interface{}{msg, conn}}:
+	default:
+		log.Error("=========>> drop the message %d, please check the slow logic handler <<=========", pack.Id)
+	}
 }
 
 func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {

@@ -79,7 +79,7 @@ func runClient(id int) {
 				return
 			}
 			// throw out the msg
-			p.OnReceivedMsg(ic, bf[:ln])
+			p.OnReceivedPackage(ic, bf[:ln])
 		}
 	}()
 }
