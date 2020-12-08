@@ -2,29 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3381aab3-d3f0-4e78-ac6b-34021055c82e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/log/example_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/log.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc_demo/logic/hello.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc_demo/msg/code/msg_id.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc_demo/msg/msg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sc_demo/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/iris.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/iris.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/duck/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/duck/msg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/duck/net.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/duck/network.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/encrypt/little/cipher.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/encrypt/little/cipher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/duck/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/msg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/duck/network.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/network.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/encrypt/little/cipher.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/cipher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/encrypt/little/cipher_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/cipher_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/encrypt/little/password.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/password.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/encrypt/little/password_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/password_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/inet/tcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iproto/msgInfo.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/msgInfo.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/game_servers/lucky/api/prop.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/game_servers/lucky/api/rank.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/game_servers/lucky/api/reward.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/game_servers/lucky/api/verify.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/test_c_s/client/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/client/client.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/test_c_s/protobuf_test/test.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/protobuf/test.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/test_c_s/server/server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/servers/test_c_s/test.proto" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/protobuf/test.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc_demo/client/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/client/client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc_demo/logic/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/logic/hello.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sc_demo/msg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/sc_demo/msg/msg.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,22 +68,13 @@
       <recent name="C:\Users\ay\go\src\lucky-day\servers\test_c_s\client" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build lucky-day/sc_demo">
+  <component name="RunManager" selected="Go Build.go build client.go">
     <configuration name="go build client.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky-day" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/sc_demo/client/client.go" />
       <package value="lucky-day" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build lucky-day/common/proxy" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="lucky-day" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/common/proxy/tlstunnel.go" />
-      <package value="lucky-day/common/proxy" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -124,13 +105,24 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestRandPassword in lucky-day/core/iencrypt/little" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="lucky-day" />
+      <working_directory value="$PROJECT_DIR$/core/iencrypt/little" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="lucky-day/core/iencrypt/little" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestRandPassword\E$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build lucky-day/sc_demo" />
         <item itemvalue="Go Build.go build client.go" />
+        <item itemvalue="Go Build.go build lucky-day/sc_demo" />
+        <item itemvalue="Go Test.TestRandPassword in lucky-day/core/iencrypt/little" />
         <item itemvalue="Go Build.go build lucky-day/servers/test_c_s/client" />
         <item itemvalue="Go Build.go build lucky-day/servers/test_c_s/server" />
-        <item itemvalue="Go Build.go build lucky-day/common/proxy" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +135,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="message hello , server &lt;=&gt; client tcp." />
-    <option name="LAST_COMMIT_MESSAGE" value="message hello , server &lt;=&gt; client tcp." />
+    <MESSAGE value="fix log &amp; only framework" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix log &amp; only framework" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -158,42 +151,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="695" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607332885212" />
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607338650324">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607395821483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607338650324" />
-    <state width="1877" height="383" key="GridCell.Tab.0.bottom" timestamp="1607395486184">
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607395821483" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="383" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607395486184" />
-    <state width="1877" height="383" key="GridCell.Tab.0.center" timestamp="1607395486184">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="383" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607395486184" />
-    <state width="1877" height="383" key="GridCell.Tab.0.left" timestamp="1607395486184">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="383" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607395486184" />
-    <state width="1877" height="383" key="GridCell.Tab.0.right" timestamp="1607395486184">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="383" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607395486184" />
-    <state width="1877" height="457" key="GridCell.Tab.1.bottom" timestamp="1607393120173">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.1.bottom" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="457" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607393120173" />
-    <state width="1877" height="457" key="GridCell.Tab.1.center" timestamp="1607393120173">
+    <state width="1877" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.1.center" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="457" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607393120173" />
-    <state width="1877" height="457" key="GridCell.Tab.1.left" timestamp="1607393120173">
+    <state width="1877" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.1.left" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="457" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607393120173" />
-    <state width="1877" height="457" key="GridCell.Tab.1.right" timestamp="1607393120173">
+    <state width="1877" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
+    <state width="1877" height="282" key="GridCell.Tab.1.right" timestamp="1607402857318">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="457" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607393120173" />
+    <state width="1877" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607402857318" />
     <state x="781" y="138" key="RollbackChangesDialog" timestamp="1607394054827">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -202,10 +195,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607330067060" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607338653368">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607395823613">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607338653368" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607395823613" />
     <state x="655" y="50" width="610" height="939" key="find.popup" timestamp="1607332122257">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

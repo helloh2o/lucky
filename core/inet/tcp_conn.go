@@ -3,7 +3,7 @@ package inet
 import (
 	"encoding/binary"
 	"io"
-	"lucky-day/core/duck"
+	"lucky-day/core/iduck"
 	"lucky-day/log"
 	"net"
 	"time"
@@ -12,10 +12,10 @@ import (
 type TCPConn struct {
 	net.Conn
 	writeChan chan []byte
-	processor duck.Processor
+	processor iduck.Processor
 }
 
-func NewTcpConn(conn net.Conn, processor duck.Processor) *TCPConn {
+func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	if processor == nil || conn == nil {
 		return nil
 	}
@@ -50,8 +50,10 @@ func (tc *TCPConn) ReadMsg() {
 		tc.writeChan <- nil
 	}()
 	bf := make([]byte, 2048)
+	// 第一个包默认5秒
+	timeout := time.Second * 5
 	for {
-		_ = tc.SetReadDeadline(time.Now().Add(time.Second * 15))
+		_ = tc.SetReadDeadline(time.Now().Add(timeout))
 		// read length
 		_, err := io.ReadAtLeast(tc, bf[:2], 2)
 		if err != nil {
@@ -78,6 +80,8 @@ func (tc *TCPConn) ReadMsg() {
 		_ = tc.SetDeadline(time.Time{})
 		// throw out the msg
 		tc.processor.OnReceivedMsg(tc, bf[:ln])
+		// after first pack | check heartbeat
+		timeout = time.Second * 15
 	}
 }
 

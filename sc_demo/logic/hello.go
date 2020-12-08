@@ -1,15 +1,15 @@
 package logic
 
 import (
-	"github.com/sirupsen/logrus"
-	"lucky-day/core/duck"
+	"lucky-day/core/iduck"
+	"lucky-day/log"
 	"lucky-day/sc_demo/protobuf"
 )
 
 // say hello
 func Hello(args ...interface{}) {
 	msg := args[0].(*protobuf.Hello)
-	logrus.Println(msg.Hello)
-	conn := args[1].(duck.IConnection)
+	log.Debug(msg.Hello)
+	conn := args[1].(iduck.IConnection)
 	conn.WriteMsg(msg)
 }

@@ -1,7 +1,7 @@
 package inet
 
 import (
-	"lucky-day/core/duck"
+	"lucky-day/core/iduck"
 	"lucky-day/log"
 	"net"
 	"runtime/debug"
@@ -12,11 +12,11 @@ type tcpServer struct {
 	mu        sync.Mutex
 	addr      string
 	ln        net.Listener
-	Conns     map[interface{}]duck.IConnection
-	processor duck.Processor
+	Conns     map[interface{}]iduck.IConnection
+	processor iduck.Processor
 }
 
-func NewTcpServer(addr string, processor duck.Processor) (s *tcpServer, err error) {
+func NewTcpServer(addr string, processor iduck.Processor) (s *tcpServer, err error) {
 	ts := new(tcpServer)
 	ts.addr = addr
 	ts.ln, err = net.Listen("tcp", addr)
@@ -24,7 +24,7 @@ func NewTcpServer(addr string, processor duck.Processor) (s *tcpServer, err erro
 		panic("processor must be set.")
 	}
 	ts.processor = processor
-	ts.Conns = make(map[interface{}]duck.IConnection)
+	ts.Conns = make(map[interface{}]iduck.IConnection)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (s *tcpServer) Handle(conn net.Conn) {
 		delete(s.Conns, conn.RemoteAddr())
 		s.mu.Unlock()
 	}()
-	var ic duck.IConnection
+	var ic iduck.IConnection
 	ic = NewTcpConn(conn, s.processor)
 	s.mu.Lock()
 	s.Conns[conn.RemoteAddr()] = ic

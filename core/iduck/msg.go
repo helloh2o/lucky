@@ -1,4 +1,4 @@
-package duck
+package iduck
 
 type Encrypt interface {
 	Encode(bs []byte)
@@ -6,7 +6,7 @@ type Encrypt interface {
 }
 
 type Processor interface {
-	SetBigEndian(big bool)
+	SetBigEndian()
 	GetBigEndian() bool
 	SetEncrypt(enc Encrypt)
 	OnReceivedMsg(IConnection, []byte)

@@ -1,4 +1,4 @@
-package duck
+package iduck
 
 import (
 	"net"

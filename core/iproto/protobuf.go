@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"lucky-day/core/duck"
+	"lucky-day/core/iduck"
 	"lucky-day/log"
 	"reflect"
 )
@@ -19,7 +19,7 @@ Contents: data,
 
 type PbfProcessor struct {
 	bigEndian bool
-	enc       duck.Encrypt
+	enc       iduck.Encrypt
 	msgTypes  map[reflect.Type]int
 	handlers  map[int]msgInfo
 }
@@ -34,10 +34,12 @@ func NewPBProcessor() *PbfProcessor {
 }
 
 // do message
-func (pbf *PbfProcessor) OnReceivedMsg(conn duck.IConnection, body []byte) {
+func (pbf *PbfProcessor) OnReceivedMsg(conn iduck.IConnection, body []byte) {
 	// 解密
 	if pbf.enc != nil {
+		//log.Debug("before decode:: %v", body)
 		pbf.enc.Decode(body)
+		//log.Debug("after decode:: %v", body)
 	}
 	// 解码
 	var pack Protocol
@@ -78,6 +80,11 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	if err != nil {
 		return err, nil
 	}
+	if pbf.enc != nil {
+		//log.Debug("before encode:: %v", data)
+		pbf.enc.Encode(data)
+		//log.Debug("after  encode:: %v", data)
+	}
 	// head
 	head := make([]byte, 2)
 	if pbf.bigEndian {
@@ -102,12 +109,12 @@ func (pbf *PbfProcessor) RegisterHandler(id int, entity interface{}, handle func
 	}
 }
 
-func (pbf *PbfProcessor) SetBigEndian(big bool) {
-	pbf.bigEndian = big
+func (pbf *PbfProcessor) SetBigEndian() {
+	pbf.bigEndian = true
 }
 func (pbf *PbfProcessor) GetBigEndian() bool {
 	return pbf.bigEndian
 }
-func (pbf *PbfProcessor) SetEncrypt(enc duck.Encrypt) {
+func (pbf *PbfProcessor) SetEncrypt(enc iduck.Encrypt) {
 	pbf.enc = enc
 }
