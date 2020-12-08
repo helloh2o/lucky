@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3381aab3-d3f0-4e78-ac6b-34021055c82e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iduck/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/msg.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/tcp_encrypt/client/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp_encrypt/client/client.go" afterDir="false" />
     </list>
@@ -64,18 +64,18 @@
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ay\go\src\lucky-day" />
-      <recent name="C:\Users\ay\go\src\lucky-day\core\inet" />
-      <recent name="C:\Users\ay\go\src\lucky-day\core\encrypt" />
-      <recent name="C:\Users\ay\go\src\lucky-day\core" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ay\go\src\lucky-day\example\tcp_encrypt" />
       <recent name="C:\Users\ay\go\src\lucky-day\sc_demo\protobuf" />
       <recent name="C:\Users\ay\go\src\lucky-day\sc_demo\msg\id" />
       <recent name="C:\Users\ay\go\src\lucky-day" />
       <recent name="C:\Users\ay\go\src\lucky-day\servers\sc_demo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky-day" />
+      <recent name="C:\Users\ay\go\src\lucky-day\core\inet" />
+      <recent name="C:\Users\ay\go\src\lucky-day\core\encrypt" />
+      <recent name="C:\Users\ay\go\src\lucky-day\core" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build lucky-day/example/tcp_encrypt/client">
@@ -189,38 +189,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607415037800" />
-    <state width="1877" height="268" key="GridCell.Tab.0.bottom" timestamp="1607416084229">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1607420630138">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607416084229" />
-    <state width="1877" height="268" key="GridCell.Tab.0.center" timestamp="1607416084229">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607420630138" />
+    <state width="1877" height="423" key="GridCell.Tab.0.bottom" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607416084229" />
-    <state width="1877" height="268" key="GridCell.Tab.0.left" timestamp="1607416084229">
+    <state width="1877" height="423" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.0.center" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607416084229" />
-    <state width="1877" height="268" key="GridCell.Tab.0.right" timestamp="1607416084229">
+    <state width="1877" height="423" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.0.left" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607416084229" />
-    <state width="1877" height="343" key="GridCell.Tab.1.bottom" timestamp="1607416037260">
+    <state width="1877" height="423" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.0.right" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="343" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607416037260" />
-    <state width="1877" height="343" key="GridCell.Tab.1.center" timestamp="1607416037260">
+    <state width="1877" height="423" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.1.bottom" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="343" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607416037260" />
-    <state width="1877" height="343" key="GridCell.Tab.1.left" timestamp="1607416037260">
+    <state width="1877" height="423" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.1.center" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="343" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607416037260" />
-    <state width="1877" height="343" key="GridCell.Tab.1.right" timestamp="1607416037260">
+    <state width="1877" height="423" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.1.left" timestamp="1607421316509">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="343" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607416037260" />
+    <state width="1877" height="423" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
+    <state width="1877" height="423" key="GridCell.Tab.1.right" timestamp="1607421316509">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="423" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607421316509" />
     <state x="781" y="138" key="RollbackChangesDialog" timestamp="1607415368759">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -233,6 +237,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607415039528" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607420630138">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607420630138" />
     <state x="655" y="50" width="610" height="939" key="find.popup" timestamp="1607332122257">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

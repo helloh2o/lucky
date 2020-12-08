@@ -12,7 +12,6 @@ type tcpServer struct {
 	mu        sync.Mutex
 	addr      string
 	ln        net.Listener
-	Conns     map[interface{}]iduck.IConnection
 	processor iduck.Processor
 }
 
@@ -24,7 +23,6 @@ func NewTcpServer(addr string, processor iduck.Processor) (s *tcpServer, err err
 		panic("processor must be set.")
 	}
 	ts.processor = processor
-	ts.Conns = make(map[interface{}]iduck.IConnection)
 	if err != nil {
 		return nil, err
 	}
@@ -48,14 +46,8 @@ func (s *tcpServer) Handle(conn net.Conn) {
 		if r := recover(); r != nil {
 			log.Error("PANIC %v TCP handle, stack %s", r, string(debug.Stack()))
 		}
-		s.mu.Lock()
-		delete(s.Conns, conn.RemoteAddr())
-		s.mu.Unlock()
 	}()
 	var ic iduck.IConnection
-	ic = NewTcpConn(conn, s.processor)
-	s.mu.Lock()
-	s.Conns[conn.RemoteAddr()] = ic
-	s.mu.Unlock()
+	ic = NewTcpConn(conn, s.processor, 100)
 	ic.ReadMsg()
 }

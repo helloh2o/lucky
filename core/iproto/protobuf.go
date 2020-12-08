@@ -23,14 +23,6 @@ type PbfProcessor struct {
 	enc       iduck.Encrypt
 	msgTypes  map[reflect.Type]int
 	handlers  map[int]msgInfo
-	callChan  chan *callData
-	cacheCap  int
-}
-
-type callData struct {
-	mId  uint32
-	call func(args ...interface{})
-	args []interface{}
 }
 
 // PB processor
@@ -38,30 +30,8 @@ func NewPBProcessor() *PbfProcessor {
 	pb := PbfProcessor{
 		msgTypes: make(map[reflect.Type]int),
 		handlers: make(map[int]msgInfo),
-		cacheCap: 100,
 	}
-	// cache msg 100
-	pb.callChan = make(chan *callData, pb.cacheCap)
-	// message call logic
-	pb.execCall()
 	return &pb
-}
-
-// exec the call back logic handlers
-func (pbf *PbfProcessor) execCall() {
-	go func() {
-		for cb := range pbf.callChan {
-			func() {
-				defer func() {
-					if r := recover(); r != nil {
-						log.Error("%v", r)
-						log.Error("panic at msg %d handler, stack %s", cb.mId, string(debug.Stack()))
-					}
-				}()
-				cb.call(cb.args...)
-			}()
-		}
-	}()
 }
 
 // 收到完整数据包
@@ -89,12 +59,15 @@ func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		log.Error("UnmarshalMerge pack.contents error by id %d", pack.Id)
 		return
 	}
-	// write to logic chan
-	select {
-	case pbf.callChan <- &callData{pack.Id, info.msgCallback, []interface{}{msg, conn}}:
-	default:
-		log.Error("=========>> drop the message %d, please check the slow logic handler <<=========", pack.Id)
-	}
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				log.Error("%v", r)
+				log.Error("panic at msg %d handler, stack %s", pack.Id, string(debug.Stack()))
+			}
+		}()
+		info.msgCallback(msg, conn)
+	}()
 }
 
 func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {

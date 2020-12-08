@@ -61,7 +61,7 @@ func runClient(id int) {
 		time.Sleep(time.Millisecond * 200)
 		conn.WriteMsg(_msg)
 	})
-	ic := inet.NewTcpConn(conn, p)
+	ic := inet.NewTcpConn(conn, p, 100)
 	ic.WriteMsg(&hello)
 	go func() {
 		bf := make([]byte, 2048)
