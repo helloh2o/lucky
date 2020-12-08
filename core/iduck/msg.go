@@ -12,5 +12,4 @@ type Processor interface {
 	OnReceivedPackage(IConnection, []byte)
 	WarpMsg(interface{}) (error, []byte)
 	RegisterHandler(id int, entity interface{}, handle func(args ...interface{}))
-	Close()
 }

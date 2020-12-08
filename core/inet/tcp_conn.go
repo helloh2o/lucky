@@ -46,7 +46,6 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 func (tc *TCPConn) ReadMsg() {
 	defer func() {
 		tc.writeChan <- nil
-		tc.processor.Close()
 	}()
 	bf := make([]byte, 2048)
 	// 第一个包默认5秒

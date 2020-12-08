@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/binary"
 	"io"
+	stdlog "log"
 	"lucky-day/core/iduck"
 	"lucky-day/core/iencrypt/little"
 	"lucky-day/core/inet"
@@ -15,6 +16,10 @@ import (
 )
 
 func main() {
+	_, err := log.New("debug", ".", stdlog.LstdFlags|stdlog.Lshortfile)
+	if err != nil {
+		panic(err)
+	}
 	max := 1000
 	for i := 1; i <= max; i++ {
 		go runClient(i)
@@ -53,7 +58,7 @@ func runClient(id int) {
 		log.Debug("Id %d, Times %d, msg:: %s", id, i, _msg.Hello)
 		i++
 		conn := args[1].(iduck.IConnection)
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * 200)
 		conn.WriteMsg(_msg)
 	})
 	ic := inet.NewTcpConn(conn, p)

@@ -25,7 +25,6 @@ type PbfProcessor struct {
 	handlers  map[int]msgInfo
 	callChan  chan *callData
 	cacheCap  int
-	closeChan chan struct{}
 }
 
 type callData struct {
@@ -52,26 +51,17 @@ func NewPBProcessor() *PbfProcessor {
 func (pbf *PbfProcessor) execCall() {
 	go func() {
 		for cb := range pbf.callChan {
-			select {
-			case <-pbf.closeChan:
-				break
-			default:
-				func() {
-					defer func() {
-						if r := recover(); r != nil {
-							log.Error("%v", r)
-							log.Error("panic at msg %d handler, stack %s", cb.mId, string(debug.Stack()))
-						}
-					}()
-					cb.call(cb.args...)
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						log.Error("%v", r)
+						log.Error("panic at msg %d handler, stack %s", cb.mId, string(debug.Stack()))
+					}
 				}()
-			}
+				cb.call(cb.args...)
+			}()
 		}
 	}()
-}
-
-func (pbf *PbfProcessor) Close() {
-	pbf.closeChan <- struct{}{}
 }
 
 // 收到完整数据包
