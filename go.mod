@@ -9,5 +9,6 @@ require (
 	github.com/kataras/iris/v12 v12.2.0-alpha.0.20201113181155-4d09475c290d
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	google.golang.org/protobuf v1.25.0
-	gorm.io/gorm v1.20.1
+	gorm.io/driver/mysql v1.0.3 // indirect
+	gorm.io/gorm v1.20.4
 )

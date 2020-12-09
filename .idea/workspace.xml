@@ -1,79 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/lucky-day.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.en.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/iris.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bean/config.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/cache/redis.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/consts.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/proxy/tlstunnel.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/config.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iduck/msg.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iencrypt/little/cipher.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/cipher.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/tcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/ws_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/TUTORIAL_EN.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/TUTORIAL_ZH.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/chanrpc/chanrpc.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/chanrpc/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/cluster/cluster.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/conf/conf.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/console/command.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/console/console.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/db/mongodb/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/db/mongodb/mongodb.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/gate/agent.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/gate/gate.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/go/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/go/go.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/leaf.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/log/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/log/log.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/module/module.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/module/skeleton.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/agent.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/conn.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/json/json.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/processor.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/protobuf/protobuf.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/tcp_client.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/tcp_conn.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/tcp_msg.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/tcp_server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/ws_client.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/ws_conn.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/network/ws_server.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/recordfile/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/recordfile/recordfile.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/recordfile/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/timer/cronexpr.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/timer/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/timer/timer.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/util/deepcopy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/util/example_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/util/map.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/util/rand.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/util/semaphore.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/leaf/version.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/comm/logic/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/logic/hello.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/comm/msg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/msg/msg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/tcp/tcpserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/tcpserver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/websocket/client/wsclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/websocket/client/wsclient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/websocket/wsserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/websocket/wsserver.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/example_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lucky.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,6 +105,23 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1.conf &amp; readme" />
+    <MESSAGE value="1.cmm &amp; rename" />
+    <MESSAGE value="1. fix timer" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. fix timer" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <environment>
@@ -165,13 +131,37 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607507183381">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607507183381" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607506503700" />
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1607506819064">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1607506819064">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1607506819064">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1607506819064">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1607506512513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607507184958">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607507184958" />
   </component>
 </project>
