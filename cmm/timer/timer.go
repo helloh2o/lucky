@@ -1,9 +1,8 @@
 package timer
 
 import (
-	"lucky/core/leaf/conf"
-	"lucky/core/leaf/log"
-	"runtime"
+	"lucky/log"
+	"runtime/debug"
 	"time"
 )
 
@@ -33,13 +32,7 @@ func (t *Timer) Cb() {
 	defer func() {
 		t.cb = nil
 		if r := recover(); r != nil {
-			if conf.LenStackBuf > 0 {
-				buf := make([]byte, conf.LenStackBuf)
-				l := runtime.Stack(buf, false)
-				log.Error("%v: %s", r, buf[:l])
-			} else {
-				log.Error("%v", r)
-			}
+			log.Error("%v: %s", r, string(debug.Stack()))
 		}
 	}()
 
