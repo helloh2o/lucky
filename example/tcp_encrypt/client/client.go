@@ -5,11 +5,11 @@ import (
 	"io"
 	stdlog "log"
 	"lucky-day/core/iduck"
-	"lucky-day/core/iencrypt/little"
 	"lucky-day/core/inet"
 	"lucky-day/core/iproto"
-	"lucky-day/example/tcp_encrypt/msg/code"
-	"lucky-day/example/tcp_encrypt/protobuf"
+	"lucky-day/example/comm/msg"
+	"lucky-day/example/comm/msg/code"
+	"lucky-day/example/comm/protobuf"
 	"lucky-day/log"
 	"net"
 	"time"
@@ -51,7 +51,7 @@ func runClient(id int) {
 	}
 	// 加密
 	p := iproto.NewPBProcessor()
-	clientSetEncrypt(p)
+	msg.SetEncrypt(p)
 	i := 1
 	p.RegisterHandler(code.Hello, &protobuf.Hello{}, func(args ...interface{}) {
 		_msg := args[0].(*protobuf.Hello)
@@ -87,14 +87,4 @@ func runClient(id int) {
 			p.OnReceivedPackage(ic, bf[:ln])
 		}
 	}()
-}
-
-func clientSetEncrypt(p iduck.Processor) {
-	//pwdStr := little.RandPassword()
-	pwdStr := "BH1rStJwNP1YIvNI4Y+8ZVWyqsX47QCTOJTpGLnL2VQHqV0pPu8ZLk3yBc5sRNWmpYjqL2jY9LiFr9EaUsT1Voy3sBadZDKBPQ3g3yP6wOtvrHNxisbuTrPxEHZ6i6sSPAw6mB0rFEsB1OSjXPzlhkmb4lmee1+1aeOgHPaDmUF0vzskwS2iA4TK7ArJ1+fCvWJmY6i2/pDMh1qh3I3PJtBXyBUhET+7w9s5UfcXCVBTQ9beJ1tHC3d5TwgzgkJqkTGkHt1tp2HaTM0fcmd+lY43IP+tsbosJQb7lpqStA94gIlef/AwKnXTQJc1vkZF6Jz5bscCG2CuNhPmKJ8OfA=="
-	pwd, err := little.ParsePassword(pwdStr)
-	if err != nil {
-		panic(err)
-	}
-	p.SetEncrypt(little.NewCipher(pwd))
 }

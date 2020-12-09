@@ -4,9 +4,9 @@ import (
 	"lucky-day/core/iduck"
 	"lucky-day/core/iencrypt/little"
 	"lucky-day/core/iproto"
-	"lucky-day/example/tcp_encrypt/logic"
-	"lucky-day/example/tcp_encrypt/msg/code"
-	"lucky-day/example/tcp_encrypt/protobuf"
+	"lucky-day/example/comm/logic"
+	"lucky-day/example/comm/msg/code"
+	"lucky-day/example/comm/protobuf"
 )
 
 var Processor = iproto.NewPBProcessor()
@@ -21,8 +21,6 @@ func SetEncrypt(p iduck.Processor) {
 	p.SetEncrypt(little.NewCipher(pwd))
 }
 func init() {
-	// 设置加密器
-	SetEncrypt(Processor)
-	// 注册逻辑
+	// 注册消息，以及回调处理
 	Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
 }

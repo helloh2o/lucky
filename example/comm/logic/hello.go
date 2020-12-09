@@ -2,7 +2,7 @@ package logic
 
 import (
 	"lucky-day/core/iduck"
-	"lucky-day/example/tcp_encrypt/protobuf"
+	"lucky-day/example/comm/protobuf"
 	"lucky-day/log"
 )
 
