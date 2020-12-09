@@ -1,8 +1,8 @@
 package inet
 
 import (
-	"lucky-day/core/iduck"
-	"lucky-day/log"
+	"lucky/core/iduck"
+	"lucky/log"
 	"net"
 	"runtime/debug"
 	"sync"
@@ -48,6 +48,6 @@ func (s *tcpServer) Handle(conn net.Conn) {
 		}
 	}()
 	var ic iduck.IConnection
-	ic = NewTcpConn(conn, s.processor, 100)
+	ic = NewTcpConn(conn, s.processor)
 	ic.ReadMsg()
 }

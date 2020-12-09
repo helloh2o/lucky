@@ -1,10 +1,11 @@
 package main
 
 import (
+	"lucky/conf"
 	"net/http"
 
-	"lucky-day/core/inet"
-	"lucky-day/example/comm/msg"
+	"lucky/core/inet"
+	"lucky/example/comm/msg"
 	_ "net/http/pprof"
 )
 
@@ -17,6 +18,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}*/
+	conf.SetConf(&conf.Config{
+		ConnUndoQueueSize:   100,
+		ConnWriteQueueSize:  100,
+		FirstPackageTimeout: 5,
+		ConnReadTimeout:     15,
+		ConnWriteTimeout:    5,
+		MaxDataPackageSize:  2048,
+		MaxHeaderLen:        1024,
+	})
 	msg.SetEncrypt(msg.Processor)
 	if s, err := inet.NewWsServer("localhost:2022", msg.Processor); err != nil {
 		panic(err)

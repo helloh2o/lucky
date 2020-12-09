@@ -2,7 +2,7 @@ package log_test
 
 import (
 	l "log"
-	"lucky-day/core/leaf/log"
+	"lucky/core/leaf/log"
 )
 
 func Example() {

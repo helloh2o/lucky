@@ -1,9 +1,9 @@
 package logic
 
 import (
-	"lucky-day/core/iduck"
-	"lucky-day/example/comm/protobuf"
-	"lucky-day/log"
+	"lucky/core/iduck"
+	"lucky/example/comm/protobuf"
+	"lucky/log"
 )
 
 // say hello

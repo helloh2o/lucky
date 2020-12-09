@@ -2,8 +2,9 @@ package inet
 
 import (
 	"github.com/gorilla/websocket"
-	"lucky-day/core/iduck"
-	"lucky-day/log"
+	"lucky/conf"
+	"lucky/core/iduck"
+	"lucky/log"
 	"net"
 	"net/http"
 	"runtime/debug"
@@ -44,7 +45,7 @@ func (h *wsHandler) HandlerWsConn(conn *websocket.Conn) {
 		}
 	}()
 	var ic iduck.IConnection
-	ic = NewWSConn(conn, h.sv.processor, 100)
+	ic = NewWSConn(conn, h.sv.processor)
 	ic.ReadMsg()
 }
 
@@ -67,9 +68,9 @@ func (s *wsServer) Run() error {
 	httpServer := &http.Server{
 		Addr:           s.addr,
 		Handler:        &wsHandler{sv: s},
-		ReadTimeout:    time.Second * 10,
-		WriteTimeout:   time.Second * 10,
-		MaxHeaderBytes: 1024,
+		ReadTimeout:    time.Second * time.Duration(conf.C.ConnReadTimeout),
+		WriteTimeout:   time.Second * time.Duration(conf.C.ConnWriteTimeout),
+		MaxHeaderBytes: conf.C.MaxHeaderLen,
 	}
 	return httpServer.Serve(s.ln)
 }

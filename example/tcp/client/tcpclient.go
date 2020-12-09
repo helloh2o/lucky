@@ -4,13 +4,13 @@ import (
 	"encoding/binary"
 	"io"
 	stdlog "log"
-	"lucky-day/core/iduck"
-	"lucky-day/core/inet"
-	"lucky-day/core/iproto"
-	"lucky-day/example/comm/msg"
-	"lucky-day/example/comm/msg/code"
-	"lucky-day/example/comm/protobuf"
-	"lucky-day/log"
+	"lucky/core/iduck"
+	"lucky/core/inet"
+	"lucky/core/iproto"
+	"lucky/example/comm/msg"
+	"lucky/example/comm/msg/code"
+	"lucky/example/comm/protobuf"
+	"lucky/log"
 	"net"
 	"time"
 )
@@ -61,7 +61,7 @@ func runClient(id int) {
 		time.Sleep(time.Millisecond * 200)
 		conn.WriteMsg(_msg)
 	})
-	ic := inet.NewTcpConn(conn, p, 100)
+	ic := inet.NewTcpConn(conn, p)
 	ic.WriteMsg(&hello)
 	go func() {
 		bf := make([]byte, 2048)

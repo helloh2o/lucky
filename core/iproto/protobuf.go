@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
-	"lucky-day/core/iduck"
-	"lucky-day/log"
+	"lucky/core/iduck"
+	"lucky/log"
 	"reflect"
 	"runtime/debug"
 )

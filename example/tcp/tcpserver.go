@@ -1,12 +1,12 @@
 package main
 
 import (
-	"lucky-day/log"
+	"lucky/log"
 	"net/http"
 
 	stdlog "log"
-	"lucky-day/core/inet"
-	"lucky-day/example/comm/msg"
+	"lucky/core/inet"
+	"lucky/example/comm/msg"
 	_ "net/http/pprof"
 )
 

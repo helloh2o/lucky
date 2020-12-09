@@ -2,8 +2,9 @@ package inet
 
 import (
 	"github.com/gorilla/websocket"
-	"lucky-day/core/iduck"
-	"lucky-day/log"
+	"lucky/conf"
+	"lucky/core/iduck"
+	"lucky/log"
 	"time"
 )
 
@@ -16,16 +17,16 @@ type WSConn struct {
 	processor iduck.Processor
 }
 
-func NewWSConn(conn *websocket.Conn, processor iduck.Processor, maxQueueSize int) *WSConn {
+func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 	if processor == nil || conn == nil {
 		return nil
 	}
 	wc := &WSConn{
 		conn:       conn,
-		writeQueue: make(chan []byte, maxQueueSize),
+		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
 		processor:  processor,
 		// 单个缓存100个为处理的包
-		readQueue: make(chan []byte, maxQueueSize),
+		readQueue: make(chan []byte, conf.C.ConnUndoQueueSize),
 	}
 	// write q
 	go func() {
@@ -64,7 +65,7 @@ func (wc *WSConn) ReadMsg() {
 		wc.readQueue <- nil
 		wc.writeQueue <- nil
 	}()
-	timeout := time.Second * 5
+	timeout := time.Second * time.Duration(conf.C.FirstPackageTimeout)
 	for {
 		_ = wc.conn.SetReadDeadline(time.Now().Add(timeout))
 		typee, body, err := wc.conn.ReadMessage()
@@ -82,7 +83,7 @@ func (wc *WSConn) ReadMsg() {
 			}
 			// clean
 			_ = wc.conn.SetReadDeadline(time.Time{})
-			timeout = time.Second * 15
+			timeout = time.Second * time.Duration(conf.C.ConnReadTimeout)
 		case websocket.TextMessage:
 			log.Error("not support pain text message type %d", typee)
 			return

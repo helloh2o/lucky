@@ -1,37 +1,46 @@
 # lucky
 
 #### 介绍
-lucky games
+这是一个游戏框架，目前支持protobuf消息协议，基于websocket或者socket进行TCP长连接传输, 支持对消息包加密。
+消息读、写、逻辑处理分别在各自goroutine中, 可以对单个连接恶意发包进行限制，不会堵塞底层网络。
+
+使用者只需注册消息和消息对应的回调函数，在回调中处理具体逻辑。例如：
+```
+	Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
+```
 
 #### 软件架构
-软件架构说明
-
+TODO
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+go get gitee.com/helloh2o/lucky
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 设置配置参数或保持默认
+```
+conf.SetConf(&conf.Config{
+		ConnUndoQueueSize:   100,
+		ConnWriteQueueSize:  100,
+		FirstPackageTimeout: 5,
+		ConnReadTimeout:     15,
+		ConnWriteTimeout:    5,
+		MaxDataPackageSize:  2048,
+		MaxHeaderLen:        1024,
+	})
+```
+2. 请参考example下的tcp和websocket 例子
 
-#### 参与贡献
+#### TODO
+1. udp 支持
+2. udp 帧同步
+3. aes 加密
+4. 消息JSON 协议
+5. mongodb 
+#### 欢迎参与
 
 1.  Fork 本仓库
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)

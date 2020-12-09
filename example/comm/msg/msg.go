@@ -1,12 +1,12 @@
 package msg
 
 import (
-	"lucky-day/core/iduck"
-	"lucky-day/core/iencrypt/little"
-	"lucky-day/core/iproto"
-	"lucky-day/example/comm/logic"
-	"lucky-day/example/comm/msg/code"
-	"lucky-day/example/comm/protobuf"
+	"lucky/core/iduck"
+	"lucky/core/iencrypt/little"
+	"lucky/core/iproto"
+	"lucky/example/comm/logic"
+	"lucky/example/comm/msg/code"
+	"lucky/example/comm/protobuf"
 )
 
 var Processor = iproto.NewPBProcessor()

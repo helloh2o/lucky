@@ -3,8 +3,9 @@ package inet
 import (
 	"encoding/binary"
 	"io"
-	"lucky-day/core/iduck"
-	"lucky-day/log"
+	"lucky/conf"
+	"lucky/core/iduck"
+	"lucky/log"
 	"net"
 	"time"
 )
@@ -18,16 +19,16 @@ type TCPConn struct {
 	processor iduck.Processor
 }
 
-func NewTcpConn(conn net.Conn, processor iduck.Processor, maxQueueSize int) *TCPConn {
+func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	if processor == nil || conn == nil {
 		return nil
 	}
 	tc := &TCPConn{
 		Conn:       conn,
-		writeQueue: make(chan []byte, maxQueueSize),
+		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
 		processor:  processor,
 		// 单个缓存100个为处理的包
-		readQueue: make(chan []byte, maxQueueSize),
+		readQueue: make(chan []byte, conf.C.ConnUndoQueueSize),
 	}
 	// write q
 	go func() {
@@ -65,9 +66,9 @@ func (tc *TCPConn) ReadMsg() {
 		tc.readQueue <- nil
 		tc.writeQueue <- nil
 	}()
-	bf := make([]byte, 2048)
+	bf := make([]byte, conf.C.MaxDataPackageSize)
 	// 第一个包默认5秒
-	timeout := time.Second * 5
+	timeout := time.Second * time.Duration(conf.C.FirstPackageTimeout)
 	for {
 		_ = tc.SetReadDeadline(time.Now().Add(timeout))
 		// read length
@@ -82,7 +83,7 @@ func (tc *TCPConn) ReadMsg() {
 		} else {
 			ln = binary.LittleEndian.Uint16(bf[:2])
 		}
-		if ln < 1 || ln > 2048 {
+		if ln < 1 || int(ln) > conf.C.MaxDataPackageSize {
 			log.Error("TCPConn message length %d invalid", ln)
 			return
 		}
@@ -102,7 +103,7 @@ func (tc *TCPConn) ReadMsg() {
 			return
 		}
 		// after first pack | check heartbeat
-		timeout = time.Second * 15
+		timeout = time.Second * time.Duration(conf.C.ConnReadTimeout)
 	}
 }
 
