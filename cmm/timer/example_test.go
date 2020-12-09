@@ -2,7 +2,7 @@ package timer_test
 
 import (
 	"fmt"
-	"lucky/core/leaf/timer"
+	"lucky/cmm/timer"
 	"time"
 )
 

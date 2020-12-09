@@ -33,8 +33,8 @@ conf.SetConf(&conf.Config{
 2. 请参考example下的tcp和websocket 例子
 
 #### TODO
-1. udp 支持
-2. udp 帧同步
+1. kcp 支持
+2. kcp 帧同步
 3. aes 加密
 4. 消息JSON 协议
 5. mongodb 

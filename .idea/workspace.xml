@@ -21,8 +21,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/timer/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/timer/example_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/utils/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/example_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/udp_conn.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/udp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/kcp_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/example_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,12 +121,15 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.conf &amp; readme" />
     <MESSAGE value="1.cmm &amp; rename" />
     <MESSAGE value="1. fix timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. fix timer" />
+    <MESSAGE value="1. go.mod" />
+    <MESSAGE value="1. iris" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. iris" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -131,10 +140,10 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607507183381">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607509874910">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607507183381" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607509874910" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -159,9 +168,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607507184958">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607509876654">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607507184958" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607509876654" />
   </component>
 </project>

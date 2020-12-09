@@ -2,11 +2,11 @@ package utils_test
 
 import (
 	"fmt"
-	"lucky/core/leaf/util"
+	"lucky/cmm/utils"
 )
 
 func ExampleMap() {
-	m := new(util.Map)
+	m := new(utils.Map)
 
 	fmt.Println(m.Get("key"))
 	m.Set("key", "value")
@@ -28,7 +28,7 @@ func ExampleMap() {
 }
 
 func ExampleRandGroup() {
-	i := util.RandGroup(0, 0, 50, 50)
+	i := utils.RandGroup(0, 0, 50, 50)
 	switch i {
 	case 2, 3:
 		fmt.Println("ok")
@@ -39,7 +39,7 @@ func ExampleRandGroup() {
 }
 
 func ExampleRandInterval() {
-	v := util.RandInterval(-1, 1)
+	v := utils.RandInterval(-1, 1)
 	switch v {
 	case -1, 0, 1:
 		fmt.Println("ok")
@@ -50,7 +50,7 @@ func ExampleRandInterval() {
 }
 
 func ExampleRandIntervalN() {
-	r := util.RandIntervalN(-1, 0, 2)
+	r := utils.RandIntervalN(-1, 0, 2)
 	if r[0] == -1 && r[1] == 0 ||
 		r[0] == 0 && r[1] == -1 {
 		fmt.Println("ok")
@@ -64,7 +64,7 @@ func ExampleDeepCopy() {
 	src := []int{1, 2, 3}
 
 	var dst []int
-	util.DeepCopy(&dst, &src)
+	utils.DeepCopy(&dst, &src)
 
 	for _, v := range dst {
 		fmt.Println(v)
@@ -79,7 +79,7 @@ func ExampleDeepCopy() {
 func ExampleDeepClone() {
 	src := []int{1, 2, 3}
 
-	dst := util.DeepClone(src).([]int)
+	dst := utils.DeepClone(src).([]int)
 
 	for _, v := range dst {
 		fmt.Println(v)
