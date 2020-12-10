@@ -1,6 +1,6 @@
 package iduck
 
-type Encrypt interface {
+type Encryptor interface {
 	Encode(bs []byte) []byte
 	Decode(bs []byte) []byte
 }
@@ -8,7 +8,7 @@ type Encrypt interface {
 type Processor interface {
 	SetBigEndian()
 	GetBigEndian() bool
-	SetEncrypt(enc Encrypt)
+	SetEncryptor(enc Encryptor)
 	OnReceivedPackage(IConnection, []byte)
 	WarpMsg(interface{}) (error, []byte)
 	RegisterHandler(id int, entity interface{}, handle func(args ...interface{}))

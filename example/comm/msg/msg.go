@@ -24,7 +24,7 @@ func SetEncrypt(p iduck.Processor) {
 	// 高级标准加密
 	cipher := aes.NewAESCipher(pwdStr)
 	_ = pwd
-	p.SetEncrypt(cipher)
+	p.SetEncryptor(cipher)
 }
 func init() {
 	// 注册消息，以及回调处理

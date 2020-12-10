@@ -123,6 +123,6 @@ func (pbf *PbfProcessor) SetBigEndian() {
 func (pbf *PbfProcessor) GetBigEndian() bool {
 	return pbf.bigEndian
 }
-func (pbf *PbfProcessor) SetEncrypt(enc iduck.Encryptor) {
+func (pbf *PbfProcessor) SetEncryptor(enc iduck.Encryptor) {
 	pbf.enc = enc
 }
