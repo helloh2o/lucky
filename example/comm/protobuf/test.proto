@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = ".;protobuf_test";
+option go_package = ".;protobuf";
 
 message hello {
   string hello = 1;

@@ -9,6 +9,15 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+func RandString(len int) string {
+	bytes := make([]byte, len)
+	for i := 0; i < len; i++ {
+		b := rand.Intn(26) + 65
+		bytes[i] = byte(b)
+	}
+	return string(bytes)
+}
+
 func RandGroup(p ...uint32) int {
 	if p == nil {
 		panic("args not found")

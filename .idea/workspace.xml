@@ -20,8 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/inet/frame_node.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/frame-sync/client/kcpframeclient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/frame-sync/kcpframeserver.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iduck/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/message.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/utils/rand.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/rand.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iduck/network.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/network.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/kcp_frame.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/base.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/base.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/base.proto" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/base.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/msg/code/msg_id.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/msg/code/msg_id.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/protobuf/test.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/protobuf/test.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/protobuf/test.proto" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/protobuf/test.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +70,38 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/frame-sync/client" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
-  <component name="RunManager" selected="Go Build.go build wsserver.go">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\example" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\example\frame-sync\client" />
+      <recent name="C:\Users\ay\go\src\lucky\example\frame-sync" />
+      <recent name="C:\Users\ay\go\src\lucky\core\iproto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build lucky/example/kcp/client">
+    <configuration name="go build lucky/example/kcp" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/kcp/kcpserver.go" />
+      <package value="lucky/example/kcp" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build lucky/example/kcp/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/kcp/client/kcpclient.go" />
+      <package value="lucky/example/kcp/client" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build lucky/example/websocket" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -88,34 +129,13 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestAESCipher_Encode in lucky/core/iencrypt/aes" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/core/iencrypt/aes" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="lucky/core/iencrypt/aes" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestAESCipher_Encode\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="redis_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/cmm/cache" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <package value="lucky" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmm/cache/redis_test.go" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build lucky/example/kcp/client" />
+        <item itemvalue="Go Build.go build lucky/example/kcp" />
         <item itemvalue="Go Build.go build wsclient.go" />
         <item itemvalue="Go Build.go build wsserver.go" />
         <item itemvalue="Go Build.go build lucky/example/websocket" />
-        <item itemvalue="Go Test.TestAESCipher_Encode in lucky/core/iencrypt/aes" />
-        <item itemvalue="Go Test.redis_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -150,7 +170,8 @@
     <MESSAGE value="Aes-128,192,256" />
     <MESSAGE value="readme" />
     <MESSAGE value="rename encryptor" />
-    <option name="LAST_COMMIT_MESSAGE" value="rename encryptor" />
+    <MESSAGE value="encryptor" />
+    <option name="LAST_COMMIT_MESSAGE" value="encryptor" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -161,30 +182,30 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607589325152">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607589600737">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607589325152" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607589600737" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607506503700" />
-    <state width="1877" height="339" key="GridCell.Tab.0.bottom" timestamp="1607588232327">
+    <state width="1877" height="312" key="GridCell.Tab.0.bottom" timestamp="1607596880893">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="339" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607588232327" />
-    <state width="1877" height="339" key="GridCell.Tab.0.center" timestamp="1607588232327">
+    <state width="1877" height="312" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607596880893" />
+    <state width="1877" height="312" key="GridCell.Tab.0.center" timestamp="1607596880893">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="339" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607588232327" />
-    <state width="1877" height="339" key="GridCell.Tab.0.left" timestamp="1607588232327">
+    <state width="1877" height="312" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607596880893" />
+    <state width="1877" height="312" key="GridCell.Tab.0.left" timestamp="1607596880893">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="339" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607588232327" />
-    <state width="1877" height="339" key="GridCell.Tab.0.right" timestamp="1607588232327">
+    <state width="1877" height="312" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607596880893" />
+    <state width="1877" height="312" key="GridCell.Tab.0.right" timestamp="1607596880893">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="339" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607588232327" />
+    <state width="1877" height="312" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607596880893" />
     <state width="1877" height="339" key="GridCell.Tab.1.bottom" timestamp="1607588232327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -205,9 +226,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607589326625">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607589602384">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607589326625" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607589602384" />
   </component>
 </project>

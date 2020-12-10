@@ -6,16 +6,20 @@ import (
 	"lucky/core/iduck"
 	"lucky/log"
 	"runtime/debug"
+	"sync"
 	"time"
 )
 
 type WSConn struct {
+	sync.RWMutex
 	conn *websocket.Conn
 	// 缓存队列
 	writeQueue chan []byte
 	readQueue  chan []byte
 	// 消息处理器
 	processor iduck.Processor
+	userData  interface{}
+	node      iduck.INode
 }
 
 func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
@@ -114,5 +118,27 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 }
 
 func (wc *WSConn) Close() error {
+	wc.Lock()
+	defer wc.Unlock()
 	return wc.conn.Close()
+}
+func (wc *WSConn) SetData(data interface{}) {
+	wc.Lock()
+	defer wc.Unlock()
+	wc.userData = data
+}
+func (wc *WSConn) GetData() interface{} {
+	wc.RLock()
+	defer wc.RUnlock()
+	return wc.userData
+}
+func (wc *WSConn) SetNode(node iduck.INode) {
+	wc.Lock()
+	defer wc.Unlock()
+	wc.node = node
+}
+func (wc *WSConn) GetNode() iduck.INode {
+	wc.RLock()
+	defer wc.RUnlock()
+	return wc.node
 }

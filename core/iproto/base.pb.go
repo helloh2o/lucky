@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 用消息0
+// 协议消息
 type Protocol struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -76,6 +76,7 @@ func (x *Protocol) GetContent() []byte {
 	return nil
 }
 
+// 打包消息
 type ScProtocolPack struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -131,6 +132,62 @@ func (x *ScProtocolPack) GetPack() []*Protocol {
 	return nil
 }
 
+// 帧消息
+type ScFrame struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Frame     uint32   `protobuf:"varint,1,opt,name=frame,proto3" json:"frame,omitempty"`
+	Protocols [][]byte `protobuf:"bytes,2,rep,name=protocols,proto3" json:"protocols,omitempty"`
+}
+
+func (x *ScFrame) Reset() {
+	*x = ScFrame{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_base_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ScFrame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScFrame) ProtoMessage() {}
+
+func (x *ScFrame) ProtoReflect() protoreflect.Message {
+	mi := &file_base_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScFrame.ProtoReflect.Descriptor instead.
+func (*ScFrame) Descriptor() ([]byte, []int) {
+	return file_base_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ScFrame) GetFrame() uint32 {
+	if x != nil {
+		return x.Frame
+	}
+	return 0
+}
+
+func (x *ScFrame) GetProtocols() [][]byte {
+	if x != nil {
+		return x.Protocols
+	}
+	return nil
+}
+
 var File_base_proto protoreflect.FileDescriptor
 
 var file_base_proto_rawDesc = []byte{
@@ -142,7 +199,11 @@ var file_base_proto_rawDesc = []byte{
 	0x6c, 0x5f, 0x70, 0x61, 0x63, 0x6b, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x04, 0x70, 0x61, 0x63, 0x6b, 0x18, 0x02,
 	0x20, 0x03, 0x28, 0x0b, 0x32, 0x09, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x52,
-	0x04, 0x70, 0x61, 0x63, 0x6b, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x3b, 0x69, 0x70, 0x72, 0x6f, 0x74,
+	0x04, 0x70, 0x61, 0x63, 0x6b, 0x22, 0x3e, 0x0a, 0x08, 0x73, 0x63, 0x5f, 0x66, 0x72, 0x61, 0x6d,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x05, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x63, 0x6f, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0c, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x63, 0x6f, 0x6c, 0x73, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x3b, 0x69, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
@@ -158,10 +219,11 @@ func file_base_proto_rawDescGZIP() []byte {
 	return file_base_proto_rawDescData
 }
 
-var file_base_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_base_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_base_proto_goTypes = []interface{}{
 	(*Protocol)(nil),       // 0: protocol
 	(*ScProtocolPack)(nil), // 1: sc_protocol_pack
+	(*ScFrame)(nil),        // 2: sc_frame
 }
 var file_base_proto_depIdxs = []int32{
 	0, // 0: sc_protocol_pack.pack:type_name -> protocol
@@ -202,6 +264,18 @@ func file_base_proto_init() {
 				return nil
 			}
 		}
+		file_base_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ScFrame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -209,7 +283,7 @@ func file_base_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_base_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

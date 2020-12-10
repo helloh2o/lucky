@@ -8,16 +8,20 @@ import (
 	"lucky/log"
 	"net"
 	"runtime/debug"
+	"sync"
 	"time"
 )
 
 type TCPConn struct {
+	sync.RWMutex
 	net.Conn
 	// 缓存队列
 	writeQueue chan []byte
 	readQueue  chan []byte
 	// 消息处理器
 	processor iduck.Processor
+	userData  interface{}
+	node      iduck.INode
 }
 
 // 可靠的UDP，like TCP
@@ -143,4 +147,25 @@ func (tc *TCPConn) WriteMsg(message interface{}) {
 
 func (tc *TCPConn) Close() error {
 	return tc.Conn.Close()
+}
+
+func (tc *TCPConn) SetData(data interface{}) {
+	tc.Lock()
+	defer tc.Unlock()
+	tc.userData = data
+}
+func (tc *TCPConn) GetData() interface{} {
+	tc.RLock()
+	defer tc.RUnlock()
+	return tc.userData
+}
+func (tc *TCPConn) SetNode(node iduck.INode) {
+	tc.Lock()
+	defer tc.Unlock()
+	tc.node = node
+}
+func (tc *TCPConn) GetNode() iduck.INode {
+	tc.RLock()
+	defer tc.RUnlock()
+	return tc.node
 }

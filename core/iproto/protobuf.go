@@ -17,7 +17,7 @@ protocol := protocolMsg{
 MsgId:    id,
 Contents: data,
 }*/
-
+// protoc --go_out=. *.proto
 type PbfProcessor struct {
 	bigEndian bool
 	enc       iduck.Encryptor
@@ -36,6 +36,11 @@ func NewPBProcessor() *PbfProcessor {
 
 // 收到完整数据包
 func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) {
+	// 如果连接在某个同步节点上，转发消息到节点
+	if conn.GetNode() != nil {
+		conn.GetNode().OnMessage(body)
+		return
+	}
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
