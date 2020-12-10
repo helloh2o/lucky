@@ -20,7 +20,7 @@ Contents: data,
 
 type PbfProcessor struct {
 	bigEndian bool
-	enc       iduck.Encrypt
+	enc       iduck.Encryptor
 	msgTypes  map[reflect.Type]int
 	handlers  map[int]msgInfo
 }
@@ -123,6 +123,6 @@ func (pbf *PbfProcessor) SetBigEndian() {
 func (pbf *PbfProcessor) GetBigEndian() bool {
 	return pbf.bigEndian
 }
-func (pbf *PbfProcessor) SetEncrypt(enc iduck.Encrypt) {
+func (pbf *PbfProcessor) SetEncrypt(enc iduck.Encryptor) {
 	pbf.enc = enc
 }

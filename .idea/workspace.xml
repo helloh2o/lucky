@@ -20,20 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cmm/cache/redis_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher_test.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/core/inet/kcp_frame.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/iduck/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iencrypt/little/cipher.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/cipher.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iencrypt/little/cipher_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/little/cipher_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_conn.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/comm/msg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/msg/msg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,9 +148,10 @@
     <MESSAGE value="1. iris" />
     <MESSAGE value="1. kcp conn" />
     <MESSAGE value="conf data" />
-    <MESSAGE value="readme" />
     <MESSAGE value="redis client" />
-    <option name="LAST_COMMIT_MESSAGE" value="redis client" />
+    <MESSAGE value="Aes-128,192,256" />
+    <MESSAGE value="readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -171,10 +162,10 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607572099138">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607588890325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607572099138" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607588890325" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -215,9 +206,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607572101008">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607588891909">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607572101008" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607588891909" />
   </component>
 </project>
