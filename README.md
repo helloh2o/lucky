@@ -1,7 +1,8 @@
 # lucky
 
 #### 介绍
-这是一个游戏框架，目前支持protobuf消息协议，基于websocket或者socket进行TCP长连接传输, 支持对消息包加密。
+这是一个游戏框架，目前支持protobuf消息协议，基于websocket或者socket进行TCP长连接传输, 支持对消息包加密
+加密方式有 AES128,AES192,AES256 以及Byte轻量级混淆加密。
 消息读、写、逻辑处理分别在各自goroutine中, 可以对单个连接恶意发包进行限制，不会堵塞底层网络。
 
 使用者只需注册消息和消息对应的回调函数，在回调中处理具体逻辑。例如：
@@ -33,10 +34,9 @@ conf.Set(&conf.Data{
 2. 请参考example下的tcp和websocket 例子
 
 #### TODO
-1. aes 加密
-2. 消息JSON 协议
-3. mongodb 
-4. 帧同步example
+1. 消息JSON 协议
+2. mongodb 
+3. 帧同步example
 #### 欢迎参与
 
 1.  Fork 本仓库
