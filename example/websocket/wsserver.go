@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}*/
-	conf.SetConf(&conf.Config{
+	conf.Set(&conf.Data{
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  100,
 		FirstPackageTimeout: 5,

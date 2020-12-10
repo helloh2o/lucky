@@ -20,7 +20,7 @@ go get gitee.com/helloh2o/lucky
 
 1. 设置配置参数或保持默认
 ```
-conf.SetConf(&conf.Config{
+conf.Set(&conf.Data{
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  100,
 		FirstPackageTimeout: 5,

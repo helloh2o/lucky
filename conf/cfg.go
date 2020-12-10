@@ -3,12 +3,12 @@ package conf
 import "sync"
 
 var (
-	C    *Config
+	C    *Data
 	once sync.Once
 )
 
 func init() {
-	C = &Config{
+	C = &Data{
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  100,
 		FirstPackageTimeout: 5,
@@ -20,7 +20,7 @@ func init() {
 }
 
 // please set this before startup server
-func SetConf(cfg *Config) {
+func Set(cfg *Data) {
 	once.Do(func() {
 		if cfg.ConnUndoQueueSize < 100 {
 			cfg.ConnUndoQueueSize = 100
@@ -32,7 +32,7 @@ func SetConf(cfg *Config) {
 	})
 }
 
-type Config struct {
+type Data struct {
 	// 单个连接未处理消息包缓存队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，最小100]
 	ConnUndoQueueSize int
 	// 单个连接未写入消息包队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，最小100]
