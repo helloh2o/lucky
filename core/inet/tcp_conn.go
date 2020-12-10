@@ -7,6 +7,7 @@ import (
 	"lucky/core/iduck"
 	"lucky/log"
 	"net"
+	"runtime/debug"
 	"time"
 )
 
@@ -67,8 +68,15 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 			if pkg == nil {
 				break
 			}
-			// the package
-			tc.processor.OnReceivedPackage(tc, pkg)
+			// processor handle the package
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						log.Error("panic %v in processor, stack %s", r, string(debug.Stack()))
+					}
+				}()
+				tc.processor.OnReceivedPackage(tc, pkg)
+			}()
 		}
 	}()
 	return tc

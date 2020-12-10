@@ -5,6 +5,7 @@ import (
 	"lucky/conf"
 	"lucky/core/iduck"
 	"lucky/log"
+	"runtime/debug"
 	"time"
 )
 
@@ -53,8 +54,15 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 			if pkg == nil {
 				break
 			}
-			// the package
-			wc.processor.OnReceivedPackage(wc, pkg)
+			// processor handle the package
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						log.Error("panic %v in processor, stack %s", r, string(debug.Stack()))
+					}
+				}()
+				wc.processor.OnReceivedPackage(wc, pkg)
+			}()
 		}
 	}()
 	return wc

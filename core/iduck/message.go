@@ -1,8 +1,8 @@
 package iduck
 
 type Encrypt interface {
-	Encode(bs []byte)
-	Decode(bs []byte)
+	Encode(bs []byte) []byte
+	Decode(bs []byte) []byte
 }
 
 type Processor interface {

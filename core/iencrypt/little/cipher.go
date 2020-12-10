@@ -1,8 +1,6 @@
 package little
 
-import "lucky/log"
-
-type Cipher struct {
+type LittleCipher struct {
 	// 编码用的密码
 	encodePassword *password
 	// 解码用的密码
@@ -10,46 +8,29 @@ type Cipher struct {
 }
 
 // 加密原数据
-func (cipher *Cipher) Encode(bs []byte) {
+func (cipher *LittleCipher) Encode(bs []byte) []byte {
 	for i, v := range bs {
 		bs[i] = cipher.encodePassword[v]
 	}
+	return bs
 }
 
 // 解码加密后的数据到原数据
-func (cipher *Cipher) Decode(bs []byte) {
+func (cipher *LittleCipher) Decode(bs []byte) []byte {
 	for i, v := range bs {
 		bs[i] = cipher.decodePassword[v]
 	}
+	return bs
 }
 
-var CipherX *Cipher
-
 // 新建一个编码解码器
-func InitCipher(pw string) {
-	encodePassword, err := ParsePassword(pw)
-	if err != nil {
-		log.Fatal("Init cipher password error %v", err)
-	}
+func NewCipher(encodePassword *password) *LittleCipher {
 	decodePassword := &password{}
 	for i, v := range encodePassword {
 		encodePassword[i] = v
 		decodePassword[v] = byte(i)
 	}
-	CipherX = &Cipher{
-		encodePassword: encodePassword,
-		decodePassword: decodePassword,
-	}
-}
-
-// 新建一个编码解码器
-func NewCipher(encodePassword *password) *Cipher {
-	decodePassword := &password{}
-	for i, v := range encodePassword {
-		encodePassword[i] = v
-		decodePassword[v] = byte(i)
-	}
-	return &Cipher{
+	return &LittleCipher{
 		encodePassword: encodePassword,
 		decodePassword: decodePassword,
 	}

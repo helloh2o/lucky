@@ -2,6 +2,7 @@ package msg
 
 import (
 	"lucky/core/iduck"
+	"lucky/core/iencrypt/aes"
 	"lucky/core/iencrypt/little"
 	"lucky/core/iproto"
 	"lucky/example/comm/logic"
@@ -18,7 +19,12 @@ func SetEncrypt(p iduck.Processor) {
 	if err != nil {
 		panic(err)
 	}
-	p.SetEncrypt(little.NewCipher(pwd))
+	// 混淆加密
+	//cipher := little.NewCipher(pwd)
+	// 高级标准加密
+	cipher := aes.NewAESCipher(pwdStr)
+	_ = pwd
+	p.SetEncrypt(cipher)
 }
 func init() {
 	// 注册消息，以及回调处理

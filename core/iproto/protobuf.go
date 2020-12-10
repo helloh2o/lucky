@@ -39,7 +39,7 @@ func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
-		pbf.enc.Decode(body)
+		body = pbf.enc.Decode(body)
 		//log.Debug("after decode:: %v", body)
 	}
 	// 解码
@@ -90,7 +90,7 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	}
 	if pbf.enc != nil {
 		//log.Debug("before encode:: %v", data)
-		pbf.enc.Encode(data)
+		data = pbf.enc.Encode(data)
 		//log.Debug("after  encode:: %v", data)
 	}
 	// head
