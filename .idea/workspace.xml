@@ -20,20 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/kcp/client/kcpclient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/kcp/kcpserver.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmm/timer/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/timer/example_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmm/utils/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/example_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/udp_conn.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/udp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/kcp_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/example_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/kcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/kcp_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go Application" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
@@ -48,6 +51,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go Application" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
@@ -58,13 +62,22 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
-  <component name="RunManager" selected="Go Build.go build wsclient.go">
-    <configuration name="go build lucky/example/tcp" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Build.go build lucky/example/kcp/client">
+    <configuration name="go build lucky/example/kcp" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/example/tcp/tcpserver.go" />
-      <package value="lucky/example/tcp" />
+      <filePath value="$PROJECT_DIR$/example/kcp/kcpserver.go" />
+      <package value="lucky/example/kcp" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build lucky/example/kcp/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/kcp/client/kcpclient.go" />
+      <package value="lucky/example/kcp/client" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -97,10 +110,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build lucky/example/kcp/client" />
+        <item itemvalue="Go Build.go build lucky/example/kcp" />
         <item itemvalue="Go Build.go build wsclient.go" />
         <item itemvalue="Go Build.go build wsserver.go" />
         <item itemvalue="Go Build.go build tcpclient.go" />
-        <item itemvalue="Go Build.go build lucky/example/tcp" />
       </list>
     </recent_temporary>
   </component>
@@ -148,22 +162,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607506503700" />
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1607506819064">
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1607565583983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
-    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1607506819064">
+    <state width="1877" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607565583983" />
+    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1607565583983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
-    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1607506819064">
+    <state width="1877" height="275" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607565583983" />
+    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1607565583983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
-    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1607506819064">
+    <state width="1877" height="275" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607565583983" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1607565583983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607506819064" />
+    <state width="1877" height="275" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607565583983" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1607506512513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

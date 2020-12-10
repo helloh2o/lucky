@@ -49,6 +49,7 @@ func (s *kcpServer) Handle(conn net.Conn) {
 		}
 	}()
 	var ic iduck.IConnection
-	ic = NewTcpConn(conn, s.processor)
+	// 可靠的UDP协议, like tcp
+	ic = NewKcpConn(conn, s.processor)
 	ic.ReadMsg()
 }

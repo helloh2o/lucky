@@ -19,6 +19,19 @@ type TCPConn struct {
 	processor iduck.Processor
 }
 
+// 可靠的UDP，like TCP
+type KCPConn struct {
+	*TCPConn
+}
+
+func NewKcpConn(conn net.Conn, processor iduck.Processor) *KCPConn {
+	tcpConn := NewTcpConn(conn, processor)
+	if tcpConn != nil {
+		return &KCPConn{tcpConn}
+	}
+	return nil
+}
+
 func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	if processor == nil || conn == nil {
 		return nil
