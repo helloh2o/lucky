@@ -1,4 +1,4 @@
-package db
+package xdb
 
 import (
 	"database/sql"
@@ -45,6 +45,6 @@ func OpenMysqlDB(dbUrl string, config *gorm.Config, maxIdleConns, maxOpenConns i
 }
 
 // 获取数据库链接
-func Mysql() *gorm.DB {
+func DB() *gorm.DB {
 	return db
 }

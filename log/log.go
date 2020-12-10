@@ -29,7 +29,7 @@ const (
 type Logger struct {
 	level      int
 	baseLogger *log.Logger
-	baseFile   *os.File
+	BaseFile   *os.File
 }
 
 var defaultLogger *Logger
@@ -48,6 +48,8 @@ func New(strLevel string, pathname string, flag int) (*Logger, error) {
 	case "debug":
 		level = debugLevel
 	case "release":
+		level = releaseLevel
+	case "warn":
 		level = releaseLevel
 	case "error":
 		level = errorLevel
@@ -85,7 +87,7 @@ func New(strLevel string, pathname string, flag int) (*Logger, error) {
 	logger := new(Logger)
 	logger.level = level
 	logger.baseLogger = baseLogger
-	logger.baseFile = baseFile
+	logger.BaseFile = baseFile
 	// replace default logger
 	defaultLogger = logger
 	return logger, nil
@@ -93,12 +95,12 @@ func New(strLevel string, pathname string, flag int) (*Logger, error) {
 
 // It's dangerous to call the method on logging
 func (logger *Logger) Close() {
-	if logger.baseFile != nil {
-		logger.baseFile.Close()
+	if logger.BaseFile != nil {
+		logger.BaseFile.Close()
 	}
 
 	logger.baseLogger = nil
-	logger.baseFile = nil
+	logger.BaseFile = nil
 }
 
 func (logger *Logger) doPrintf(level int, printLevel string, format string, a ...interface{}) {
