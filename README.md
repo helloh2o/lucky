@@ -33,11 +33,10 @@ conf.Set(&conf.Data{
 2. 请参考example下的tcp和websocket 例子
 
 #### TODO
-1. kcp 支持
-2. kcp 帧同步
-3. aes 加密
-4. 消息JSON 协议
-5. mongodb 
+1. aes 加密
+2. 消息JSON 协议
+3. mongodb 
+4. 帧同步example
 #### 欢迎参与
 
 1.  Fork 本仓库
