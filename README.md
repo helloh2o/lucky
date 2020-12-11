@@ -1,7 +1,7 @@
 # lucky
 
 #### 介绍
-这是一个游戏框架，目前支持protobuf消息协议，基于websocket或者socket进行TCP长连接传输，也可以使用可靠的UDP协议KCP进行通信, 支持对消息包加密
+这是一个网络框架[游戏，应用]，目前支持protobuf消息协议，基于websocket或者socket进行TCP长连接传输，也可以使用可靠的UDP协议KCP进行通信, 支持对消息包加密
 
 数据包加密方式： AES128,AES192,AES256 以及Byte轻量级混淆加密。
 
