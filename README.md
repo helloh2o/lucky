@@ -31,6 +31,7 @@ conf.Set(&conf.Data{
 	})
 ```
 2. 请参考example下的tcp, websocket, kcp, 以及kcp帧同步例子
+3. 帧同步部分还需要进一步完善，只是一个基础的实现
 
 #### TODO
 1. 消息JSON 协议
