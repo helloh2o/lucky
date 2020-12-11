@@ -25,7 +25,7 @@ type FrameNode struct {
 	// current frame messages
 	frameData [][]byte
 	frameId   uint32
-	allFrame  [][][]byte
+	allFrame  []interface{}
 	// rand seed
 	RandSeed int64
 	// message channel
@@ -57,7 +57,7 @@ func (gr *FrameNode) Serve() {
 				gr.sendFrame()
 			case pkg := <-gr.onMessage:
 				if pkg == nil {
-					log.Release("============= Node %s, stop serve =============", gr.EnterToken)
+					log.Release("============= FrameNode %s, stop serve =============", gr.EnterToken)
 					// stop Serve
 					gr.FrameTicker.Stop()
 					return
@@ -109,15 +109,17 @@ func (gr *FrameNode) sendFrame() {
 	gr.allFrame = append(gr.allFrame, gr.frameData)
 }
 
-func (gr *FrameNode) OnMessage(msg []byte) {
+func (gr *FrameNode) OnRawMessage(msg []byte) {
 	select {
 	case gr.onMessage <- msg:
 	default:
 	}
 }
 
-func (gr *FrameNode) GetAllMessage() chan [][][]byte {
-	data := make(chan [][][]byte, 1)
+func (gr *FrameNode) OnProtocolMessage(interface{}) {}
+
+func (gr *FrameNode) GetAllMessage() chan []interface{} {
+	data := make(chan []interface{}, 1)
 	data <- gr.allFrame
 	return data
 }

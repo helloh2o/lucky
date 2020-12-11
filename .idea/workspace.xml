@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/core/inet/broadcast.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iproto/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iduck/network.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/network.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/frame_node.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/frame_node.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +163,8 @@
     <MESSAGE value="frame example" />
     <MESSAGE value="frame bug &amp; oor cipher" />
     <MESSAGE value="readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme" />
+    <MESSAGE value="json processor" />
+    <option name="LAST_COMMIT_MESSAGE" value="json processor" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -172,10 +175,10 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607680924868">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607681480105">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607680924868" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607681480105" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -212,17 +215,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="261" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607671905080" />
-    <state x="772" y="138" key="RollbackChangesDialog" timestamp="1607662766289">
+    <state x="772" y="138" key="RollbackChangesDialog" timestamp="1607682349065">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="772" y="138" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607662766289" />
+    <state x="772" y="138" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607682349065" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1607506512513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607680886019">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607681482305">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607680886019" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607681482305" />
   </component>
 </project>

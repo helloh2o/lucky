@@ -14,8 +14,9 @@ type INode interface {
 	AddConn(IConnection)
 	DelConn(string)
 	Serve()
-	OnMessage([]byte)
-	GetAllMessage() chan [][][]byte
+	OnRawMessage([]byte)
+	OnProtocolMessage(interface{})
+	GetAllMessage() chan []interface{}
 	Destroy()
 	Complete()
 }
