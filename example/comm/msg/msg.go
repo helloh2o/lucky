@@ -2,8 +2,8 @@ package msg
 
 import (
 	"lucky/core/iduck"
-	"lucky/core/iencrypt/aes"
 	"lucky/core/iencrypt/little"
+	"lucky/core/iencrypt/oor"
 	"lucky/core/iproto"
 	"lucky/example/comm/logic"
 	"lucky/example/comm/msg/code"
@@ -21,8 +21,9 @@ func SetEncrypt(p iduck.Processor) {
 	}
 	// 混淆加密
 	//cipher := little.NewCipher(pwd)
+	cipher := oor.NewXORCipher("BH1rStJwNP1Y%d^*IvNI4Y+8ZVWyqsX")
 	// 高级标准加密
-	cipher := aes.NewAESCipher(pwdStr)
+	//cipher := aes.NewAESCipher(pwdStr)
 	_ = pwd
 	p.SetEncryptor(cipher)
 }

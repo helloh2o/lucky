@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}*/
-	max := 100
+	max := 1000
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 100)
@@ -26,7 +26,7 @@ func main() {
 }
 
 func runClient(id int) {
-	hello := protobuf.Hello{Hello: "hello protobuf 3."}
+	hello := protobuf.Hello{Hello: "hello websocket."}
 	d := websocket.Dialer{}
 	ws, _, err := d.Dial("ws://localhost:2022", nil)
 	if err != nil {

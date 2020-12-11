@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	max := 10
+	max := 100
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 100)
@@ -70,7 +70,7 @@ func runClient(id int) {
 	ic := inet.NewKcpConn(conn, p)
 	ic.WriteMsg(&hello)
 	go func() {
-		bf := make([]byte, 2048)
+		bf := make([]byte, 8192)
 		for {
 			// read length
 			_, err := io.ReadAtLeast(conn, bf[:2], 2)

@@ -11,7 +11,7 @@ import (
 
 func main() {
 	go func() {
-		//go tool pprof  http://localhost:6060/debug/pprof/profile
+		//go tool pprof -http=:1234 http://localhost:6060/debug/pprof/profile
 		_ = http.ListenAndServe("0.0.0.0:6060", nil)
 	}()
 	/*_, err := log.New("release", ".", stdlog.LstdFlags|stdlog.Lshortfile)

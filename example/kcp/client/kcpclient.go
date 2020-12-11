@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	max := 100
+	max := 1000
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 100)

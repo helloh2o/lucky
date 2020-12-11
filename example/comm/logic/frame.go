@@ -10,7 +10,7 @@ func FrameStart(args ...interface{}) {
 	conn := args[1].(iduck.IConnection)
 	// set test node
 	conn.SetNode(node.TestNode)
-	node.TestNode.AddConn(conn.GetUuid(), conn)
+	node.TestNode.AddConn(conn)
 }
 
 // 帧同步开始
@@ -19,8 +19,8 @@ func FrameEnd(args ...interface{}) {
 	if data := conn.GetNode(); data != nil {
 		_node := data.(iduck.INode)
 		_node.Complete()
-		_ = conn.Close()
 	}
+	_ = conn.Close()
 }
 
 func FrameMove(args ...interface{}) {

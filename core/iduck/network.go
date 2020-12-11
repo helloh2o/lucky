@@ -11,11 +11,11 @@ type Server interface {
 
 // 网络同步节点，如游戏房间节点
 type INode interface {
-	AddConn(interface{}, IConnection)
-	DelConn(interface{})
+	AddConn(IConnection)
+	DelConn(string)
 	Serve()
 	OnMessage([]byte)
-	GetAllMessage() [][][]byte
+	GetAllMessage() chan [][][]byte
 	Destroy()
 	Complete()
 }
