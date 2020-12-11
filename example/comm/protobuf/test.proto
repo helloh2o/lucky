@@ -1,6 +1,23 @@
 syntax = "proto3";
 option go_package = ".;protobuf";
 
+//  protoc --go_out=. *.proto
 message hello {
   string hello = 1;
+}
+
+message cs_start_frame {
+}
+
+message cs_end_frame {
+}
+// 移动
+message cs_move {
+  float  fromX = 1;
+  float  fromY = 2;
+  float  fromZ = 3;
+  float  toX = 4;
+  float  toY = 5;
+  float  toZ = 6;
+  float  speed = 7;
 }

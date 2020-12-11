@@ -14,7 +14,7 @@ func init() {
 		FirstPackageTimeout: 5,
 		ConnReadTimeout:     15,
 		ConnWriteTimeout:    5,
-		MaxDataPackageSize:  2048,
+		MaxDataPackageSize:  4096,
 		MaxHeaderLen:        1024,
 	}
 }

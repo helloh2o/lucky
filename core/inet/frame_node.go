@@ -1,7 +1,7 @@
 package inet
 
 import (
-	"lucky/cmm/utils"
+	"github.com/google/uuid"
 	"lucky/core/iduck"
 	"lucky/core/iproto"
 	"lucky/log"
@@ -15,6 +15,10 @@ type FrameNode struct {
 	sync.RWMutex
 	// 网络连接
 	Connections map[interface{}]iduck.IConnection
+	// 当前连接数量
+	clientSize int64
+	// 完成同步数量
+	overSize int64
 	// 进入令牌
 	EnterToken string
 	// 同步周期
@@ -29,10 +33,10 @@ type FrameNode struct {
 	onMessage chan []byte
 }
 
-func NewFrameGameRoom() *FrameNode {
+func NewFrameNode() *FrameNode {
 	return &FrameNode{
 		Connections: make(map[interface{}]iduck.IConnection),
-		EnterToken:  utils.RandString(32),
+		EnterToken:  uuid.New().String(),
 		FrameTicker: time.NewTicker(time.Millisecond * 66),
 		RandSeed:    time.Now().UnixNano(),
 		onMessage:   make(chan []byte, 1000),
@@ -43,15 +47,21 @@ func (gr *FrameNode) Serve() {
 	go func() {
 		for {
 			select {
-			case pkg := <-gr.onMessage:
-				if pkg == nil {
-					// stop Serve
-					gr.FrameTicker.Stop()
-					return
-				}
-				gr.frameData = append(gr.frameData, pkg)
 			case <-gr.FrameTicker.C:
 				gr.sendFrame()
+			default:
+				select {
+				default:
+					continue
+				case pkg := <-gr.onMessage:
+					if pkg == nil {
+						log.Release("============= Node %s, stop serve =============", gr.EnterToken)
+						// stop Serve
+						gr.FrameTicker.Stop()
+						return
+					}
+					gr.frameData = append(gr.frameData, pkg)
+				}
 			}
 		}
 	}()
@@ -66,6 +76,7 @@ func (gr *FrameNode) sendFrame() {
 	}()
 	// 没有消息
 	if len(gr.frameData) == 0 {
+		log.Debug("Server empty frame without data")
 		return
 	}
 	gr.RLock()
@@ -99,13 +110,35 @@ func (gr *FrameNode) AddConn(key interface{}, conn iduck.IConnection) {
 	gr.Lock()
 	defer gr.Unlock()
 	gr.Connections[key] = conn
+	gr.clientSize++
 }
 
 func (gr *FrameNode) DelConn(key interface{}) {
 	gr.Lock()
 	defer gr.Unlock()
 	delete(gr.Connections, key)
+	gr.clientSize--
 }
+
+// 完成同步
+func (gr *FrameNode) Complete() {
+	gr.Lock()
+	defer gr.Unlock()
+	gr.overSize++
+	if gr.overSize >= gr.clientSize/2 {
+		gr.Destroy()
+	}
+}
+
+// 摧毁节点
 func (gr *FrameNode) Destroy() {
-	gr.onMessage <- nil
+	gr.Lock()
+	defer gr.Unlock()
+	var one sync.Once
+	one.Do(func() {
+		for _, conn := range gr.Connections {
+			conn.SetNode(nil)
+		}
+		gr.onMessage <- nil
+	})
 }

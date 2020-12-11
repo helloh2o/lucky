@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+//  protoc --go_out=. *.proto
 type Hello struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -67,14 +68,197 @@ func (x *Hello) GetHello() string {
 	return ""
 }
 
+type CsStartFrame struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CsStartFrame) Reset() {
+	*x = CsStartFrame{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_test_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CsStartFrame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsStartFrame) ProtoMessage() {}
+
+func (x *CsStartFrame) ProtoReflect() protoreflect.Message {
+	mi := &file_test_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsStartFrame.ProtoReflect.Descriptor instead.
+func (*CsStartFrame) Descriptor() ([]byte, []int) {
+	return file_test_proto_rawDescGZIP(), []int{1}
+}
+
+type CsEndFrame struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CsEndFrame) Reset() {
+	*x = CsEndFrame{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_test_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CsEndFrame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsEndFrame) ProtoMessage() {}
+
+func (x *CsEndFrame) ProtoReflect() protoreflect.Message {
+	mi := &file_test_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsEndFrame.ProtoReflect.Descriptor instead.
+func (*CsEndFrame) Descriptor() ([]byte, []int) {
+	return file_test_proto_rawDescGZIP(), []int{2}
+}
+
+// 移动
+type CsMove struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FromX float32 `protobuf:"fixed32,1,opt,name=fromX,proto3" json:"fromX,omitempty"`
+	FromY float32 `protobuf:"fixed32,2,opt,name=fromY,proto3" json:"fromY,omitempty"`
+	FromZ float32 `protobuf:"fixed32,3,opt,name=fromZ,proto3" json:"fromZ,omitempty"`
+	ToX   float32 `protobuf:"fixed32,4,opt,name=toX,proto3" json:"toX,omitempty"`
+	ToY   float32 `protobuf:"fixed32,5,opt,name=toY,proto3" json:"toY,omitempty"`
+	ToZ   float32 `protobuf:"fixed32,6,opt,name=toZ,proto3" json:"toZ,omitempty"`
+	Speed float32 `protobuf:"fixed32,7,opt,name=speed,proto3" json:"speed,omitempty"`
+}
+
+func (x *CsMove) Reset() {
+	*x = CsMove{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_test_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CsMove) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsMove) ProtoMessage() {}
+
+func (x *CsMove) ProtoReflect() protoreflect.Message {
+	mi := &file_test_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsMove.ProtoReflect.Descriptor instead.
+func (*CsMove) Descriptor() ([]byte, []int) {
+	return file_test_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CsMove) GetFromX() float32 {
+	if x != nil {
+		return x.FromX
+	}
+	return 0
+}
+
+func (x *CsMove) GetFromY() float32 {
+	if x != nil {
+		return x.FromY
+	}
+	return 0
+}
+
+func (x *CsMove) GetFromZ() float32 {
+	if x != nil {
+		return x.FromZ
+	}
+	return 0
+}
+
+func (x *CsMove) GetToX() float32 {
+	if x != nil {
+		return x.ToX
+	}
+	return 0
+}
+
+func (x *CsMove) GetToY() float32 {
+	if x != nil {
+		return x.ToY
+	}
+	return 0
+}
+
+func (x *CsMove) GetToZ() float32 {
+	if x != nil {
+		return x.ToZ
+	}
+	return 0
+}
+
+func (x *CsMove) GetSpeed() float32 {
+	if x != nil {
+		return x.Speed
+	}
+	return 0
+}
+
 var File_test_proto protoreflect.FileDescriptor
 
 var file_test_proto_rawDesc = []byte{
 	0x0a, 0x0a, 0x74, 0x65, 0x73, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1d, 0x0a, 0x05,
 	0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x14, 0x0a, 0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x42, 0x0c, 0x5a, 0x0a, 0x2e,
-	0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x22, 0x10, 0x0a, 0x0e, 0x63,
+	0x73, 0x5f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x22, 0x0e, 0x0a,
+	0x0c, 0x63, 0x73, 0x5f, 0x65, 0x6e, 0x64, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x22, 0x97, 0x01,
+	0x0a, 0x07, 0x63, 0x73, 0x5f, 0x6d, 0x6f, 0x76, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x72, 0x6f,
+	0x6d, 0x58, 0x18, 0x01, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x66, 0x72, 0x6f, 0x6d, 0x58, 0x12,
+	0x14, 0x0a, 0x05, 0x66, 0x72, 0x6f, 0x6d, 0x59, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x05,
+	0x66, 0x72, 0x6f, 0x6d, 0x59, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x72, 0x6f, 0x6d, 0x5a, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x02, 0x52, 0x05, 0x66, 0x72, 0x6f, 0x6d, 0x5a, 0x12, 0x10, 0x0a, 0x03, 0x74,
+	0x6f, 0x58, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x03, 0x74, 0x6f, 0x58, 0x12, 0x10, 0x0a,
+	0x03, 0x74, 0x6f, 0x59, 0x18, 0x05, 0x20, 0x01, 0x28, 0x02, 0x52, 0x03, 0x74, 0x6f, 0x59, 0x12,
+	0x10, 0x0a, 0x03, 0x74, 0x6f, 0x5a, 0x18, 0x06, 0x20, 0x01, 0x28, 0x02, 0x52, 0x03, 0x74, 0x6f,
+	0x5a, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x70, 0x65, 0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x02,
+	0x52, 0x05, 0x73, 0x70, 0x65, 0x65, 0x64, 0x42, 0x0c, 0x5a, 0x0a, 0x2e, 0x3b, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -89,9 +273,12 @@ func file_test_proto_rawDescGZIP() []byte {
 	return file_test_proto_rawDescData
 }
 
-var file_test_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_test_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_test_proto_goTypes = []interface{}{
-	(*Hello)(nil), // 0: hello
+	(*Hello)(nil),        // 0: hello
+	(*CsStartFrame)(nil), // 1: cs_start_frame
+	(*CsEndFrame)(nil),   // 2: cs_end_frame
+	(*CsMove)(nil),       // 3: cs_move
 }
 var file_test_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -119,6 +306,42 @@ func file_test_proto_init() {
 				return nil
 			}
 		}
+		file_test_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CsStartFrame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_test_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CsEndFrame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_test_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CsMove); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -126,7 +349,7 @@ func file_test_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_test_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

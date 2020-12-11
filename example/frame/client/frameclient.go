@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"github.com/xtaci/kcp-go"
 	"io"
+	"lucky/conf"
 	"lucky/core/iduck"
 	"lucky/core/inet"
 	"lucky/core/iproto"
@@ -11,11 +12,12 @@ import (
 	"lucky/example/comm/msg/code"
 	"lucky/example/comm/protobuf"
 	"lucky/log"
+	"math/rand"
 	"time"
 )
 
 func main() {
-	max := 100
+	max := 10
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 100)
@@ -24,8 +26,8 @@ func main() {
 }
 
 func runClient(id int) {
-	hello := protobuf.Hello{Hello: "hello kcp 3."}
-	conn, err := kcp.DialWithOptions("localhost:2023", nil, 10, 3)
+	hello := protobuf.Hello{Hello: "hello kcp frame."}
+	conn, err := kcp.DialWithOptions("localhost:2024", nil, 10, 3)
 	if err != nil {
 		panic(err)
 	}
@@ -38,19 +40,32 @@ func runClient(id int) {
 		log.Debug("Id %d, Times %d, msg:: %s", id, i, _msg.Hello)
 		i++
 		conn := args[1].(iduck.IConnection)
-		time.Sleep(time.Millisecond * 200)
-		conn.WriteMsg(_msg)
+		conn.WriteMsg(&protobuf.CsStartFrame{})
+		// 1分钟后结束同步, 移动操作
+		go func() {
+			time.Sleep(time.Second * 5)
+			for i := 0; i < 60; i++ {
+				conn.WriteMsg(&protobuf.CsMove{
+					FromX: 1,
+					FromY: 2.1,
+					FromZ: 3,
+					ToX:   3,
+					ToY:   9,
+					ToZ:   41.2,
+					Speed: 9,
+				})
+				sn := rand.Intn(800) + 100
+				time.Sleep(time.Millisecond * time.Duration(sn))
+			}
+			conn.WriteMsg(&protobuf.CsEndFrame{})
+		}()
 	})
-	p.RegisterHandler(code.Hello, &protobuf.Hello{}, func(args ...interface{}) {
-		_msg := args[0].(*protobuf.Hello)
-		log.Debug("Id %d, Times %d, msg:: %s", id, i, _msg.Hello)
-		i++
-		conn := args[1].(iduck.IConnection)
-		time.Sleep(time.Millisecond * 200)
-		conn.WriteMsg(_msg)
-	})
-	p.RegisterHandler(code.Frame, &iproto.ScFrame{}, func(args ...interface{}) {
-		log.Release("==== Received Frame message ====")
+	p.RegisterHandler(code.FrameStart, &protobuf.CsStartFrame{}, nil)
+	p.RegisterHandler(code.FrameEnd, &protobuf.CsEndFrame{}, nil)
+	p.RegisterHandler(code.MoveOp, &protobuf.CsMove{}, nil)
+	p.RegisterHandler(code.FrameData, &iproto.ScFrame{}, func(args ...interface{}) {
+		f := args[0].(*iproto.ScFrame)
+		log.Release("==== Received FrameData message packages length %d ====", len(f.Protocols))
 	})
 	ic := inet.NewKcpConn(conn, p)
 	ic.WriteMsg(&hello)
@@ -64,7 +79,7 @@ func runClient(id int) {
 				return
 			}
 			var ln = binary.LittleEndian.Uint16(bf[:2])
-			if ln < 1 || ln > 2048 {
+			if ln < 1 || ln > uint16(conf.C.MaxDataPackageSize) {
 				log.Error("TCPConn message length %d invalid", ln)
 				return
 			}

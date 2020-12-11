@@ -29,4 +29,10 @@ func SetEncrypt(p iduck.Processor) {
 func init() {
 	// 注册消息，以及回调处理
 	Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
+
+	// 帧同步处理
+	Processor.RegisterHandler(code.FrameStart, &protobuf.CsStartFrame{}, logic.FrameStart)
+	Processor.RegisterHandler(code.FrameData, &iproto.ScFrame{}, nil)
+	Processor.RegisterHandler(code.FrameEnd, &protobuf.CsEndFrame{}, logic.FrameEnd)
+	Processor.RegisterHandler(code.MoveOp, &protobuf.CsMove{}, logic.FrameMove)
 }

@@ -2,6 +2,7 @@ package inet
 
 import (
 	"encoding/binary"
+	"github.com/google/uuid"
 	"io"
 	"lucky/conf"
 	"lucky/core/iduck"
@@ -14,6 +15,7 @@ import (
 
 type TCPConn struct {
 	sync.RWMutex
+	uuid string
 	net.Conn
 	// 缓存队列
 	writeQueue chan []byte
@@ -42,6 +44,7 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 		return nil
 	}
 	tc := &TCPConn{
+		uuid:       uuid.New().String(),
 		Conn:       conn,
 		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
 		processor:  processor,
@@ -84,6 +87,10 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 		}
 	}()
 	return tc
+}
+
+func (tc *TCPConn) GetUuid() string {
+	return tc.uuid
 }
 
 func (tc *TCPConn) ReadMsg() {

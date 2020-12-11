@@ -16,10 +16,10 @@ type kcpServer struct {
 	processor iduck.Processor
 }
 
-func NewKcpServer(addr string, processor iduck.Processor) (s *tcpServer, err error) {
-	ts := new(tcpServer)
+func NewKcpServer(addr string, processor iduck.Processor) (s *kcpServer, err error) {
+	ts := new(kcpServer)
 	ts.addr = addr
-	ts.ln, err = kcp.ListenWithOptions(":2023", nil, 10, 3)
+	ts.ln, err = kcp.ListenWithOptions(addr, nil, 10, 3)
 	if processor == nil {
 		panic("processor must be set.")
 	}
@@ -31,7 +31,7 @@ func NewKcpServer(addr string, processor iduck.Processor) (s *tcpServer, err err
 }
 
 func (s *kcpServer) Run() error {
-	log.Release("Starting tcp server on %s", s.addr)
+	log.Release("Starting kcp server on %s", s.addr)
 	for {
 		conn, err := s.ln.Accept()
 		if err != nil {

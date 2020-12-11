@@ -36,11 +36,6 @@ func NewPBProcessor() *PbfProcessor {
 
 // 收到完整数据包
 func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) {
-	// 如果连接在某个同步节点上，转发消息到节点
-	if conn.GetNode() != nil {
-		conn.GetNode().OnMessage(body)
-		return
-	}
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -71,7 +66,7 @@ func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 				log.Error("panic at msg %d handler, stack %s", pack.Id, string(debug.Stack()))
 			}
 		}()
-		info.msgCallback(msg, conn)
+		info.msgCallback(msg, conn, body)
 	}()
 }
 

@@ -16,10 +16,13 @@ type INode interface {
 	Serve()
 	OnMessage([]byte)
 	GetAllMessage() [][][]byte
+	Destroy()
+	Complete()
 }
 
 // 网络连接
 type IConnection interface {
+	GetUuid() string
 	ReadMsg()
 	WriteMsg(message interface{})
 	Close() error

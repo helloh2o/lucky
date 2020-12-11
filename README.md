@@ -26,16 +26,15 @@ conf.Set(&conf.Data{
 		FirstPackageTimeout: 5,
 		ConnReadTimeout:     15,
 		ConnWriteTimeout:    5,
-		MaxDataPackageSize:  2048,
+		MaxDataPackageSize:  4096,
 		MaxHeaderLen:        1024,
 	})
 ```
-2. 请参考example下的tcp和websocket 例子
+2. 请参考example下的tcp, websocket, kcp, 以及kcp帧同步例子
 
 #### TODO
 1. 消息JSON 协议
 2. mongodb 
-3. 帧同步example
 #### 欢迎参与
 
 1.  Fork 本仓库

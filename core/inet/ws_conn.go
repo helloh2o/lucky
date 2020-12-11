@@ -1,6 +1,7 @@
 package inet
 
 import (
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"lucky/conf"
 	"lucky/core/iduck"
@@ -12,6 +13,7 @@ import (
 
 type WSConn struct {
 	sync.RWMutex
+	uuid string
 	conn *websocket.Conn
 	// 缓存队列
 	writeQueue chan []byte
@@ -27,6 +29,7 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 		return nil
 	}
 	wc := &WSConn{
+		uuid:       uuid.New().String(),
 		conn:       conn,
 		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
 		processor:  processor,
@@ -70,6 +73,10 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 		}
 	}()
 	return wc
+}
+
+func (wc *WSConn) GetUuid() string {
+	return wc.uuid
 }
 
 func (wc *WSConn) ReadMsg() {
