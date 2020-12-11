@@ -34,8 +34,7 @@ conf.Set(&conf.Data{
 3. 帧同步部分还需要进一步完善，只是一个基础的实现
 
 #### TODO
-1. 消息JSON 协议
-2. mongodb 
+1. mongodb 
 #### 欢迎参与
 
 1.  Fork 本仓库

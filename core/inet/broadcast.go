@@ -36,87 +36,87 @@ func NewBroadcastNode() *BroadcastNode {
 	}
 }
 
-func (bnode *BroadcastNode) Serve() {
+func (bNode *BroadcastNode) Serve() {
 	go func() {
 		for {
 			select {
-			case pkg := <-bnode.onMessage:
+			case pkg := <-bNode.onMessage:
 				if pkg == nil {
-					log.Release("============= BroadcastNode %s, stop serve =============", bnode.NodeId)
+					log.Release("============= BroadcastNode %s, stop serve =============", bNode.NodeId)
 					// stop Serve
 					return
 				}
-				bnode.allMessages = append(bnode.allMessages, pkg)
-				bnode.broadcast(pkg)
+				bNode.allMessages = append(bNode.allMessages, pkg)
+				bNode.broadcast(pkg)
 				// add conn
-			case ic := <-bnode.addConnChan:
-				bnode.Connections[ic.GetUuid()] = ic
-				bnode.clientSize++
+			case ic := <-bNode.addConnChan:
+				bNode.Connections[ic.GetUuid()] = ic
+				bNode.clientSize++
 				// conn leave
-			case key := <-bnode.delConnChan:
-				delete(bnode.Connections, key)
-				bnode.clientSize--
+			case key := <-bNode.delConnChan:
+				delete(bNode.Connections, key)
+				bNode.clientSize--
 			}
 		}
 	}()
 }
 
-func (bnode *BroadcastNode) broadcast(msg interface{}) {
+func (bNode *BroadcastNode) broadcast(msg interface{}) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Error("write frame error %v, stack %s", r, string(debug.Stack()))
-			bnode.Destroy()
+			bNode.Destroy()
 		}
 	}()
-	for _, conn := range bnode.Connections {
+	for _, conn := range bNode.Connections {
 		conn.WriteMsg(msg)
 	}
 }
 
-func (bnode *BroadcastNode) OnRawMessage([]byte) {}
+func (bNode *BroadcastNode) OnRawMessage([]byte) {}
 
-func (bnode *BroadcastNode) OnProtocolMessage(msg interface{}) {
+func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) {
 	select {
-	case bnode.onMessage <- msg:
+	case bNode.onMessage <- msg:
 	default:
 	}
 }
 
-func (bnode *BroadcastNode) GetAllMessage() chan []interface{} {
+func (bNode *BroadcastNode) GetAllMessage() chan []interface{} {
 	data := make(chan []interface{}, 1)
-	data <- []interface{}{bnode.allMessages}
+	data <- []interface{}{bNode.allMessages}
 	return data
 }
 
-func (bnode *BroadcastNode) AddConn(conn iduck.IConnection) {
+func (bNode *BroadcastNode) AddConn(conn iduck.IConnection) {
 	select {
-	case bnode.addConnChan <- conn:
+	case bNode.addConnChan <- conn:
 	default:
 	}
 }
 
-func (bnode *BroadcastNode) DelConn(key string) {
+func (bNode *BroadcastNode) DelConn(key string) {
 	select {
-	case bnode.delConnChan <- key:
+	case bNode.delConnChan <- key:
 	default:
 	}
 }
 
 // 完成同步
-func (bnode *BroadcastNode) Complete() {
+func (bNode *BroadcastNode) Complete() {
 	select {
-	case bnode.completeChan <- struct{}{}:
+	case bNode.completeChan <- struct{}{}:
 	default:
 	}
 }
 
 // 摧毁节点
-func (bnode *BroadcastNode) Destroy() {
+func (bNode *BroadcastNode) Destroy() {
 	var one sync.Once
 	one.Do(func() {
-		for _, conn := range bnode.Connections {
+		for _, conn := range bNode.Connections {
 			conn.SetNode(nil)
 		}
-		bnode.onMessage <- nil
+		bNode.onMessage <- nil
 	})
 }
