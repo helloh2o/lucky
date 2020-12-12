@@ -117,12 +117,8 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 	if err != nil {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {
-		select {
 		// ws write data only ,not need data length
-		case wc.writeQueue <- pkg[2:]:
-		default:
-			log.Error(" =============== Drop message, write chan is full  %d  =============== ", len(wc.writeQueue))
-		}
+		wc.writeQueue <- pkg[2:]
 	}
 }
 

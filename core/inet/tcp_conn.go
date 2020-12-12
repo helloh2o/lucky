@@ -146,11 +146,7 @@ func (tc *TCPConn) WriteMsg(message interface{}) {
 	if err != nil {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {
-		select {
-		case tc.writeQueue <- pkg:
-		default:
-			log.Error(" =============== Drop message, write chan is full  %d  =============== ", len(tc.writeQueue))
-		}
+		tc.writeQueue <- pkg
 	}
 }
 
