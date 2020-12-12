@@ -21,6 +21,7 @@ require (
 	github.com/xtaci/kcp-go v5.4.20+incompatible
 	github.com/xtaci/lossyconn v0.0.0-20200209145036-adba10fffc37 // indirect
 	github.com/yudai/pp v2.0.1+incompatible // indirect
+	golang.org/x/exp v0.0.0-20190121172915-509febef88a4
 	google.golang.org/protobuf v1.25.0
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/gorm v1.20.4

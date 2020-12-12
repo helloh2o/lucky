@@ -2,14 +2,15 @@ package logic
 
 import (
 	"lucky/core/iduck"
+	"lucky/core/iproto"
 	"lucky/example/comm/protobuf"
 	"lucky/log"
 )
 
 // say hello
 func Hello(args ...interface{}) {
-	msg := args[0].(*protobuf.Hello)
+	msg := args[iproto.Msg].(*protobuf.Hello)
 	log.Debug(msg.Hello)
-	conn := args[1].(iduck.IConnection)
+	conn := args[iproto.Conn].(iduck.IConnection)
 	conn.WriteMsg(msg)
 }

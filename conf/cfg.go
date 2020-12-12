@@ -10,7 +10,7 @@ var (
 func init() {
 	C = &Data{
 		ConnUndoQueueSize:   100,
-		ConnWriteQueueSize:  100,
+		ConnWriteQueueSize:  0,
 		FirstPackageTimeout: 5,
 		ConnReadTimeout:     15,
 		ConnWriteTimeout:    5,
@@ -22,20 +22,14 @@ func init() {
 // please set this before startup server
 func Set(cfg *Data) {
 	once.Do(func() {
-		if cfg.ConnUndoQueueSize < 100 {
-			cfg.ConnUndoQueueSize = 100
-		}
-		if cfg.ConnWriteQueueSize < 100 {
-			cfg.ConnWriteQueueSize = 100
-		}
 		C = cfg
 	})
 }
 
 type Data struct {
-	// 单个连接未处理消息包缓存队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，最小100]
+	// 单个连接未处理消息包缓存队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，默认100]
 	ConnUndoQueueSize int
-	// 单个连接未写入消息包队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，最小100]
+	// 单个连接未写入消息包队列大小 [超过这个大小，包将丢弃，视为当前系统无法处理，默认为0 不丢弃包]
 	ConnWriteQueueSize int
 	// 第一个包等待超市时间 (s) [默认5秒，连接上来未读到正确包，断开连接]
 	FirstPackageTimeout int

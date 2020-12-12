@@ -13,16 +13,21 @@ import (
 	"lucky/example/comm/protobuf"
 	"lucky/log"
 	"math/rand"
+	"sync"
 	"time"
 )
 
+var wg sync.WaitGroup
+
 func main() {
 	max := 100
+	wg.Add(max)
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 100)
 	}
-	select {}
+	wg.Wait()
+	log.Release("======== frame battle complete ========")
 }
 
 func runClient(id int) {
@@ -43,6 +48,7 @@ func runClient(id int) {
 		conn.WriteMsg(&protobuf.CsStartFrame{})
 		// 1分钟后结束同步, 移动操作
 		go func() {
+			defer wg.Done()
 			time.Sleep(time.Second * 5)
 			for i := 0; i < 60; i++ {
 				conn.WriteMsg(&protobuf.CsMove{
