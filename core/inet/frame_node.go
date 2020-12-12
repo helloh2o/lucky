@@ -110,6 +110,10 @@ func (gr *FrameNode) sendFrame() {
 }
 
 func (gr *FrameNode) OnRawMessage(msg []byte) {
+	if msg == nil {
+		log.Error("can't frame nil message")
+		return
+	}
 	select {
 	case gr.onMessage <- msg:
 	default:
