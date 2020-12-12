@@ -158,7 +158,9 @@ func (tc *TCPConn) Close() error {
 	tc.Lock()
 	defer func() {
 		tc.Unlock()
-		tc.closeCb()
+		if tc.closeCb != nil {
+			tc.closeCb()
+		}
 	}()
 	return tc.Close()
 }

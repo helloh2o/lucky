@@ -130,7 +130,9 @@ func (wc *WSConn) Close() error {
 	wc.Lock()
 	defer func() {
 		wc.Unlock()
-		wc.closeCb()
+		if wc.closeCb != nil {
+			wc.closeCb()
+		}
 	}()
 	return wc.conn.Close()
 }
