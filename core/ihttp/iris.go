@@ -4,6 +4,7 @@ import (
 	"github.com/iris-contrib/middleware/cors"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
+	"github.com/kataras/iris/v12/core/router"
 	"github.com/kataras/iris/v12/middleware/logger"
 	"github.com/kataras/iris/v12/middleware/recover"
 	"io"
@@ -21,6 +22,18 @@ func init() {
 	app.Logger().SetOutput(os.Stdout)
 }
 
+func Handle(method string, relativePath string, handlers ...context.Handler) {
+	app.Handle(method, relativePath, handlers...)
+}
+
+func HandleDir(requestPath string, fsOrDir interface{}, opts ...iris.DirOptions) (routes []*router.Route) {
+	return app.HandleDir(requestPath, fsOrDir, opts...)
+}
+
+// return the instance
+func Iris() *iris.Application {
+	return app
+}
 func AddHandler(h context.Handler) {
 	app.Use(h)
 }
