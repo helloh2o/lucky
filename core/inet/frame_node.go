@@ -1,12 +1,12 @@
 package inet
 
 import (
+	"errors"
 	"github.com/google/uuid"
 	"lucky/core/iduck"
 	"lucky/core/iproto"
 	"lucky/log"
-	"runtime/debug"
-	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -34,7 +34,10 @@ type FrameNode struct {
 	addConnChan  chan iduck.IConnection
 	delConnChan  chan string
 	completeChan chan interface{}
+	closeFlag    int64
 }
+
+var closedFrameErr = errors.New("FrameNode is closed")
 
 func NewFrameNode() *FrameNode {
 	return &FrameNode{
@@ -42,7 +45,7 @@ func NewFrameNode() *FrameNode {
 		EnterToken:   uuid.New().String(),
 		FrameTicker:  time.NewTicker(time.Millisecond * 66),
 		RandSeed:     time.Now().UnixNano(),
-		onMessage:    make(chan []byte, 1000),
+		onMessage:    make(chan []byte),
 		addConnChan:  make(chan iduck.IConnection),
 		delConnChan:  make(chan string),
 		completeChan: make(chan interface{}),
@@ -51,19 +54,16 @@ func NewFrameNode() *FrameNode {
 
 func (gr *FrameNode) Serve() {
 	go func() {
+		defer func() {
+			atomic.AddInt64(&gr.closeFlag, 1)
+			for _, conn := range gr.Connections {
+				conn.SetNode(nil)
+			}
+		}()
 		for {
+			// 优先管理连接状态
 			select {
-			case <-gr.FrameTicker.C:
-				gr.sendFrame()
-			case pkg := <-gr.onMessage:
-				if pkg == nil {
-					log.Release("============= FrameNode %s, stop serve =============", gr.EnterToken)
-					// stop Serve
-					gr.FrameTicker.Stop()
-					return
-				}
-				gr.frameData = append(gr.frameData, pkg)
-				// add conn
+			// add conn
 			case ic := <-gr.addConnChan:
 				gr.Connections[ic.GetUuid()] = ic
 				gr.clientSize++
@@ -75,7 +75,20 @@ func (gr *FrameNode) Serve() {
 			case <-gr.completeChan:
 				gr.overSize++
 				if gr.overSize >= gr.clientSize/2 {
-					gr.Destroy()
+					_ = gr.Destroy()
+				}
+			default:
+				select {
+				case <-gr.FrameTicker.C:
+					gr.sendFrame()
+				case pkg := <-gr.onMessage:
+					if pkg == nil {
+						log.Release("============= FrameNode %s, stop serve =============", gr.EnterToken)
+						// stop Serve
+						gr.FrameTicker.Stop()
+						return
+					}
+					gr.frameData = append(gr.frameData, pkg)
 				}
 			}
 		}
@@ -83,12 +96,6 @@ func (gr *FrameNode) Serve() {
 }
 
 func (gr *FrameNode) sendFrame() {
-	defer func() {
-		if r := recover(); r != nil {
-			log.Error("write frame error %v, stack %s", r, string(debug.Stack()))
-			gr.Destroy()
-		}
-	}()
 	// 没有消息
 	if len(gr.frameData) == 0 {
 		//log.Debug("Server empty frame without data")
@@ -109,18 +116,21 @@ func (gr *FrameNode) sendFrame() {
 	gr.allFrame = append(gr.allFrame, gr.frameData)
 }
 
-func (gr *FrameNode) OnRawMessage(msg []byte) {
+func (gr *FrameNode) OnRawMessage(msg []byte) error {
 	if msg == nil {
-		log.Error("can't frame nil message")
-		return
+		err := errors.New("can't frame nil message")
+		return err
 	}
-	select {
-	case gr.onMessage <- msg:
-	default:
+	if gr.available() {
+		gr.onMessage <- msg
+		return nil
 	}
+	return closedFrameErr
 }
 
-func (gr *FrameNode) OnProtocolMessage(interface{}) {}
+func (gr *FrameNode) OnProtocolMessage(interface{}) error {
+	return nil
+}
 
 func (gr *FrameNode) GetAllMessage() chan []interface{} {
 	data := make(chan []interface{}, 1)
@@ -128,35 +138,40 @@ func (gr *FrameNode) GetAllMessage() chan []interface{} {
 	return data
 }
 
-func (gr *FrameNode) AddConn(conn iduck.IConnection) {
-	select {
-	case gr.addConnChan <- conn:
-	default:
+func (gr *FrameNode) AddConn(conn iduck.IConnection) error {
+	if gr.available() {
+		gr.addConnChan <- conn
+		return nil
 	}
+	return closedFrameErr
 }
 
-func (gr *FrameNode) DelConn(key string) {
-	select {
-	case gr.delConnChan <- key:
-	default:
+func (gr *FrameNode) DelConn(key string) error {
+	if gr.available() {
+		gr.delConnChan <- key
+		return nil
 	}
+	return closedFrameErr
 }
 
 // 完成同步
-func (gr *FrameNode) Complete() {
-	select {
-	case gr.completeChan <- struct{}{}:
-	default:
+func (gr *FrameNode) Complete() error {
+	if gr.available() {
+		gr.completeChan <- struct{}{}
+		return nil
 	}
+	return closedFrameErr
 }
 
 // 摧毁节点
-func (gr *FrameNode) Destroy() {
-	var one sync.Once
-	one.Do(func() {
-		for _, conn := range gr.Connections {
-			conn.SetNode(nil)
-		}
+func (gr *FrameNode) Destroy() error {
+	if gr.available() {
 		gr.onMessage <- nil
-	})
+		return nil
+	}
+	return closedFrameErr
+}
+
+func (gr *FrameNode) available() bool {
+	return atomic.LoadInt64(&gr.closeFlag) == 0
 }

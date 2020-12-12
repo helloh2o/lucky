@@ -11,14 +11,14 @@ type Server interface {
 
 // 网络同步节点，如游戏房间节点,聊天室节点
 type INode interface {
-	AddConn(IConnection)
-	DelConn(string)
+	AddConn(IConnection) error
+	DelConn(string) error
 	Serve()
-	OnRawMessage([]byte)
-	OnProtocolMessage(interface{})
+	OnRawMessage([]byte) error
+	OnProtocolMessage(interface{}) error
 	GetAllMessage() chan []interface{}
-	Destroy()
-	Complete()
+	Destroy() error
+	Complete() error
 }
 
 // 网络连接
