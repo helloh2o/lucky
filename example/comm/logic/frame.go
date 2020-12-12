@@ -29,7 +29,7 @@ func FrameMove(args ...interface{}) {
 		_node, ok := data.(iduck.INode)
 		if ok {
 			raw := args[2].([]byte)
-			_node.OnMessage(raw)
+			_node.OnRawMessage(raw)
 		}
 	}
 }

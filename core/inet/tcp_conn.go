@@ -24,6 +24,8 @@ type TCPConn struct {
 	processor iduck.Processor
 	userData  interface{}
 	node      iduck.INode
+	// after close
+	closeCb func()
 }
 
 // 可靠的UDP，like TCP
@@ -65,7 +67,7 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 			}
 		}
 		// write over or error
-		_ = conn.Close()
+		_ = tc.Close()
 		log.Release("Conn %s <=> %s closed.", tc.Conn.LocalAddr(), tc.Conn.RemoteAddr())
 	}()
 	// read q
@@ -153,7 +155,18 @@ func (tc *TCPConn) WriteMsg(message interface{}) {
 }
 
 func (tc *TCPConn) Close() error {
-	return tc.Conn.Close()
+	tc.Lock()
+	defer func() {
+		tc.Unlock()
+		tc.closeCb()
+	}()
+	return tc.Close()
+}
+
+func (tc *TCPConn) AfterClose(cb func()) {
+	tc.Lock()
+	defer tc.Unlock()
+	tc.closeCb = cb
 }
 
 func (tc *TCPConn) SetData(data interface{}) {

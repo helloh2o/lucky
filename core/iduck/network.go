@@ -9,7 +9,7 @@ type Server interface {
 	Handle(conn net.Conn)
 }
 
-// 网络同步节点，如游戏房间节点
+// 网络同步节点，如游戏房间节点,聊天室节点
 type INode interface {
 	AddConn(IConnection)
 	DelConn(string)
@@ -27,6 +27,7 @@ type IConnection interface {
 	ReadMsg()
 	WriteMsg(message interface{})
 	Close() error
+	AfterClose(func())
 	// 设置自定义数据
 	SetData(interface{})
 	GetData() interface{}

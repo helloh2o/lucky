@@ -22,6 +22,8 @@ type WSConn struct {
 	processor iduck.Processor
 	userData  interface{}
 	node      iduck.INode
+	// after close
+	closeCb func()
 }
 
 func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
@@ -51,7 +53,7 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 			}
 		}
 		// write over or error
-		_ = conn.Close()
+		_ = wc.Close()
 		log.Release("Conn %s <=> %s closed.", wc.conn.LocalAddr(), wc.conn.RemoteAddr())
 	}()
 	// read q
@@ -126,8 +128,17 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 
 func (wc *WSConn) Close() error {
 	wc.Lock()
-	defer wc.Unlock()
+	defer func() {
+		wc.Unlock()
+		wc.closeCb()
+	}()
 	return wc.conn.Close()
+}
+
+func (wc *WSConn) AfterClose(cb func()) {
+	wc.Lock()
+	defer wc.Unlock()
+	wc.closeCb = cb
 }
 func (wc *WSConn) SetData(data interface{}) {
 	wc.Lock()
