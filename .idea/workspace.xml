@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/chatroom/clients/webclient/live.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/live.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/chatroom/clients/webclient/logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/logic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,15 +77,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build lucky/example/chatroom/clients/robot">
-    <configuration name="go build chat_server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/chatroom/chat_server.go" />
-      <package value="lucky" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build frameclient.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -95,12 +86,12 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build frameserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build lucky/example/chatroom" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/frame/frameserver.go" />
-      <package value="lucky" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/chatroom/chat_server.go" />
+      <package value="lucky/example/chatroom" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -113,11 +104,20 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build robot.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build tcpclient.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" />
+      <filePath value="$PROJECT_DIR$/example/tcp/client/tcpclient.go" />
+      <package value="lucky" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build tcpserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/example/tcp/tcpserver.go" />
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
@@ -125,10 +125,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build lucky/example/chatroom/clients/robot" />
-        <item itemvalue="Go Build.go build chat_server.go" />
-        <item itemvalue="Go Build.go build robot.go (1)" />
+        <item itemvalue="Go Build.go build lucky/example/chatroom" />
+        <item itemvalue="Go Build.go build tcpclient.go" />
+        <item itemvalue="Go Build.go build tcpserver.go" />
         <item itemvalue="Go Build.go build frameclient.go" />
-        <item itemvalue="Go Build.go build frameserver.go" />
       </list>
     </recent_temporary>
   </component>
@@ -152,8 +152,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.conf &amp; readme" />
-    <MESSAGE value="1.cmm &amp; rename" />
     <MESSAGE value="1. fix timer" />
     <MESSAGE value="1. go.mod" />
     <MESSAGE value="1. iris" />
@@ -177,7 +175,9 @@
     <MESSAGE value="net node bug" />
     <MESSAGE value="chat room" />
     <MESSAGE value="json protocol" />
-    <option name="LAST_COMMIT_MESSAGE" value="json protocol" />
+    <MESSAGE value="chat web demo" />
+    <MESSAGE value="node close" />
+    <option name="LAST_COMMIT_MESSAGE" value="node close" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -192,10 +192,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607743948658" />
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607912084500">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607917470619">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607912084500" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607917470619" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1607766999462">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -204,22 +204,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607506503700" />
-    <state width="1877" height="197" key="GridCell.Tab.0.bottom" timestamp="1607915382941">
+    <state width="1877" height="180" key="GridCell.Tab.0.bottom" timestamp="1607917610165">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607915382941" />
-    <state width="1877" height="197" key="GridCell.Tab.0.center" timestamp="1607915382941">
+    <state width="1877" height="180" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607917610165" />
+    <state width="1877" height="180" key="GridCell.Tab.0.center" timestamp="1607917610165">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607915382941" />
-    <state width="1877" height="197" key="GridCell.Tab.0.left" timestamp="1607915382941">
+    <state width="1877" height="180" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607917610165" />
+    <state width="1877" height="180" key="GridCell.Tab.0.left" timestamp="1607917610165">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607915382941" />
-    <state width="1877" height="197" key="GridCell.Tab.0.right" timestamp="1607915382941">
+    <state width="1877" height="180" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607917610165" />
+    <state width="1877" height="180" key="GridCell.Tab.0.right" timestamp="1607917610165">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="197" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607915382941" />
+    <state width="1877" height="180" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607917610165" />
     <state width="1877" height="278" key="GridCell.Tab.1.bottom" timestamp="1607769429477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -244,9 +244,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607912087375">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607917472635">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607912087375" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607917472635" />
   </component>
 </project>
