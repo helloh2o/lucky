@@ -55,7 +55,6 @@ func NewFrameNode() *FrameNode {
 func (gr *FrameNode) Serve() {
 	go func() {
 		defer func() {
-			atomic.AddInt64(&gr.closeFlag, 1)
 			for _, conn := range gr.Connections {
 				conn.SetNode(nil)
 			}
@@ -166,7 +165,10 @@ func (gr *FrameNode) Complete() error {
 // 摧毁节点
 func (gr *FrameNode) Destroy() error {
 	if gr.available() {
-		gr.onMessage <- nil
+		atomic.AddInt64(&gr.closeFlag, 1)
+		go func() {
+			gr.onMessage <- nil
+		}()
 		return nil
 	}
 	return closedFrameErr

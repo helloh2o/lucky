@@ -42,7 +42,6 @@ func NewBroadcastNode() *BroadcastNode {
 func (bNode *BroadcastNode) Serve() {
 	go func() {
 		defer func() {
-			atomic.AddInt64(&bNode.closeFlag, 1)
 			for _, conn := range bNode.Connections {
 				conn.SetNode(nil)
 			}
@@ -64,6 +63,7 @@ func (bNode *BroadcastNode) Serve() {
 					if pkg == nil {
 						log.Release("============= BroadcastNode %s, stop serve =============", bNode.NodeId)
 						// stop Serve
+						_ = bNode.Destroy()
 						return
 					}
 					bNode.allMessages = append(bNode.allMessages, pkg)
@@ -77,14 +77,9 @@ func (bNode *BroadcastNode) Serve() {
 }
 
 func (bNode *BroadcastNode) broadcast(msg interface{}) {
-	if msg == nil {
-		log.Error("can't broadcast nil msg.")
-		return
-	}
 	defer func() {
 		if r := recover(); r != nil {
 			log.Error("write frame error %v, stack %s", r, string(debug.Stack()))
-			bNode.Destroy()
 		}
 	}()
 	log.Debug("amount %d, broadcast msg %+v", bNode.clientSize, msg)
@@ -133,7 +128,10 @@ func (bNode *BroadcastNode) Complete() error {
 // 摧毁节点
 func (bNode *BroadcastNode) Destroy() error {
 	if bNode.available() {
-		bNode.onMessage <- nil
+		atomic.AddInt64(&bNode.closeFlag, 1)
+		go func() {
+			bNode.onMessage <- nil
+		}()
 		return nil
 	}
 	return closedErr
