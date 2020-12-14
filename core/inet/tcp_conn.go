@@ -158,7 +158,7 @@ func (tc *TCPConn) Close() error {
 			tc.closeCb()
 		}
 	}()
-	return tc.Close()
+	return tc.Conn.Close()
 }
 
 func (tc *TCPConn) AfterClose(cb func()) {
