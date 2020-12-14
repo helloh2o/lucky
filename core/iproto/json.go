@@ -18,6 +18,11 @@ type JsonProcessor struct {
 	handlers  map[int]msgInfo
 }
 
+type JsonProtocol struct {
+	Id      int         `json:"id"`
+	Content interface{} `json:"content"`
+}
+
 // PB processor
 func NewJSONProcessor() *JsonProcessor {
 	pb := JsonProcessor{
@@ -36,20 +41,21 @@ func (jp *JsonProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		//log.Debug("after decode:: %v", body)
 	}
 	// 解码
-	var pack Protocol
+	var pack JsonProtocol
 	if err := json.Unmarshal(body, &pack); err != nil {
 		log.Error("Can't unmarshal pack body to json Protocol, %+v", body)
 		return
 	}
-	h, ok := jp.handlers[int(pack.Id)]
+	h, ok := jp.handlers[pack.Id]
 	if !ok {
 		log.Error("Not register msg id %d", pack.Id)
 		return
 	}
 	msg := reflect.New(h.msgType.Elem()).Interface()
-	err := json.Unmarshal(pack.Content, msg)
+	msgBytes, _ := json.Marshal(pack.Content)
+	err := json.Unmarshal(msgBytes, msg)
 	if err != nil {
-		log.Error("UnmarshalMerge pack.contents error by id %d", pack.Id)
+		log.Error("Can't unmarshal pack content to json msg, %+v", body)
 		return
 	}
 	func() {
@@ -73,9 +79,9 @@ func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
 	if !ok {
 		return errors.New(fmt.Sprintf("not register %v", tp)), nil
 	}
-	protocol := Protocol{
-		Id:      uint32(id),
-		Content: data,
+	protocol := JsonProtocol{
+		Id:      id,
+		Content: message,
 	}
 	data, err = json.Marshal(&protocol)
 	if err != nil {

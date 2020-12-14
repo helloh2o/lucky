@@ -66,8 +66,12 @@ func NewWsServer(addr string, processor iduck.Processor) (s *wsServer, err error
 func (s *wsServer) Run() error {
 	log.Release("Starting websocket server on %s", s.addr)
 	httpServer := &http.Server{
-		Addr:           s.addr,
-		Handler:        &wsHandler{sv: s},
+		Addr: s.addr,
+		Handler: &wsHandler{sv: s, upgrader: websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		}},
 		ReadTimeout:    time.Second * time.Duration(conf.C.ConnReadTimeout),
 		WriteTimeout:   time.Second * time.Duration(conf.C.ConnWriteTimeout),
 		MaxHeaderBytes: conf.C.MaxHeaderLen,

@@ -37,7 +37,7 @@ func runClient(id int) {
 	p.RegisterHandler(jsonmsg.Join_Success, &jsonmsg.JoinRoomSuccess{}, func(args ...interface{}) {
 		for {
 			_msg := &jsonmsg.ChatMessage{
-				FromName: strconv.Itoa(id) + "/" + wc.GetUuid()[:5],
+				FromName: "机器人" + strconv.Itoa(id) + "/" + wc.GetUuid()[:5],
 				Content:  utils.RandString(5 + rand.Intn(20)),
 			}
 			wc.WriteMsg(_msg)
@@ -47,7 +47,7 @@ func runClient(id int) {
 	})
 	p.RegisterHandler(jsonmsg.Chat_Message, &jsonmsg.ChatMessage{}, func(args ...interface{}) {
 		msg := args[iproto.Msg].(*jsonmsg.ChatMessage)
-		log.Release("用户：%s, 发消息：%s", msg.FromName, msg.Content)
+		log.Release("机器人：%s, 发消息：%s", msg.FromName, msg.Content)
 	})
 	p.RegisterHandler(jsonmsg.Enter_Room, &jsonmsg.EnterRoom{}, nil)
 	// 进入房间

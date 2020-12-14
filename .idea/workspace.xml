@@ -20,28 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/chatroom/chat_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/chatnode/room.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/jsonmsg/message.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/robot/robot/robot.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/robot/webclient/default.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/robot/webclient/index.31f0aa4c.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/robot/webclient/live.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chatroom/robot/webclient/logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf/cfg.go" beforeDir="false" afterPath="$PROJECT_DIR$/conf/cfg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iduck/network.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iduck/network.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/broadcast.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/broadcast.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/frame_node.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/frame_node.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/inet/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/iproto/msgInfo.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/msgInfo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/comm/logic/frame.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/logic/frame.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/comm/logic/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/logic/hello.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/frame/client/frameclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/frame/client/frameclient.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/ws_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/robot/robot/robot.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/robot/webclient/default.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/default.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/robot/webclient/index.31f0aa4c.css" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/index.31f0aa4c.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/robot/webclient/live.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/live.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/robot/webclient/logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/webclient/logic.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +64,7 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/chatroom/static" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
@@ -89,12 +75,13 @@
       <recent name="C:\Users\ay\go\src\lucky\core\iproto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\client" />
       <recent name="C:\Users\ay\go\src\lucky\example" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build frameserver.go">
+  <component name="RunManager" selected="Go Build.go build robot.go (1)">
     <configuration name="go build chat_server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -122,31 +109,31 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build lucky/example/chatroom/robot/robot" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build lucky/example/chatroom/clients/robot" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/example/chatroom/robot/robot/robot.go" />
-      <package value="lucky/example/chatroom/robot/robot" />
+      <filePath value="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" />
+      <package value="lucky/example/chatroom/clients/robot" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build robot.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build robot.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/chatroom/robot/robot/robot.go" />
+      <filePath value="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" />
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build robot.go (1)" />
+        <item itemvalue="Go Build.go build chat_server.go" />
+        <item itemvalue="Go Build.go build lucky/example/chatroom/clients/robot" />
         <item itemvalue="Go Build.go build frameclient.go" />
         <item itemvalue="Go Build.go build frameserver.go" />
-        <item itemvalue="Go Build.go build robot.go" />
-        <item itemvalue="Go Build.go build chat_server.go" />
-        <item itemvalue="Go Build.go build lucky/example/chatroom/robot/robot" />
       </list>
     </recent_temporary>
   </component>
@@ -191,7 +178,10 @@
     <MESSAGE value="nil msg" />
     <MESSAGE value="xor test &amp; iris" />
     <MESSAGE value="nil bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="nil bug" />
+    <MESSAGE value="not drop write msg" />
+    <MESSAGE value="net node bug" />
+    <MESSAGE value="chat room" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat room" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -206,57 +196,61 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607743948658" />
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607756895386">
+    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1607763949285">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607756895386" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607763949285" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1607766999462">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607766999462" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607506503700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607506503700" />
-    <state width="1877" height="372" key="GridCell.Tab.0.bottom" timestamp="1607763845504">
+    <state width="1877" height="293" key="GridCell.Tab.0.bottom" timestamp="1607911987668">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607763845504" />
-    <state width="1877" height="372" key="GridCell.Tab.0.center" timestamp="1607763845504">
+    <state width="1877" height="293" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607911987668" />
+    <state width="1877" height="293" key="GridCell.Tab.0.center" timestamp="1607911987668">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607763845504" />
-    <state width="1877" height="372" key="GridCell.Tab.0.left" timestamp="1607763845504">
+    <state width="1877" height="293" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607911987668" />
+    <state width="1877" height="293" key="GridCell.Tab.0.left" timestamp="1607911987668">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607763845504" />
-    <state width="1877" height="372" key="GridCell.Tab.0.right" timestamp="1607763845504">
+    <state width="1877" height="293" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607911987668" />
+    <state width="1877" height="293" key="GridCell.Tab.0.right" timestamp="1607911987668">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607763845504" />
-    <state width="1877" height="393" key="GridCell.Tab.1.bottom" timestamp="1607760700718">
+    <state width="1877" height="293" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607911987668" />
+    <state width="1877" height="278" key="GridCell.Tab.1.bottom" timestamp="1607769429477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="393" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607760700718" />
-    <state width="1877" height="393" key="GridCell.Tab.1.center" timestamp="1607760700718">
+    <state width="1877" height="278" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607769429477" />
+    <state width="1877" height="278" key="GridCell.Tab.1.center" timestamp="1607769429477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="393" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607760700718" />
-    <state width="1877" height="393" key="GridCell.Tab.1.left" timestamp="1607760700718">
+    <state width="1877" height="278" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607769429477" />
+    <state width="1877" height="278" key="GridCell.Tab.1.left" timestamp="1607769429477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="393" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607760700718" />
-    <state width="1877" height="393" key="GridCell.Tab.1.right" timestamp="1607760700718">
+    <state width="1877" height="278" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607769429477" />
+    <state width="1877" height="278" key="GridCell.Tab.1.right" timestamp="1607769429477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="393" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607760700718" />
-    <state x="772" y="138" key="RollbackChangesDialog" timestamp="1607682349065">
+    <state width="1877" height="278" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607769429477" />
+    <state x="772" y="138" key="RollbackChangesDialog" timestamp="1607768392652">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="772" y="138" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607682349065" />
+    <state x="772" y="138" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607768392652" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1607506512513">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607506512513" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607756897470">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1607763951462">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607756897470" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1607763951462" />
   </component>
 </project>
