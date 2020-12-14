@@ -23,7 +23,7 @@ go get gitee.com/helloh2o/lucky
 conf.Set(&conf.Data{
 		ConnUndoQueueSize:   100,
 		FirstPackageTimeout: 5,
-		ConnReadTimeout:     15,
+		ConnReadTimeout:     35,
 		ConnWriteTimeout:    5,
 		MaxDataPackageSize:  4096,
 		MaxHeaderLen:        1024,
