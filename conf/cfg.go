@@ -12,7 +12,7 @@ func init() {
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  0,
 		FirstPackageTimeout: 5,
-		ConnReadTimeout:     15,
+		ConnReadTimeout:     35,
 		ConnWriteTimeout:    5,
 		MaxDataPackageSize:  4096,
 		MaxHeaderLen:        1024,
