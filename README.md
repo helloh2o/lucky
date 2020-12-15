@@ -31,6 +31,8 @@ conf.Set(&conf.Data{
 ```
 2. 请参考example下的tcp, websocket, kcp, 以及kcp帧同步例子
 3. 帧同步部分还需要进一步完善，只是一个基础的实现
+4. 聊天室例子, 源码example/chatroom
+![Image text](https://gitee.com/helloh2o/lucky/raw/master/example/chatroom/demo.png)
 
 #### TODO
 1. mongodb 
