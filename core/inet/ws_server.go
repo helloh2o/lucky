@@ -41,7 +41,7 @@ func (h *wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func (h *wsHandler) HandlerWsConn(conn *websocket.Conn) {
 	defer func() {
 		if r := recover(); r != nil {
-			log.Error("PANIC %v TCP handle, stack %s", r, string(debug.Stack()))
+			log.Error("PANIC %v websocket handle, stack %s", r, string(debug.Stack()))
 		}
 	}()
 	var ic iduck.IConnection
