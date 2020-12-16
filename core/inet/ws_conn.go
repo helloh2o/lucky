@@ -8,6 +8,7 @@ import (
 	"lucky/log"
 	"runtime/debug"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -23,7 +24,8 @@ type WSConn struct {
 	userData  interface{}
 	node      iduck.INode
 	// after close
-	closeCb func()
+	closeCb   func()
+	closeFlag int64
 }
 
 func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
@@ -118,7 +120,18 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {
 		// ws write data only ,not need data length
-		wc.writeQueue <- pkg[2:]
+	push:
+		select {
+		case wc.writeQueue <- pkg[2:]:
+		default:
+			if wc.IsClosed() {
+				return
+			}
+			time.Sleep(time.Millisecond * 50)
+			// re push
+			goto push
+		}
+
 	}
 }
 
@@ -126,11 +139,17 @@ func (wc *WSConn) Close() error {
 	wc.Lock()
 	defer func() {
 		wc.Unlock()
+		// add closed flag
+		atomic.AddInt64(&wc.closeFlag, 1)
 		if wc.closeCb != nil {
 			wc.closeCb()
 		}
 	}()
 	return wc.conn.Close()
+}
+
+func (wc *WSConn) IsClosed() bool {
+	return atomic.LoadInt64(&wc.closeFlag) != 0
 }
 
 func (wc *WSConn) AfterClose(cb func()) {

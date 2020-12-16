@@ -10,6 +10,7 @@ import (
 	"net"
 	"runtime/debug"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -25,7 +26,8 @@ type TCPConn struct {
 	userData  interface{}
 	node      iduck.INode
 	// after close
-	closeCb func()
+	closeCb   func()
+	closeFlag int64
 }
 
 // 可靠的UDP，like TCP
@@ -146,7 +148,17 @@ func (tc *TCPConn) WriteMsg(message interface{}) {
 	if err != nil {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {
-		tc.writeQueue <- pkg
+	push:
+		select {
+		case tc.writeQueue <- pkg:
+		default:
+			if tc.IsClosed() {
+				return
+			}
+			time.Sleep(time.Millisecond * 50)
+			// re push
+			goto push
+		}
 	}
 }
 
@@ -154,11 +166,17 @@ func (tc *TCPConn) Close() error {
 	tc.Lock()
 	defer func() {
 		tc.Unlock()
+		// add close flag
+		atomic.AddInt64(&tc.closeFlag, 1)
 		if tc.closeCb != nil {
 			tc.closeCb()
 		}
 	}()
 	return tc.Conn.Close()
+}
+
+func (tc *TCPConn) IsClosed() bool {
+	return atomic.LoadInt64(&tc.closeFlag) != 0
 }
 
 func (tc *TCPConn) AfterClose(cb func()) {

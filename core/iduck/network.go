@@ -34,4 +34,6 @@ type IConnection interface {
 	// 设置节点
 	SetNode(INode)
 	GetNode() INode
+	// 是否关闭
+	IsClosed() bool
 }
