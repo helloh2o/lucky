@@ -19,8 +19,8 @@ type BroadcastNode struct {
 	// 进入令牌
 	NodeId string
 	// message channel
-	onMessage   chan interface{}
-	allMessages []interface{}
+	onMessage      chan interface{}
+	recentMessages []interface{}
 	// AddConn
 	addConnChan chan iduck.IConnection
 	delConnChan chan string
@@ -65,7 +65,12 @@ func (bNode *BroadcastNode) Serve() {
 						// stop Serve
 						return
 					}
-					bNode.allMessages = append(bNode.allMessages, pkg)
+					bNode.recentMessages = append(bNode.recentMessages, pkg)
+					// cache recent 100
+					recentSize := len(bNode.recentMessages)
+					if recentSize > 100 {
+						bNode.recentMessages = bNode.recentMessages[recentSize-100:]
+					}
 					bNode.broadcast(pkg)
 				default:
 					time.Sleep(time.Millisecond * 50)
@@ -81,10 +86,14 @@ func (bNode *BroadcastNode) broadcast(msg interface{}) {
 			log.Error("write frame error %v, stack %s", r, string(debug.Stack()))
 		}
 	}()
+	if bNode.clientSize == 0 {
+		return
+	}
 	log.Debug("amount %d, broadcast msg %+v", bNode.clientSize, msg)
 	for _, conn := range bNode.Connections {
 		conn.WriteMsg(msg)
 	}
+	log.Debug(" ======= broadcast ok ======= ")
 }
 
 func (bNode *BroadcastNode) OnRawMessage([]byte) error { return nil }
@@ -98,7 +107,7 @@ func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) error {
 
 func (bNode *BroadcastNode) GetAllMessage() chan []interface{} {
 	data := make(chan []interface{}, 1)
-	data <- bNode.allMessages
+	data <- bNode.recentMessages
 	return data
 }
 

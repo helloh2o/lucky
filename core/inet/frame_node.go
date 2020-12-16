@@ -96,7 +96,7 @@ func (gr *FrameNode) Serve() {
 
 func (gr *FrameNode) sendFrame() {
 	// 没有消息
-	if len(gr.frameData) == 0 {
+	if len(gr.frameData) == 0 || gr.clientSize == 0 {
 		//log.Debug("Server empty frame without data")
 		return
 	}
