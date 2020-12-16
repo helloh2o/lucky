@@ -100,24 +100,25 @@ func (wc *WSConn) ReadMsg() {
 	timeout := time.Second * time.Duration(conf.C.FirstPackageTimeout)
 	for {
 		_ = wc.conn.SetReadDeadline(time.Now().Add(timeout))
-		typee, body, err := wc.conn.ReadMessage()
+		_type, body, err := wc.conn.ReadMessage()
 		if err != nil {
+			log.Error("WSConn read message error %s", err.Error())
 			break
 		}
-		switch typee {
+		switch _type {
 		case websocket.BinaryMessage:
 			// write to cache queue
 			select {
 			case wc.logicQueue <- body:
 			default:
-				log.Error("WSConn read queue overflow err %v", err)
-				return
+				// ignore overflow package not close conn
+				log.Error("WSConn %s <=> %s logic queue overflow err, queue size %d", wc.conn.LocalAddr(), wc.conn.RemoteAddr(), len(wc.logicQueue))
 			}
 			// clean
 			_ = wc.conn.SetReadDeadline(time.Time{})
 			timeout = time.Second * time.Duration(conf.C.ConnReadTimeout)
 		case websocket.TextMessage:
-			log.Error("not support pain text message type %d", typee)
+			log.Error("not support pain text message type %d", _type)
 			return
 		}
 	}

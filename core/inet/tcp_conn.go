@@ -144,8 +144,8 @@ func (tc *TCPConn) ReadMsg() {
 		select {
 		case tc.logicQueue <- append(make([]byte, 0), bf[:ln]...):
 		default:
-			log.Error("TCPConn read queue overflow err %s", err.Error())
-			return
+			// ignore overflow package not close conn
+			log.Error("TCPConn %s <=> %s logic queue overflow err, queue size %d", tc.LocalAddr(), tc.RemoteAddr(), len(tc.logicQueue))
 		}
 		// after first pack | check heartbeat
 		timeout = time.Second * time.Duration(conf.C.ConnReadTimeout)
