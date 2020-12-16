@@ -90,9 +90,14 @@ func (bNode *BroadcastNode) broadcast(msg interface{}) {
 func (bNode *BroadcastNode) OnRawMessage([]byte) error { return nil }
 
 func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) error {
-	if bNode.available() {
-		bNode.onMessage <- msg
+	select {
+	case bNode.onMessage <- msg:
 		return nil
+	default:
+		if bNode.available() {
+			// re push
+			return bNode.OnProtocolMessage(msg)
+		}
 	}
 	return closedErr
 }

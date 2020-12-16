@@ -120,9 +120,13 @@ func (gr *FrameNode) OnRawMessage(msg []byte) error {
 		err := errors.New("can't frame nil message")
 		return err
 	}
-	if gr.available() {
-		gr.onMessage <- msg
+	select {
+	case gr.onMessage <- msg:
 		return nil
+	default:
+		if gr.available() {
+			return gr.OnRawMessage(msg)
+		}
 	}
 	return closedFrameErr
 }
