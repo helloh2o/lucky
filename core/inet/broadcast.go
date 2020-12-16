@@ -63,7 +63,6 @@ func (bNode *BroadcastNode) Serve() {
 					if pkg == nil {
 						log.Release("============= BroadcastNode %s, stop serve =============", bNode.NodeId)
 						// stop Serve
-						_ = bNode.Destroy()
 						return
 					}
 					bNode.allMessages = append(bNode.allMessages, pkg)
@@ -132,7 +131,6 @@ func (bNode *BroadcastNode) Destroy() error {
 		go func() {
 			bNode.onMessage <- nil
 		}()
-		return nil
 	}
 	return closedErr
 }
