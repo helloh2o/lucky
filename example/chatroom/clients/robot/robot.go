@@ -9,6 +9,7 @@ import (
 	"lucky/example/chatroom/jsonmsg"
 	"lucky/log"
 	"strconv"
+	"sync/atomic"
 	"time"
 )
 
@@ -17,15 +18,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}*/
-	max := 100
+	max := 1000
 	for i := 1; i <= max; i++ {
 		go runClient(i)
-		time.Sleep(time.Millisecond * 200)
+		time.Sleep(time.Millisecond * 300)
 	}
 	select {}
 }
 
 func runClient(id int) {
+	var chatting int64
 	d := websocket.Dialer{}
 	ws, _, err := d.Dial("ws://localhost:20220", nil)
 	if err != nil {
@@ -35,15 +37,17 @@ func runClient(id int) {
 	p := iproto.NewJSONProcessor()
 	wc := inet.NewWSConn(ws, p)
 	p.RegisterHandler(jsonmsg.Join_Success, &jsonmsg.JoinRoomSuccess{}, func(args ...interface{}) {
-		for {
-			_msg := &jsonmsg.ChatMessage{
-				FromName: "机器人" + strconv.Itoa(id) + "/" + wc.GetUuid()[:5],
-				Content:  utils.RandString(5 + rand.Intn(20)),
+		go func() {
+			atomic.AddInt64(&chatting, 1)
+			for {
+				_msg := &jsonmsg.ChatMessage{
+					FromName: "机器人" + strconv.Itoa(id) + "/" + wc.GetUuid()[:5],
+					Content:  utils.RandString(5 + rand.Intn(20)),
+				}
+				wc.WriteMsg(_msg)
+				time.Sleep(time.Second * time.Duration(rand.Intn(10)+1))
 			}
-			wc.WriteMsg(_msg)
-			time.Sleep(time.Second * time.Duration(rand.Intn(10)+1))
-			//time.Sleep(time.Millisecond * 200)
-		}
+		}()
 	})
 	p.RegisterHandler(jsonmsg.Chat_Message, &jsonmsg.ChatMessage{}, func(args ...interface{}) {
 		msg := args[iproto.Msg].(*jsonmsg.ChatMessage)
@@ -58,8 +62,12 @@ func runClient(id int) {
 			if err != nil {
 				break
 			}
-			// throw out the msg
-			go p.OnReceivedPackage(wc, body)
+			if atomic.LoadInt64(&chatting) == 0 {
+				// throw out the msg
+				p.OnReceivedPackage(wc, body)
+			} else {
+				// do not handle message on chatting, but read TCP cache buff
+			}
 		}
 	}()
 }
