@@ -7,7 +7,7 @@ import (
 
 func TestAESCipher_Encode(t *testing.T) {
 	cipher := NewAESCipher("BH1rStJwNP1YIvNI")
-	painText := []byte("hello world")
+	painText := []byte("hello � []world ��")
 	encrypt := cipher.Encode(painText)
 	log.Debug(string(encrypt))
 	dencrypt := cipher.Decode(encrypt)
