@@ -44,6 +44,9 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 	// write q
 	go func() {
 		for pkg := range wc.writeQueue {
+			if pkg == nil {
+				break
+			}
 			// Binary=1 Text=0
 			if conf.C.ConnWriteTimeout > 0 {
 				_ = wc.conn.SetWriteDeadline(time.Now().Add(time.Second * time.Duration(conf.C.ConnWriteTimeout)))
@@ -88,6 +91,7 @@ func (wc *WSConn) GetUuid() string {
 func (wc *WSConn) ReadMsg() {
 	defer func() {
 		wc.logicQueue <- nil
+		wc.writeQueue <- nil
 		// force close conn
 		if !wc.IsClosed() {
 			_ = wc.conn.Close()

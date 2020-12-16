@@ -59,6 +59,9 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	// write q
 	go func() {
 		for pkg := range tc.writeQueue {
+			if pkg == nil {
+				break
+			}
 			if conf.C.ConnWriteTimeout > 0 {
 				_ = tc.SetWriteDeadline(time.Now().Add(time.Second * time.Duration(conf.C.ConnWriteTimeout)))
 			}
@@ -102,6 +105,7 @@ func (tc *TCPConn) GetUuid() string {
 func (tc *TCPConn) ReadMsg() {
 	defer func() {
 		tc.logicQueue <- nil
+		tc.writeQueue <- nil
 		// force close conn
 		if !tc.IsClosed() {
 			_ = tc.Close()
