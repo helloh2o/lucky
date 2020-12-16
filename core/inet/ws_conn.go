@@ -16,9 +16,10 @@ type WSConn struct {
 	sync.RWMutex
 	uuid string
 	conn *websocket.Conn
-	// 缓存队列
+	// 缓写队列
 	writeQueue chan []byte
-	readQueue  chan []byte
+	// 逻辑消息队列
+	logicQueue chan []byte
 	// 消息处理器
 	processor iduck.Processor
 	userData  interface{}
@@ -38,30 +39,30 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
 		processor:  processor,
 		// 单个缓存100个为处理的包
-		readQueue: make(chan []byte, conf.C.ConnUndoQueueSize),
+		logicQueue: make(chan []byte, conf.C.ConnUndoQueueSize),
 	}
 	// write q
 	go func() {
 		for pkg := range wc.writeQueue {
-			// read over
-			if pkg == nil {
-				break
-			}
 			// Binary=1 Text=0
+			if conf.C.ConnWriteTimeout > 0 {
+				_ = wc.conn.SetWriteDeadline(time.Now().Add(time.Second * time.Duration(conf.C.ConnWriteTimeout)))
+			}
 			err := wc.conn.WriteMessage(websocket.BinaryMessage, pkg)
 			if err != nil {
 				log.Error("websocket write %v", err)
 				break
 			}
+			_ = wc.conn.SetWriteDeadline(time.Time{})
 		}
 		// write over or error
 		_ = wc.Close()
 		log.Release("Conn %s <=> %s closed.", wc.conn.LocalAddr(), wc.conn.RemoteAddr())
 	}()
-	// read q
+	// logic q
 	go func() {
-		for pkg := range wc.readQueue {
-			// read over
+		for pkg := range wc.logicQueue {
+			// logic over
 			if pkg == nil {
 				break
 			}
@@ -83,10 +84,14 @@ func (wc *WSConn) GetUuid() string {
 	return wc.uuid
 }
 
+// read | write end -> write | read end -> conn end
 func (wc *WSConn) ReadMsg() {
 	defer func() {
-		wc.readQueue <- nil
-		wc.writeQueue <- nil
+		wc.logicQueue <- nil
+		// force close conn
+		if !wc.IsClosed() {
+			_ = wc.conn.Close()
+		}
 	}()
 	timeout := time.Second * time.Duration(conf.C.FirstPackageTimeout)
 	for {
@@ -99,7 +104,7 @@ func (wc *WSConn) ReadMsg() {
 		case websocket.BinaryMessage:
 			// write to cache queue
 			select {
-			case wc.readQueue <- body:
+			case wc.logicQueue <- body:
 			default:
 				log.Error("WSConn read queue overflow err %v", err)
 				return
@@ -143,6 +148,10 @@ func (wc *WSConn) Close() error {
 		atomic.AddInt64(&wc.closeFlag, 1)
 		if wc.closeCb != nil {
 			wc.closeCb()
+		}
+		// clean write q if not empty
+		for len(wc.writeQueue) > 0 {
+			<-wc.writeQueue
 		}
 	}()
 	return wc.conn.Close()
