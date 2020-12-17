@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}*/
-	max := 1000
+	max := 100
 	for i := 1; i <= max; i++ {
 		go runClient(i)
 		time.Sleep(time.Millisecond * 300)

@@ -8,7 +8,6 @@ import (
 	"lucky/core/iduck"
 	"lucky/log"
 	"reflect"
-	"runtime/debug"
 )
 
 /*
@@ -59,15 +58,8 @@ func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		log.Error("UnmarshalMerge pack.contents error by id %d", pack.Id)
 		return
 	}
-	func() {
-		defer func() {
-			if r := recover(); r != nil {
-				log.Error("%v", r)
-				log.Error("panic at msg %d handler, stack %s", pack.Id, string(debug.Stack()))
-			}
-		}()
-		info.msgCallback(msg, conn, body)
-	}()
+	// 执行逻辑
+	execute(info, msg, conn, body, pack.Id)
 }
 
 func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {

@@ -8,7 +8,6 @@ import (
 	"lucky/core/iduck"
 	"lucky/log"
 	"reflect"
-	"runtime/debug"
 )
 
 type JsonProcessor struct {
@@ -46,27 +45,20 @@ func (jp *JsonProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		log.Error("Can't unmarshal pack body to json Protocol, %+v", body)
 		return
 	}
-	h, ok := jp.handlers[pack.Id]
+	info, ok := jp.handlers[pack.Id]
 	if !ok {
 		log.Error("Not register msg id %d", pack.Id)
 		return
 	}
-	msg := reflect.New(h.msgType.Elem()).Interface()
+	msg := reflect.New(info.msgType.Elem()).Interface()
 	msgBytes, _ := json.Marshal(pack.Content)
 	err := json.Unmarshal(msgBytes, msg)
 	if err != nil {
 		log.Error("Can't unmarshal pack content to json msg, %+v", body)
 		return
 	}
-	func() {
-		defer func() {
-			if r := recover(); r != nil {
-				log.Error("%v", r)
-				log.Error("panic at msg %d handler, stack %s", pack.Id, string(debug.Stack()))
-			}
-		}()
-		h.msgCallback(msg, conn, body)
-	}()
+	// 执行逻辑
+	execute(info, msg, conn, body, uint32(pack.Id))
 }
 
 func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
