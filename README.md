@@ -9,6 +9,7 @@
 
 使用者只需注册消息和消息对应的回调函数，在回调中处理具体逻辑。例如：
 ```
+        //在处理器上注册（消息码，消息体，消息执行的逻辑代码）
 	Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
 ```
 
