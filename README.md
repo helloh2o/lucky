@@ -1,7 +1,7 @@
 # Lucky
 
 #### 介绍
-一个简洁的游戏/应用网络框架，支持protobuf，JSON 消息协议，基于websocket或者socket(TCP,KCP)进行数据传输, 支持对消息包加密解密。
+一个简洁的游戏/应用网络框架，支持protobuf，JSON 消息协议，基于HTTP,websocket或者socket(TCP,KCP)进行数据传输, 支持对消息包加密解密。
 
 数据包加密方式： AES128,AES192,AES256 以及Byte轻量级混淆加密。
 
@@ -30,7 +30,7 @@ conf.Set(&conf.Data{
 		MaxHeaderLen:        1024,
 	})
 ```
-2. 请参考example下的tcp, websocket, kcp, 以及kcp帧同步例子
+2. 请参考example下的http, tcp, websocket, kcp, 以及kcp帧同步例子
 3. 帧同步部分还需要进一步完善，只是一个基础的实现
 4. 聊天室例子, 源码example/chatroom
 ![Image text](https://gitee.com/helloh2o/lucky/raw/master/example/chatroom/demo.png)
