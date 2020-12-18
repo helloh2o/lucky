@@ -21,14 +21,14 @@ func main() {
 	conf.Set(&conf.Data{
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  100,
-		FirstPackageTimeout: 5,
-		ConnReadTimeout:     15,
+		FirstPackageTimeout: 500,
+		ConnReadTimeout:     500,
 		ConnWriteTimeout:    5,
 		MaxDataPackageSize:  2048,
 		MaxHeaderLen:        1024,
 	})
 	msg.SetEncrypt(msg.Processor)
-	if s, err := inet.NewWsServer("localhost:2022", msg.Processor); err != nil {
+	if s, err := inet.NewWsServer(":2022", msg.Processor); err != nil {
 		panic(err)
 	} else {
 		err = s.Run()
