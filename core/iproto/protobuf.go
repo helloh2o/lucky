@@ -34,7 +34,7 @@ func NewPBProcessor() *PbfProcessor {
 }
 
 // 收到完整数据包
-func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) {
+func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -59,7 +59,7 @@ func (pbf *PbfProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		return
 	}
 	// 执行逻辑
-	execute(info, msg, conn, body, pack.Id)
+	execute(info, msg, writer, body, pack.Id)
 }
 
 func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
@@ -94,6 +94,15 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	}
 	pkg := append(head, data...)
 	return nil, pkg
+}
+
+// without header length
+func (pbf *PbfProcessor) WarpMsgNoHeader(message interface{}) ([]byte, error) {
+	err, data := pbf.WarpMsg(message)
+	if err != nil {
+		return nil, err
+	}
+	return data[2:], nil
 }
 
 func (pbf *PbfProcessor) RegisterHandler(id int, entity interface{}, handle func(args ...interface{})) {

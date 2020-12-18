@@ -1,7 +1,6 @@
 package iproto
 
 import (
-	"lucky/core/iduck"
 	"lucky/log"
 	"reflect"
 	"runtime/debug"
@@ -22,12 +21,12 @@ type msgInfo struct {
 }
 
 // 执行消息回调
-func execute(mInfo msgInfo, msg interface{}, conn iduck.IConnection, body []byte, id uint32) {
+func execute(mInfo msgInfo, msg interface{}, writer interface{}, body []byte, id uint32) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Error("%v", r)
 			log.Error("panic at msg %d handler, stack %s", id, string(debug.Stack()))
 		}
 	}()
-	mInfo.msgCallback(msg, conn, body)
+	mInfo.msgCallback(msg, writer, body)
 }

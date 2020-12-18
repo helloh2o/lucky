@@ -32,7 +32,7 @@ func NewJSONProcessor() *JsonProcessor {
 }
 
 // 收到完整数据包
-func (jp *JsonProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) {
+func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	// 解密
 	if jp.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -58,7 +58,7 @@ func (jp *JsonProcessor) OnReceivedPackage(conn iduck.IConnection, body []byte) 
 		return
 	}
 	// 执行逻辑
-	execute(info, msg, conn, body, uint32(pack.Id))
+	execute(info, msg, writer, body, uint32(pack.Id))
 }
 
 func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
