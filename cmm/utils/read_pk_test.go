@@ -8,12 +8,12 @@ import (
 )
 
 func TestDispatchReadPK(t *testing.T) {
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 1000; i++ {
 		expected := float64(200)
 		resultPkg := DispatchReadPK(expected, 10)
 		var result float64
-		for i, v := range resultPkg {
-			log.Debug("index %d, got %.2f", i, v)
+		for _, v := range resultPkg {
+			//log.Debug("index %d, got %.2f", i, v)
 			result += v
 		}
 		// 保留六位
