@@ -37,7 +37,7 @@ func NewQUICServer(addr string, processor iduck.Processor, cert, key string) (s 
 }
 
 func (s *quicServer) Run() error {
-	log.Release("Starting kcp server on %s", s.addr)
+	log.Release("Starting quic server on %s", s.addr)
 	for {
 		sess, err := s.ln.Accept(context.Background())
 		if err != nil {
@@ -56,7 +56,7 @@ func (s *quicServer) Run() error {
 func (s *quicServer) HandleStream(stream quic.Stream) {
 	defer func() {
 		if r := recover(); r != nil {
-			log.Error("PANIC %v TCP handle, stack %s", r, string(debug.Stack()))
+			log.Error("PANIC %v quic stream handle, stack %s", r, string(debug.Stack()))
 		}
 	}()
 	var ic iduck.IConnection
