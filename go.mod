@@ -12,6 +12,7 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/kataras/iris/v12 v12.2.0-alpha.0.20201113181155-4d09475c290d
 	github.com/klauspost/reedsolomon v1.9.9 // indirect
+	github.com/lucas-clemente/quic-go v0.19.3
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mmcloughlin/avo v0.0.0-20201130012700-45c8ae10fd12 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
