@@ -61,7 +61,7 @@ func (s *quicServer) HandleStream(stream quic.Stream) {
 	}()
 	var ic iduck.IConnection
 	// 可靠安全的UDP协议，http/3
-	ic = NewQuicSteam(stream, s.processor)
+	ic = NewQuicStream(stream, s.processor)
 	ic.ReadMsg()
 }
 func (s *quicServer) Handle(conn net.Conn) {}

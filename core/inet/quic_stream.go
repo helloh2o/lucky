@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-type QuicSteam struct {
+type QuicStream struct {
 	sync.RWMutex
 	uuid string
 	quic.Stream
@@ -31,11 +31,11 @@ type QuicSteam struct {
 	closeFlag int64
 }
 
-func NewQuicSteam(stream quic.Stream, processor iduck.Processor) *QuicSteam {
+func NewQuicStream(stream quic.Stream, processor iduck.Processor) *QuicStream {
 	if processor == nil || stream == nil {
 		return nil
 	}
-	s := &QuicSteam{
+	s := &QuicStream{
 		uuid:       uuid.New().String(),
 		Stream:     stream,
 		writeQueue: make(chan []byte, conf.C.ConnWriteQueueSize),
@@ -83,12 +83,12 @@ func NewQuicSteam(stream quic.Stream, processor iduck.Processor) *QuicSteam {
 	return s
 }
 
-func (tc *QuicSteam) GetUuid() string {
-	return tc.uuid
+func (s *QuicStream) GetUuid() string {
+	return s.uuid
 }
 
 // read | write end -> write | read end -> conn end
-func (s *QuicSteam) ReadMsg() {
+func (s *QuicStream) ReadMsg() {
 	defer func() {
 		s.logicQueue <- nil
 		s.writeQueue <- nil
@@ -138,7 +138,7 @@ func (s *QuicSteam) ReadMsg() {
 	}
 }
 
-func (s *QuicSteam) WriteMsg(message interface{}) {
+func (s *QuicStream) WriteMsg(message interface{}) {
 	err, pkg := s.processor.WarpMsg(message)
 	if err != nil {
 		log.Error("Quic Steam OnWarpMsg package error %s", err)
@@ -157,7 +157,7 @@ func (s *QuicSteam) WriteMsg(message interface{}) {
 	}
 }
 
-func (s *QuicSteam) Close() error {
+func (s *QuicStream) Close() error {
 	s.Lock()
 	defer func() {
 		s.Unlock()
@@ -174,32 +174,32 @@ func (s *QuicSteam) Close() error {
 	return s.Close()
 }
 
-func (s *QuicSteam) IsClosed() bool {
+func (s *QuicStream) IsClosed() bool {
 	return atomic.LoadInt64(&s.closeFlag) != 0
 }
 
-func (s *QuicSteam) AfterClose(cb func()) {
+func (s *QuicStream) AfterClose(cb func()) {
 	s.Lock()
 	defer s.Unlock()
 	s.closeCb = cb
 }
 
-func (s *QuicSteam) SetData(data interface{}) {
+func (s *QuicStream) SetData(data interface{}) {
 	s.Lock()
 	defer s.Unlock()
 	s.userData = data
 }
-func (s *QuicSteam) GetData() interface{} {
+func (s *QuicStream) GetData() interface{} {
 	s.RLock()
 	defer s.RUnlock()
 	return s.userData
 }
-func (s *QuicSteam) SetNode(node iduck.INode) {
+func (s *QuicStream) SetNode(node iduck.INode) {
 	s.Lock()
 	defer s.Unlock()
 	s.node = node
 }
-func (s *QuicSteam) GetNode() iduck.INode {
+func (s *QuicStream) GetNode() iduck.INode {
 	s.RLock()
 	defer s.RUnlock()
 	return s.node
