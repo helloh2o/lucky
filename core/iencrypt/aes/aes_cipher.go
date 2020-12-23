@@ -13,17 +13,19 @@ type AESCipher struct {
 }
 
 func NewAESCipher(key string) *AESCipher {
-	if len(key)%8 != 0 {
-		panic("incorrect key, need 16, 24, 32 length string")
+	size := len(key) / 8
+	if size < 2 {
+		log.Error("incorrect key, need 16(aes-128), 24(aes-192), 32(aes-256) length string")
+		return nil
+	} else if size > 4 {
+		size = 4
 	}
-	if len(key) > 32 {
-		key = key[:32]
-	}
+	key = key[:size*8]
 	return &AESCipher{key: []byte(key)}
 }
 
-func (a128 *AESCipher) Decode(src []byte) []byte {
-	encrypt, err := aesDeCrypt(src, a128.key)
+func (aes *AESCipher) Decode(src []byte) []byte {
+	encrypt, err := aesDeCrypt(src, aes.key)
 	if err != nil {
 		log.Error("Aes Decode error %s", err)
 		return src
@@ -31,8 +33,8 @@ func (a128 *AESCipher) Decode(src []byte) []byte {
 	return encrypt
 }
 
-func (a128 *AESCipher) Encode(src []byte) []byte {
-	encrypt, err := aesEcrypt(src, a128.key)
+func (aes *AESCipher) Encode(src []byte) []byte {
+	encrypt, err := aesEcrypt(src, aes.key)
 	if err != nil {
 		log.Error("Aes Encode error %s", err)
 		return src
