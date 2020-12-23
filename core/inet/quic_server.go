@@ -21,7 +21,7 @@ type quicServer struct {
 func NewQUICServer(addr string, processor iduck.Processor, cert, key string) (s *quicServer, err error) {
 	pem, err := tls.LoadX509KeyPair(cert, key)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	ts := new(quicServer)
 	ts.addr = addr
