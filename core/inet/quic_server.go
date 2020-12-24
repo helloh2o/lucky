@@ -18,14 +18,10 @@ type quicServer struct {
 	processor iduck.Processor
 }
 
-func NewQUICServer(addr string, processor iduck.Processor, cert, key string) (s *quicServer, err error) {
-	pem, err := tls.LoadX509KeyPair(cert, key)
-	if err != nil {
-		return nil, err
-	}
+func NewQUICServer(addr string, processor iduck.Processor, config *tls.Config) (s *quicServer, err error) {
 	ts := new(quicServer)
 	ts.addr = addr
-	ts.ln, err = quic.ListenAddr(addr, &tls.Config{Certificates: []tls.Certificate{pem}}, nil)
+	ts.ln, err = quic.ListenAddr(addr, config, nil)
 	if processor == nil {
 		panic("processor must be set.")
 	}
