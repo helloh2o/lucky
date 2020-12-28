@@ -12,12 +12,12 @@ import (
 
 // 广播转发节点
 type BroadcastNode struct {
+	// 节点ID
+	NodeId string
 	// 网络连接
 	Connections map[interface{}]iduck.IConnection
 	// 当前连接数量
 	clientSize int64
-	// 进入令牌
-	NodeId string
 	// message channel
 	onMessage      chan interface{}
 	recentMessages []interface{}

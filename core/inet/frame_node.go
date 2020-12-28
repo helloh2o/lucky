@@ -12,14 +12,14 @@ import (
 
 // 帧同步节点
 type FrameNode struct {
+	// 节点ID
+	NodeId string
 	// 网络连接
 	Connections map[interface{}]iduck.IConnection
 	// 当前连接数量
 	clientSize int64
 	// 完成同步数量
 	overSize int64
-	// 进入令牌
-	EnterToken string
 	// 同步周期
 	FrameTicker *time.Ticker
 	// current frame messages
@@ -42,7 +42,7 @@ var closedFrameErr = errors.New("FrameNode is closed")
 func NewFrameNode() *FrameNode {
 	return &FrameNode{
 		Connections:  make(map[interface{}]iduck.IConnection),
-		EnterToken:   uuid.New().String(),
+		NodeId:       uuid.New().String(),
 		FrameTicker:  time.NewTicker(time.Millisecond * 66),
 		RandSeed:     time.Now().UnixNano(),
 		onMessage:    make(chan []byte),
@@ -82,7 +82,7 @@ func (gr *FrameNode) Serve() {
 					gr.sendFrame()
 				case pkg := <-gr.onMessage:
 					if pkg == nil {
-						log.Release("============= FrameNode %s, stop serve =============", gr.EnterToken)
+						log.Release("============= FrameNode %s, stop serve =============", gr.NodeId)
 						// stop Serve
 						gr.FrameTicker.Stop()
 						return
