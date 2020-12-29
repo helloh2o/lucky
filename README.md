@@ -37,9 +37,9 @@ conf.Set(&conf.Data{
 4. 聊天室例子, 源码example/chatroom
 ![Image text](https://gitee.com/helloh2o/lucky/raw/master/example/chatroom/demo.png)
 
-#### 欢迎参与
+#### 欢迎参与 :)
 1. 欢迎提交PR 和 Issue
-2. 开源不易，觉得不错给个小星星✮吧 :)
+2. 开源不易，觉得不错就给个小星星✮吧 
 
 #### TODO
 1. mongodb 
