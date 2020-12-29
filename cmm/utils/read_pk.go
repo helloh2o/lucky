@@ -9,11 +9,11 @@ import (
 	"time"
 )
 
-// 红包分发、 参考文章 https://blog.csdn.net/Evrse/article/details/110144412?utm_medium=distribute.pc_feed.none-task-blog-personrec_tag-9.nonecase&depth_1-utm_source=distribute.pc_feed.none-task-blog-personrec_tag-9.nonecase&request_id=5fc021d95b578e08897d84cf
 // 保留两位小数
 var r = rand.New(rand.NewSource(uint64(time.Now().UnixNano())))
 
-func DispatchReadPK(money float64, amount int) (pks []float64) {
+// @average money/amount
+func DispatchReadPK(money float64, amount int, average bool) (pks []float64) {
 	if money == 0 || amount == 0 {
 		log.Error("money & amount must bigger than 0.")
 		return
@@ -22,9 +22,14 @@ func DispatchReadPK(money float64, amount int) (pks []float64) {
 	probList := make([]float64, amount)
 	AllProb := float64(0)
 	for i := 0; i < amount; i++ {
-		ni := r.Intn(100) + 1
-		AllProb += float64(ni)
-		probList[i] = float64(ni)
+		if average {
+			probList[i] = 1
+			AllProb += 1
+		} else {
+			ni := r.Intn(100) + 1
+			AllProb += float64(ni)
+			probList[i] = float64(ni)
+		}
 	}
 	var allocated float64
 	// read pk

@@ -8,9 +8,9 @@ import (
 )
 
 func TestDispatchReadPK(t *testing.T) {
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 100; i++ {
 		expected := float64(200)
-		resultPkg := DispatchReadPK(expected, 10)
+		resultPkg := DispatchReadPK(expected, 11, true)
 		var result float64
 		for _, v := range resultPkg {
 			//log.Debug("index %d, got %.2f", i, v)
