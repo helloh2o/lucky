@@ -1,5 +1,7 @@
 # Lucky
 
+[**Github**](https://github.com/helloh2o/lucky) <<=>> [**Gitee**](https://gitee.com/helloh2o/lucky)
+
 #### 介绍
 一个简洁的游戏/应用网络框架，支持protobuf，JSON 消息协议，基于HTTP/HTTPS,websocket或者socket(TCP,KCP,QUIC)进行数据传输, 支持对消息包加密解密。
 
@@ -15,7 +17,7 @@
 
 #### 安装教程
 
-go get gitee.com/helloh2o/lucky
+go get github.com/helloh2o/lucky  或者 go get gitee.com/helloh2o/lucky
 
 #### 使用说明
 
@@ -35,11 +37,9 @@ conf.Set(&conf.Data{
 4. 聊天室例子, 源码example/chatroom
 ![Image text](https://gitee.com/helloh2o/lucky/raw/master/example/chatroom/demo.png)
 
+#### 欢迎参与
+1. 欢迎提交PR 和 Issue
+2. 开源不易，觉得不错给个小星星吧 :)
+
 #### TODO
 1. mongodb 
-#### 欢迎参与
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
