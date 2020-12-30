@@ -1,6 +1,7 @@
-# Lucky
-
+# Lucky for simple & useful
 [**Github**](https://github.com/helloh2o/lucky) <<=>> [**Gitee**](https://gitee.com/helloh2o/lucky)
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/helloh2o/lucky)](https://goreportcard.com/report/github.com/helloh2o/lucky)
 
 #### Introduction
 
