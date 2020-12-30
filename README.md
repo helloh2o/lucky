@@ -1,6 +1,7 @@
 # Lucky
-
 [**Github**](https://github.com/helloh2o/lucky) <<=>> [**Gitee**](https://gitee.com/helloh2o/lucky)
+
+#### [English README](https://github.com/helloh2o/lucky/blob/master/README_en.md)
 
 #### 介绍
 一个简洁的游戏/应用网络框架，支持protobuf，JSON 消息协议，基于HTTP/HTTPS,websocket或者socket(TCP,KCP,QUIC)进行数据传输, 支持对消息包加密解密。
