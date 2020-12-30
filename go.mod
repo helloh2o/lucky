@@ -1,4 +1,4 @@
-module lucky
+module github.com/helloh2o/lucky
 
 go 1.15
 
