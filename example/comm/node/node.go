@@ -1,7 +1,7 @@
 package node
 
 import (
-	"lucky/core/inet"
+	"github.com/helloh2o/lucky/core/inet"
 )
 
 var TestNode *inet.FrameNode

@@ -2,8 +2,8 @@ package oor
 
 import (
 	"bytes"
-	"lucky/cmm/utils"
-	"lucky/log"
+	"github.com/helloh2o/lucky/cmm/utils"
+	"github.com/helloh2o/lucky/log"
 	"testing"
 )
 

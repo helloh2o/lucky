@@ -2,8 +2,8 @@ package utils
 
 import (
 	"fmt"
+	"github.com/helloh2o/lucky/log"
 	"golang.org/x/exp/rand"
-	"lucky/log"
 	"math"
 	"strconv"
 	"time"

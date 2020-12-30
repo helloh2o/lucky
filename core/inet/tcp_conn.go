@@ -3,10 +3,10 @@ package inet
 import (
 	"encoding/binary"
 	"github.com/google/uuid"
+	"github.com/helloh2o/lucky/conf"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/log"
 	"io"
-	"lucky/conf"
-	"lucky/core/iduck"
-	"lucky/log"
 	"net"
 	"runtime/debug"
 	"sync"

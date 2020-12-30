@@ -1,7 +1,7 @@
 package iproto
 
 import (
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"reflect"
 	"runtime/debug"
 )

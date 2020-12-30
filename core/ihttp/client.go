@@ -2,8 +2,8 @@ package ihttp
 
 import (
 	"crypto/tls"
+	"github.com/helloh2o/lucky/log"
 	"io"
-	"lucky/log"
 	"net/http"
 	"net/url"
 	"time"

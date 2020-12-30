@@ -2,7 +2,7 @@ package timer_test
 
 import (
 	"fmt"
-	"lucky/cmm/timer"
+	"github.com/helloh2o/lucky/cmm/timer"
 	"time"
 )
 

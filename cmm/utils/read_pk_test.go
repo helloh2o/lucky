@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"strconv"
 	"testing"
 )

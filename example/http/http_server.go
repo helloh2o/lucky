@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/helloh2o/lucky/core/ihttp"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/comm/msg"
+	"github.com/helloh2o/lucky/example/comm/msg/code"
+	"github.com/helloh2o/lucky/example/comm/protobuf"
+	"github.com/helloh2o/lucky/log"
 	"github.com/kataras/iris/v12/context"
-	"lucky/core/ihttp"
-	"lucky/core/iproto"
-	"lucky/example/comm/msg"
-	"lucky/example/comm/msg/code"
-	"lucky/example/comm/protobuf"
-	"lucky/log"
 )
 
 func main() {

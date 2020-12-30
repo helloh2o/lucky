@@ -2,10 +2,10 @@ package xdb
 
 import (
 	"database/sql"
+	"github.com/helloh2o/lucky/log"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"lucky/log"
 )
 
 var (

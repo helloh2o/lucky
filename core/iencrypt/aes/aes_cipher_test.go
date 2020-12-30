@@ -1,7 +1,7 @@
 package aes
 
 import (
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"testing"
 )
 

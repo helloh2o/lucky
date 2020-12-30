@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/gorilla/websocket"
-	"lucky/core/iduck"
-	"lucky/core/inet"
-	"lucky/core/iproto"
-	"lucky/example/comm/msg"
-	"lucky/example/comm/msg/code"
-	"lucky/example/comm/protobuf"
-	"lucky/log"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/comm/msg"
+	"github.com/helloh2o/lucky/example/comm/msg/code"
+	"github.com/helloh2o/lucky/example/comm/protobuf"
+	"github.com/helloh2o/lucky/log"
 	"time"
 )
 

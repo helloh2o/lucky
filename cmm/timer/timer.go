@@ -1,7 +1,7 @@
 package timer
 
 import (
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"time"
 )

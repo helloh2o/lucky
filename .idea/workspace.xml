@@ -20,10 +20,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/example/quic/client/quic_client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/quic/quic_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/cache/redis_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/cache/redis_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/timer/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/timer/example_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/timer/timer.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/timer/timer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/utils/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/example_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/utils/read_pk.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/read_pk.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/utils/read_pk_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/utils/read_pk_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmm/xdb/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmm/xdb/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/aes/aes_cipher_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iencrypt/oor/xor_cipher_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iencrypt/oor/xor_cipher_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/ihttp/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/ihttp/client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/ihttp/client_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/ihttp/client_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/broadcast.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/broadcast.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/frame_node.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/frame_node.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/kcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/kcp_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/inet/quic_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/quic_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/quic_stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/quic_stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/tcp_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/tcp_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/inet/ws_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/inet/ws_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/msgInfo.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/msgInfo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/iproto/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/iproto/protobuf.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/chat_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/chat_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/chatnode/room.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/chatnode/room.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/chatroom/jsonmsg/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/chatroom/jsonmsg/message.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/logic/frame.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/logic/frame.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/logic/hello.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/logic/hello.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/msg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/msg/msg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/comm/node/node.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/comm/node/node.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/frame/client/frameclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/frame/client/frameclient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/frame/frameserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/frame/frameserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/http/client/http_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/http/client/http_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/http/http_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/http/http_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/kcp/client/kcpclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/kcp/client/kcpclient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/kcp/kcpserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/kcp/kcpserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/quic/client/quic_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/quic/client/quic_client.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/quic/quic_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/quic/quic_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/tcp/tcpserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/tcpserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/websocket/client/wsclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/websocket/client/wsclient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/websocket/wsserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/websocket/wsserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/example_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/example_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +84,7 @@
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -80,16 +123,7 @@
       <recent name="C:\Users\ay\go\src\lucky\example\frame-sync\client" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build quic_client.go">
-    <configuration name="go build lucky/example/chatroom/clients/robot" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/example/chatroom/clients/robot/robot.go" />
-      <package value="lucky/example/chatroom/clients/robot" />
-      <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Go Test.TestDispatchReadPK in lucky/cmm/utils">
     <configuration name="go build lucky/example/quic" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -119,6 +153,17 @@
       <pattern value="^\QTestAESCipher_Encode\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestDispatchReadPK in lucky/cmm/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$/cmm/utils" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="lucky/cmm/utils" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestDispatchReadPK\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestNewHttpClient in lucky/core/ihttp" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/core/ihttp" />
@@ -132,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestDispatchReadPK in lucky/cmm/utils" />
         <item itemvalue="Go Build.go build quic_client.go" />
         <item itemvalue="Go Build.go build lucky/example/quic" />
         <item itemvalue="Go Test.TestAESCipher_Encode in lucky/core/iencrypt/aes" />
         <item itemvalue="Go Test.TestNewHttpClient in lucky/core/ihttp" />
-        <item itemvalue="Go Build.go build lucky/example/chatroom/clients/robot" />
       </list>
     </recent_temporary>
   </component>
@@ -160,9 +205,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="robot" />
-    <MESSAGE value="longer" />
-    <MESSAGE value="websocket" />
     <MESSAGE value="demo image" />
     <MESSAGE value="add isClosed flag" />
     <MESSAGE value="destroy bug" />
@@ -185,7 +227,10 @@
     <MESSAGE value="readme" />
     <MESSAGE value="go mod" />
     <MESSAGE value="fix quic" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix quic" />
+    <MESSAGE value="add average red_pkg" />
+    <MESSAGE value="sysctl.conf" />
+    <MESSAGE value="openfiles.sh" />
+    <option name="LAST_COMMIT_MESSAGE" value="openfiles.sh" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -196,15 +241,16 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607743948658">
+    <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609315895292">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609315895292" />
     <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607743948658" />
-    <state x="740" y="0" width="804" height="811" key="CommitChangelistDialog2" timestamp="1608719440936">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2660" y="0" width="804" height="811" key="CommitChangelistDialog2" timestamp="1609299679071">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608719440936" />
-    <state x="2660" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608717770119" />
+    <state x="740" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236731034" />
+    <state x="2660" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609299679071" />
     <state x="740" y="123" width="804" height="811" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608177563446" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1607766999462">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -223,28 +269,28 @@
     </state>
     <state x="765" y="421" key="Github.CreateGistDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608542211989" />
     <state x="765" y="421" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608100484084" />
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom" timestamp="1608776415806">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="365" key="GridCell.Tab.0.bottom" timestamp="1609236674123">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="307" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608699080819" />
+    <state width="1877" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236674123" />
     <state width="1877" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608776415806" />
     <state width="1877" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.center" timestamp="1608776415806">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="365" key="GridCell.Tab.0.center" timestamp="1609236674123">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="307" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608699080819" />
+    <state width="1877" height="365" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236674123" />
     <state width="1877" height="365" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608776415806" />
     <state width="1877" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.left" timestamp="1608776415806">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="365" key="GridCell.Tab.0.left" timestamp="1609236674123">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="307" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608699080819" />
+    <state width="1877" height="365" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236674123" />
     <state width="1877" height="365" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608776415806" />
     <state width="1877" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.right" timestamp="1608776415806">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="365" key="GridCell.Tab.0.right" timestamp="1609236674123">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="307" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608699080819" />
+    <state width="1877" height="365" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236674123" />
     <state width="1877" height="365" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608776415806" />
     <state width="1877" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
     <state width="1877" height="628" key="GridCell.Tab.1.bottom" timestamp="1608283081492">
@@ -280,16 +326,20 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608086095536" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1608719442579">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1609299680437">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608719442579" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608717772175" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609236734444" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609299680437" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608177564769" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1608171128448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608171128448" />
+    <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1609320769865">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609320769865" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1608177457867">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

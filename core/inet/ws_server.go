@@ -2,9 +2,9 @@ package inet
 
 import (
 	"github.com/gorilla/websocket"
-	"lucky/conf"
-	"lucky/core/iduck"
-	"lucky/log"
+	"github.com/helloh2o/lucky/conf"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/log"
 	"net"
 	"net/http"
 	"runtime/debug"

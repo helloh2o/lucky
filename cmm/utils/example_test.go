@@ -2,7 +2,7 @@ package utils_test
 
 import (
 	"fmt"
-	"lucky/cmm/utils"
+	"github.com/helloh2o/lucky/cmm/utils"
 )
 
 func ExampleMap() {

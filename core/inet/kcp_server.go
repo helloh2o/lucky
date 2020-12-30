@@ -1,9 +1,9 @@
 package inet
 
 import (
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/log"
 	"github.com/xtaci/kcp-go"
-	"lucky/core/iduck"
-	"lucky/log"
 	"net"
 	"runtime/debug"
 	"sync"

@@ -1,8 +1,8 @@
 package log_test
 
 import (
+	"github.com/helloh2o/lucky/log"
 	l "log"
-	"lucky/log"
 )
 
 func Example() {

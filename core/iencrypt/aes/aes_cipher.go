@@ -5,7 +5,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"errors"
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 )
 
 type AESCipher struct {

@@ -1,12 +1,12 @@
 package msg
 
 import (
-	"lucky/core/iduck"
-	"lucky/core/iencrypt/little"
-	"lucky/core/iproto"
-	"lucky/example/comm/logic"
-	"lucky/example/comm/msg/code"
-	"lucky/example/comm/protobuf"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/iencrypt/little"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/comm/logic"
+	"github.com/helloh2o/lucky/example/comm/msg/code"
+	"github.com/helloh2o/lucky/example/comm/protobuf"
 )
 
 var Processor = iproto.NewPBProcessor()

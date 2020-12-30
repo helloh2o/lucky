@@ -1,9 +1,9 @@
 package main
 
 import (
-	"lucky/core/inet"
-	"lucky/example/comm/msg"
-	"lucky/example/comm/node"
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/example/comm/msg"
+	"github.com/helloh2o/lucky/example/comm/node"
 	"net/http"
 	_ "net/http/pprof"
 )

@@ -1,9 +1,9 @@
 package logic
 
 import (
-	"lucky/core/iduck"
-	"lucky/core/iproto"
-	"lucky/example/comm/node"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/comm/node"
 )
 
 // 帧同步开始

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"lucky/core/inet"
-	"lucky/example/comm/msg"
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/example/comm/msg"
 )
 
 func main() {

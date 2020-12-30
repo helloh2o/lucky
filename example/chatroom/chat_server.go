@@ -1,11 +1,11 @@
 package main
 
 import (
-	"lucky/conf"
-	"lucky/example/chatroom/jsonmsg"
+	"github.com/helloh2o/lucky/conf"
+	"github.com/helloh2o/lucky/example/chatroom/jsonmsg"
 	"net/http"
 
-	"lucky/core/inet"
+	"github.com/helloh2o/lucky/core/inet"
 	_ "net/http/pprof"
 )
 

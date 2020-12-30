@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"lucky/core/iduck"
-	"lucky/core/iproto"
-	"lucky/example/comm/protobuf"
-	"lucky/log"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/comm/protobuf"
+	"github.com/helloh2o/lucky/log"
 )
 
 // say hello

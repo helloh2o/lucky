@@ -3,8 +3,8 @@ package inet
 import (
 	"errors"
 	"github.com/google/uuid"
-	"lucky/core/iduck"
-	"lucky/log"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"sync/atomic"
 	"time"

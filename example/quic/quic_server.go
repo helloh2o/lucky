@@ -6,9 +6,9 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/example/comm/msg"
 	"io/ioutil"
-	"lucky/core/inet"
-	"lucky/example/comm/msg"
 	"math/big"
 	"os"
 )

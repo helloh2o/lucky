@@ -1,9 +1,9 @@
 package ihttp
 
 import (
+	"github.com/helloh2o/lucky/log"
 	"io"
 	"io/ioutil"
-	"lucky/log"
 	"net/url"
 	"testing"
 )

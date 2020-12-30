@@ -1,8 +1,8 @@
 package chatnode
 
 import (
-	"lucky/core/iduck"
-	"lucky/core/inet"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/inet"
 )
 
 var testChatRoom iduck.INode

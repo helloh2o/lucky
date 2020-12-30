@@ -3,9 +3,9 @@ package inet
 import (
 	"context"
 	"crypto/tls"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/log"
 	"github.com/lucas-clemente/quic-go"
-	"lucky/core/iduck"
-	"lucky/log"
 	"net"
 	"runtime/debug"
 	"sync"

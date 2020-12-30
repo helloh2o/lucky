@@ -3,7 +3,7 @@ package cache
 import (
 	"context"
 	"github.com/go-redis/redis/v8"
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"testing"
 	"time"
 )

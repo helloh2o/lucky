@@ -1,10 +1,10 @@
 package jsonmsg
 
 import (
-	"lucky/core/iduck"
-	"lucky/core/iproto"
-	"lucky/example/chatroom/chatnode"
-	"lucky/log"
+	"github.com/helloh2o/lucky/core/iduck"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/chatroom/chatnode"
+	"github.com/helloh2o/lucky/log"
 )
 
 const (

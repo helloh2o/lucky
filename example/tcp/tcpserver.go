@@ -1,12 +1,12 @@
 package main
 
 import (
-	"lucky/log"
+	"github.com/helloh2o/lucky/log"
 	"net/http"
 
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/example/comm/msg"
 	stdlog "log"
-	"lucky/core/inet"
-	"lucky/example/comm/msg"
 	_ "net/http/pprof"
 )
 

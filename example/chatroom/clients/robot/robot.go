@@ -2,12 +2,12 @@ package main
 
 import (
 	"github.com/gorilla/websocket"
+	"github.com/helloh2o/lucky/cmm/utils"
+	"github.com/helloh2o/lucky/core/inet"
+	"github.com/helloh2o/lucky/core/iproto"
+	"github.com/helloh2o/lucky/example/chatroom/jsonmsg"
+	"github.com/helloh2o/lucky/log"
 	"golang.org/x/exp/rand"
-	"lucky/cmm/utils"
-	"lucky/core/inet"
-	"lucky/core/iproto"
-	"lucky/example/chatroom/jsonmsg"
-	"lucky/log"
 	"strconv"
 	"sync/atomic"
 	"time"
