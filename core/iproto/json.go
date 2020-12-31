@@ -10,6 +10,7 @@ import (
 	"reflect"
 )
 
+// JsonProcessor one of Processor implement
 type JsonProcessor struct {
 	bigEndian bool
 	enc       iduck.Encryptor
@@ -17,12 +18,13 @@ type JsonProcessor struct {
 	handlers  map[int]msgInfo
 }
 
+// JsonProtocol is the protocol for JsonProcessor
 type JsonProtocol struct {
 	Id      int         `json:"id"`
 	Content interface{} `json:"content"`
 }
 
-// PB processor
+// NewJSONProcessor return new JsonProcessor
 func NewJSONProcessor() *JsonProcessor {
 	pb := JsonProcessor{
 		msgTypes: make(map[reflect.Type]int),
@@ -31,7 +33,7 @@ func NewJSONProcessor() *JsonProcessor {
 	return &pb
 }
 
-// 收到完整数据包
+// OnReceivedPackage 收到完整数据包
 func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	// 解密
 	if jp.enc != nil {
@@ -61,10 +63,11 @@ func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	execute(info, msg, writer, body, uint32(pack.Id))
 }
 
+// WarpMsg format the interface message to []byte
 func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
 	data, err := json.Marshal(message)
 	if err != nil {
-		return err, nil
+		return err, data
 	}
 	tp := reflect.TypeOf(message)
 	id, ok := jp.msgTypes[tp]
@@ -95,6 +98,7 @@ func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
 	return nil, pkg
 }
 
+// RegisterHandler for logic
 func (jp *JsonProcessor) RegisterHandler(id int, entity interface{}, handle func(args ...interface{})) {
 	if _, ok := jp.handlers[id]; ok {
 		log.Error("Already register handler by Id:: %d", id)
@@ -108,12 +112,17 @@ func (jp *JsonProcessor) RegisterHandler(id int, entity interface{}, handle func
 	}
 }
 
+// SetBigEndian for order
 func (jp *JsonProcessor) SetBigEndian() {
 	jp.bigEndian = true
 }
+
+// GetBigEndian of the order
 func (jp *JsonProcessor) GetBigEndian() bool {
 	return jp.bigEndian
 }
+
+// SetEncryptor for processor
 func (jp *JsonProcessor) SetEncryptor(enc iduck.Encryptor) {
 	jp.enc = enc
 }

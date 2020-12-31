@@ -13,7 +13,7 @@ var (
 	sqlDB *sql.DB
 )
 
-// gorm v2 dbUrl = username:password@tcp(localhost:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
+// OpenMysqlDB gorm v2 dbUrl = username:password@tcp(localhost:3306)/db_name?charset=utf8mb4&parseTime=True&loc=Local
 func OpenMysqlDB(dbUrl string, config *gorm.Config, maxIdleConns, maxOpenConns int, models ...interface{}) (err error) {
 	if config == nil {
 		config = &gorm.Config{}
@@ -44,7 +44,7 @@ func OpenMysqlDB(dbUrl string, config *gorm.Config, maxIdleConns, maxOpenConns i
 	return
 }
 
-// 获取数据库链接
+// DB 获取数据库链接
 func DB() *gorm.DB {
 	return db
 }

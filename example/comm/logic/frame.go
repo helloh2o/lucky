@@ -6,7 +6,7 @@ import (
 	"github.com/helloh2o/lucky/example/comm/node"
 )
 
-// 帧同步开始
+// FrameStart 帧同步开始
 func FrameStart(args ...interface{}) {
 	conn := args[iproto.Conn].(iduck.IConnection)
 	// set test node
@@ -14,7 +14,7 @@ func FrameStart(args ...interface{}) {
 	node.TestNode.AddConn(conn)
 }
 
-// 帧同步开始
+// FrameEnd 帧同步开始
 func FrameEnd(args ...interface{}) {
 	conn := args[iproto.Conn].(iduck.IConnection)
 	if data := conn.GetNode(); data != nil {
@@ -24,6 +24,7 @@ func FrameEnd(args ...interface{}) {
 	_ = conn.Close()
 }
 
+// FrameMove move op
 func FrameMove(args ...interface{}) {
 	conn := args[iproto.Conn].(iduck.IConnection)
 	if data := conn.GetNode(); data != nil {

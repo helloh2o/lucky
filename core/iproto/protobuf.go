@@ -17,6 +17,7 @@ MsgId:    id,
 Contents: data,
 }*/
 // protoc --go_out=. *.proto
+// PbfProcessor one of Processor implement
 type PbfProcessor struct {
 	bigEndian bool
 	enc       iduck.Encryptor
@@ -24,7 +25,7 @@ type PbfProcessor struct {
 	handlers  map[int]msgInfo
 }
 
-// PB processor
+// NewPBProcessor return PB processor
 func NewPBProcessor() *PbfProcessor {
 	pb := PbfProcessor{
 		msgTypes: make(map[reflect.Type]int),
@@ -33,7 +34,7 @@ func NewPBProcessor() *PbfProcessor {
 	return &pb
 }
 
-// 收到完整数据包
+// OnReceivedPackage 收到完整数据包
 func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	// 解密
 	if pbf.enc != nil {
@@ -62,6 +63,7 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	execute(info, msg, writer, body, pack.Id)
 }
 
+// WarpMsg format the interface message to []byte
 func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	data, err := proto.Marshal(message.(proto.Message))
 	if err != nil {
@@ -96,7 +98,7 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	return nil, pkg
 }
 
-// without header length
+// WarpMsgNoHeader without header length
 func (pbf *PbfProcessor) WarpMsgNoHeader(message interface{}) ([]byte, error) {
 	err, data := pbf.WarpMsg(message)
 	if err != nil {
@@ -105,6 +107,7 @@ func (pbf *PbfProcessor) WarpMsgNoHeader(message interface{}) ([]byte, error) {
 	return data[2:], nil
 }
 
+// RegisterHandler for logic
 func (pbf *PbfProcessor) RegisterHandler(id int, entity interface{}, handle func(args ...interface{})) {
 	if _, ok := pbf.handlers[id]; ok {
 		log.Error("Already register handler by Id:: %d", id)
@@ -118,12 +121,17 @@ func (pbf *PbfProcessor) RegisterHandler(id int, entity interface{}, handle func
 	}
 }
 
+// SetBigEndian for order
 func (pbf *PbfProcessor) SetBigEndian() {
 	pbf.bigEndian = true
 }
+
+// GetBigEndian of the order
 func (pbf *PbfProcessor) GetBigEndian() bool {
 	return pbf.bigEndian
 }
+
+// SetEncryptor for processor
 func (pbf *PbfProcessor) SetEncryptor(enc iduck.Encryptor) {
 	pbf.enc = enc
 }

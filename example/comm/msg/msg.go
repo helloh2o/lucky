@@ -9,9 +9,13 @@ import (
 	"github.com/helloh2o/lucky/example/comm/protobuf"
 )
 
+// Processor is message handler
 var Processor = iproto.NewPBProcessor()
+
+// PwdStr is encrypt key
 var PwdStr = "BH1rStJwNP1YIvNI4Y+8ZVWyqsX47QCTOJTpGLnL2VQHqV0pPu8ZLk3yBc5sRNWmpYjqL2jY9LiFr9EaUsT1Voy3sBadZDKBPQ3g3yP6wOtvrHNxisbuTrPxEHZ6i6sSPAw6mB0rFEsB1OSjXPzlhkmb4lmee1+1aeOgHPaDmUF0vzskwS2iA4TK7ArJ1+fCvWJmY6i2/pDMh1qh3I3PJtBXyBUhET+7w9s5UfcXCVBTQ9beJ1tHC3d5TwgzgkJqkTGkHt1tp2HaTM0fcmd+lY43IP+tsbosJQb7lpqStA94gIlef/AwKnXTQJc1vkZF6Jz5bscCG2CuNhPmKJ8OfA=="
 
+// SetEncrypt for processor
 func SetEncrypt(p iduck.Processor) {
 	//pwdStr := little.RandPassword()
 	pwd, err := little.ParsePassword(PwdStr)

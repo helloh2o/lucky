@@ -7,6 +7,7 @@ import (
 
 var testChatRoom iduck.INode
 
+// GetRoom get net node
 func GetRoom() iduck.INode {
 	if testChatRoom == nil {
 		testChatRoom = inet.NewBroadcastNode()

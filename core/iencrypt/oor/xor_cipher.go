@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// XORCipher one of Encryptor implement
 type XORCipher struct {
 	sync.RWMutex
 	password    []byte
@@ -13,7 +14,7 @@ type XORCipher struct {
 	maxLen      int
 }
 
-// 简单的混淆加密 maxBufferLen 加密数据最大长度
+// NewXORCipher 简单的混淆加密 maxBufferLen 加密数据最大长度
 func NewXORCipher(key string) *XORCipher {
 	if len(key) < 4 {
 		panic("XOR key must more than 4 characters")
@@ -34,6 +35,7 @@ func (xor *XORCipher) updateMaxLen(max int) {
 	}
 }
 
+// Decode the src
 func (xor *XORCipher) Decode(src []byte) []byte {
 	xor.trySelfUpdate(len(src))
 	for i, b := range src {
@@ -42,6 +44,7 @@ func (xor *XORCipher) Decode(src []byte) []byte {
 	return src
 }
 
+// Encode the src
 func (xor *XORCipher) Encode(src []byte) []byte {
 	xor.trySelfUpdate(len(src))
 	for i, b := range src {

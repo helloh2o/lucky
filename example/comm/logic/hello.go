@@ -7,7 +7,7 @@ import (
 	"github.com/helloh2o/lucky/log"
 )
 
-// say hello
+// Hello say hello logic
 func Hello(args ...interface{}) {
 	msg := args[iproto.Msg].(*protobuf.Hello)
 	log.Debug(msg.Hello)

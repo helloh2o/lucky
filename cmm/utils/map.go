@@ -4,6 +4,7 @@ import (
 	"sync"
 )
 
+// sync Map
 type Map struct {
 	sync.RWMutex
 	m map[interface{}]interface{}
@@ -15,6 +16,7 @@ func (m *Map) init() {
 	}
 }
 
+// UnsafeGet by key
 func (m *Map) UnsafeGet(key interface{}) interface{} {
 	if m.m == nil {
 		return nil
@@ -23,23 +25,27 @@ func (m *Map) UnsafeGet(key interface{}) interface{} {
 	}
 }
 
+// Get by key
 func (m *Map) Get(key interface{}) interface{} {
 	m.RLock()
 	defer m.RUnlock()
 	return m.UnsafeGet(key)
 }
 
+// UnsafeSet by k v
 func (m *Map) UnsafeSet(key interface{}, value interface{}) {
 	m.init()
 	m.m[key] = value
 }
 
+// Set by k v
 func (m *Map) Set(key interface{}, value interface{}) {
 	m.Lock()
 	defer m.Unlock()
 	m.UnsafeSet(key, value)
 }
 
+// TestAndSet k v v
 func (m *Map) TestAndSet(key interface{}, value interface{}) interface{} {
 	m.Lock()
 	defer m.Unlock()
@@ -54,17 +60,20 @@ func (m *Map) TestAndSet(key interface{}, value interface{}) interface{} {
 	}
 }
 
+// UnsafeDel by key
 func (m *Map) UnsafeDel(key interface{}) {
 	m.init()
 	delete(m.m, key)
 }
 
+// Del by key
 func (m *Map) Del(key interface{}) {
 	m.Lock()
 	defer m.Unlock()
 	m.UnsafeDel(key)
 }
 
+// UnsafeLen of map
 func (m *Map) UnsafeLen() int {
 	if m.m == nil {
 		return 0
@@ -73,12 +82,14 @@ func (m *Map) UnsafeLen() int {
 	}
 }
 
+// Len map
 func (m *Map) Len() int {
 	m.RLock()
 	defer m.RUnlock()
 	return m.UnsafeLen()
 }
 
+// UnsafeRange map
 func (m *Map) UnsafeRange(f func(interface{}, interface{})) {
 	if m.m == nil {
 		return
@@ -88,12 +99,14 @@ func (m *Map) UnsafeRange(f func(interface{}, interface{})) {
 	}
 }
 
+// RLockRange map
 func (m *Map) RLockRange(f func(interface{}, interface{})) {
 	m.RLock()
 	defer m.RUnlock()
 	m.UnsafeRange(f)
 }
 
+// LockRange map
 func (m *Map) LockRange(f func(interface{}, interface{})) {
 	m.Lock()
 	defer m.Unlock()

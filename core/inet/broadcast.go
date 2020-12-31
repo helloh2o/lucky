@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// 广播转发节点
+// BroadcastNode 广播转发节点
 type BroadcastNode struct {
 	// 节点ID
 	NodeId string
@@ -27,6 +27,7 @@ type BroadcastNode struct {
 	closeFlag   int64
 }
 
+// closedErr node closed error
 var closedErr = errors.New("broadcast node closed")
 
 func NewBroadcastNode() *BroadcastNode {
@@ -39,6 +40,7 @@ func NewBroadcastNode() *BroadcastNode {
 	}
 }
 
+// Serve the node
 func (bNode *BroadcastNode) Serve() {
 	go func() {
 		defer func() {
@@ -96,8 +98,10 @@ func (bNode *BroadcastNode) broadcast(msg interface{}) {
 	log.Debug(" ======= broadcast ok ======= ")
 }
 
+// OnRawMessage bytes
 func (bNode *BroadcastNode) OnRawMessage([]byte) error { return nil }
 
+// OnProtocolMessage interface
 func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) error {
 	if bNode.available() {
 		bNode.onMessage <- msg
@@ -105,12 +109,14 @@ func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) error {
 	return closedErr
 }
 
+// GetAllMessage return  chan []interface{}
 func (bNode *BroadcastNode) GetAllMessage() chan []interface{} {
 	data := make(chan []interface{}, 1)
 	data <- bNode.recentMessages
 	return data
 }
 
+// AddConn by conn
 func (bNode *BroadcastNode) AddConn(conn iduck.IConnection) error {
 	if bNode.available() {
 		bNode.addConnChan <- conn
@@ -119,6 +125,7 @@ func (bNode *BroadcastNode) AddConn(conn iduck.IConnection) error {
 	return closedErr
 }
 
+// DelConn by key
 func (bNode *BroadcastNode) DelConn(key string) error {
 	if bNode.available() {
 		bNode.delConnChan <- key
@@ -127,12 +134,12 @@ func (bNode *BroadcastNode) DelConn(key string) error {
 	return closedErr
 }
 
-// 完成同步
+// Complete sync
 func (bNode *BroadcastNode) Complete() error {
 	return nil
 }
 
-// 摧毁节点
+// Destroy the node
 func (bNode *BroadcastNode) Destroy() error {
 	if bNode.available() {
 		atomic.AddInt64(&bNode.closeFlag, 1)

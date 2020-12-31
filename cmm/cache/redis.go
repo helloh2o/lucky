@@ -8,13 +8,14 @@ import (
 	"time"
 )
 
+// RedisC is the *redis.Client
 var RedisC *redis.Client
 
-// redis://localhost:6379/?pwd=&db=
-func OpenRedis(rURL string) error {
+// OpenRedis redis://localhost:6379/?pwd=&db=
+func OpenRedis(rURL string) (*redis.Client, error) {
 	urlInfo, err := url.Parse(rURL)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	pwd := urlInfo.Query().Get("pwd")
 	dbName := urlInfo.Query().Get("db")
@@ -22,19 +23,22 @@ func OpenRedis(rURL string) error {
 	if dbName != "" {
 		dbIndex, err = strconv.Atoi(dbName)
 		if err != nil {
-			return err
+			return nil, err
 		}
 	}
-	RedisC = redis.NewClient(&redis.Options{
+	instance := redis.NewClient(&redis.Options{
 		Addr:     urlInfo.Host,
 		Password: pwd,
 		DB:       dbIndex,
 	})
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
-	_, err = RedisC.Ping(ctx).Result()
+	_, err = instance.Ping(ctx).Result()
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	if RedisC == nil {
+		RedisC = instance
+	}
+	return instance, nil
 }

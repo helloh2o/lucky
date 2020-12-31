@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// 帧同步节点
+// FrameNode 帧同步节点
 type FrameNode struct {
 	// 节点ID
 	NodeId string
@@ -37,8 +37,10 @@ type FrameNode struct {
 	closeFlag    int64
 }
 
+// closedFrameErr is closed error
 var closedFrameErr = errors.New("FrameNode is closed")
 
+// NewFrameNode return a new FrameNode
 func NewFrameNode() *FrameNode {
 	return &FrameNode{
 		Connections:  make(map[interface{}]iduck.IConnection),
@@ -52,6 +54,7 @@ func NewFrameNode() *FrameNode {
 	}
 }
 
+// Serve the node
 func (gr *FrameNode) Serve() {
 	go func() {
 		defer func() {
@@ -115,6 +118,7 @@ func (gr *FrameNode) sendFrame() {
 	gr.allFrame = append(gr.allFrame, gr.frameData)
 }
 
+// OnRawMessage msg
 func (gr *FrameNode) OnRawMessage(msg []byte) error {
 	if msg == nil {
 		err := errors.New("can't frame nil message")
@@ -126,16 +130,19 @@ func (gr *FrameNode) OnRawMessage(msg []byte) error {
 	return closedFrameErr
 }
 
+// OnProtocolMessage interface
 func (gr *FrameNode) OnProtocolMessage(interface{}) error {
 	return nil
 }
 
+// GetAllMessage return chan []interface
 func (gr *FrameNode) GetAllMessage() chan []interface{} {
 	data := make(chan []interface{}, 1)
 	data <- gr.allFrame
 	return data
 }
 
+// AddConn conn
 func (gr *FrameNode) AddConn(conn iduck.IConnection) error {
 	if gr.available() {
 		gr.addConnChan <- conn
@@ -144,6 +151,7 @@ func (gr *FrameNode) AddConn(conn iduck.IConnection) error {
 	return closedFrameErr
 }
 
+// DelConn by key
 func (gr *FrameNode) DelConn(key string) error {
 	if gr.available() {
 		gr.delConnChan <- key
@@ -152,7 +160,7 @@ func (gr *FrameNode) DelConn(key string) error {
 	return closedFrameErr
 }
 
-// 完成同步
+// Complete sync
 func (gr *FrameNode) Complete() error {
 	if gr.available() {
 		gr.completeChan <- struct{}{}
@@ -161,7 +169,7 @@ func (gr *FrameNode) Complete() error {
 	return closedFrameErr
 }
 
-// 摧毁节点
+// Destroy the node
 func (gr *FrameNode) Destroy() error {
 	if gr.available() {
 		atomic.AddInt64(&gr.closeFlag, 1)

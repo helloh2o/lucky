@@ -16,6 +16,7 @@ type kcpServer struct {
 	processor iduck.Processor
 }
 
+// NewKcpServer return a *kcpServer
 func NewKcpServer(addr string, processor iduck.Processor) (s *kcpServer, err error) {
 	ts := new(kcpServer)
 	ts.addr = addr
@@ -30,6 +31,7 @@ func NewKcpServer(addr string, processor iduck.Processor) (s *kcpServer, err err
 	return ts, err
 }
 
+// Run kcp server
 func (s *kcpServer) Run() error {
 	log.Release("Starting kcp server on %s", s.addr)
 	for {
@@ -41,7 +43,7 @@ func (s *kcpServer) Run() error {
 	}
 }
 
-// goroutine handle connection
+// Handle goroutine handle connection
 func (s *kcpServer) Handle(conn net.Conn) {
 	defer func() {
 		if r := recover(); r != nil {

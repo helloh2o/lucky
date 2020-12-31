@@ -9,15 +9,18 @@ import (
 	"time"
 )
 
+// Req is http client req
 type Req struct {
 	http.Client
 	proxy string
 }
 
 var (
+	// UA is user agent
 	UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.3578.98 Safari/537.36"
 )
 
+// NewHttpClient get new client
 func NewHttpClient(proxyUrl ...string) *Req {
 	req := new(Req)
 	req.Client = http.Client{}
@@ -35,6 +38,8 @@ func NewHttpClient(proxyUrl ...string) *Req {
 	req.Transport = tr
 	return req
 }
+
+// DoReq client request target url
 func (req *Req) DoReq(method string, targetUrl string, callback func(*url.URL, io.Reader)) {
 	switch method {
 	case "POST", "GET", "PUT", "DELETE", "HEAD":
@@ -67,13 +72,17 @@ func (req *Req) DoReq(method string, targetUrl string, callback func(*url.URL, i
 	}
 }
 
+// Jar store the cookies
 type Jar struct {
 	cookies []*http.Cookie
 }
 
+// SetCookies new cookies
 func (jar *Jar) SetCookies(u *url.URL, cookies []*http.Cookie) {
 	jar.cookies = cookies
 }
+
+// Cookies get all cookies
 func (jar *Jar) Cookies(u *url.URL) []*http.Cookie {
 	return jar.cookies
 }

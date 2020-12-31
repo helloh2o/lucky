@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/helloh2o/lucky/conf"
 	"github.com/helloh2o/lucky/example/chatroom/jsonmsg"
+	"log"
 	"net/http"
 
 	"github.com/helloh2o/lucky/core/inet"
@@ -29,6 +30,6 @@ func main() {
 	if s, err := inet.NewWsServer("localhost:20220", jsonmsg.Processor); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		log.Fatal(s.Run())
 	}
 }

@@ -4,12 +4,13 @@ import (
 	"net"
 )
 
+// Server interface
 type Server interface {
 	Run() error
 	Handle(conn net.Conn)
 }
 
-// 网络同步节点，如游戏房间节点,聊天室节点
+// INode 网络同步节点，如游戏房间节点,聊天室节点
 type INode interface {
 	AddConn(IConnection) error
 	DelConn(string) error
@@ -21,7 +22,7 @@ type INode interface {
 	Complete() error
 }
 
-// 网络连接
+// IConnection 网络连接
 type IConnection interface {
 	GetUuid() string
 	ReadMsg()

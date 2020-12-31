@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/helloh2o/lucky/conf"
+	"log"
 	"net/http"
 
 	"github.com/helloh2o/lucky/core/inet"
@@ -31,6 +32,6 @@ func main() {
 	if s, err := inet.NewWsServer(":2022", msg.Processor); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		log.Fatal(s.Run())
 	}
 }

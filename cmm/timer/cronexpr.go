@@ -17,6 +17,7 @@ import (
 // Day of month | Yes        | 1-31           | * / , -
 // Month        | Yes        | 1-12           | * / , -
 // Day of week  | Yes        | 0-6            | * / , -
+// CronExpr is expr struct
 type CronExpr struct {
 	sec   uint64
 	min   uint64
@@ -26,7 +27,7 @@ type CronExpr struct {
 	dow   uint64
 }
 
-// goroutine safe
+// NewCronExpr goroutine safe
 func NewCronExpr(expr string) (cronExpr *CronExpr, err error) {
 	fields := strings.Fields(expr)
 	if len(fields) != 5 && len(fields) != 6 {
@@ -186,7 +187,7 @@ func (e *CronExpr) matchDay(t time.Time) bool {
 		1<<uint(t.Day())&e.dom != 0
 }
 
-// goroutine safe
+// Next goroutine safe
 func (e *CronExpr) Next(t time.Time) time.Time {
 	// the upcoming second
 	t = t.Truncate(time.Second).Add(time.Second)

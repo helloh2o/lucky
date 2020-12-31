@@ -15,6 +15,7 @@ type tcpServer struct {
 	processor iduck.Processor
 }
 
+// NewTcpServer return new tcpServer
 func NewTcpServer(addr string, processor iduck.Processor) (s *tcpServer, err error) {
 	ts := new(tcpServer)
 	ts.addr = addr
@@ -29,6 +30,7 @@ func NewTcpServer(addr string, processor iduck.Processor) (s *tcpServer, err err
 	return ts, err
 }
 
+// Run the server
 func (s *tcpServer) Run() error {
 	log.Release("Starting tcp server on %s", s.addr)
 	for {
@@ -40,7 +42,7 @@ func (s *tcpServer) Run() error {
 	}
 }
 
-// goroutine handle connection
+// Handle goroutine handle connection
 func (s *tcpServer) Handle(conn net.Conn) {
 	defer func() {
 		if r := recover(); r != nil {

@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// WSConn is warped tcp conn for luck
 type WSConn struct {
 	sync.RWMutex
 	uuid string
@@ -29,6 +30,7 @@ type WSConn struct {
 	closeFlag int64
 }
 
+// NewWSConn return new ws conn
 func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 	if processor == nil || conn == nil {
 		return nil
@@ -83,11 +85,12 @@ func NewWSConn(conn *websocket.Conn, processor iduck.Processor) *WSConn {
 	return wc
 }
 
+// GetUuid get uuid of conn
 func (wc *WSConn) GetUuid() string {
 	return wc.uuid
 }
 
-// read | write end -> write | read end -> conn end
+// ReadMsg read | write end -> write | read end -> conn end
 func (wc *WSConn) ReadMsg() {
 	defer func() {
 		wc.logicQueue <- nil
@@ -124,6 +127,7 @@ func (wc *WSConn) ReadMsg() {
 	}
 }
 
+// WriteMsg warp msg base on conn's processor
 func (wc *WSConn) WriteMsg(message interface{}) {
 	err, pkg := wc.processor.WarpMsg(message)
 	if err != nil {
@@ -145,6 +149,7 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 	}
 }
 
+// Close the conn
 func (wc *WSConn) Close() error {
 	wc.Lock()
 	defer func() {
@@ -162,30 +167,40 @@ func (wc *WSConn) Close() error {
 	return wc.conn.Close()
 }
 
+// IsClosed return the status of conn
 func (wc *WSConn) IsClosed() bool {
 	return atomic.LoadInt64(&wc.closeFlag) != 0
 }
 
+// AfterClose conn call back
 func (wc *WSConn) AfterClose(cb func()) {
 	wc.Lock()
 	defer wc.Unlock()
 	wc.closeCb = cb
 }
+
+// SetData for conn
 func (wc *WSConn) SetData(data interface{}) {
 	wc.Lock()
 	defer wc.Unlock()
 	wc.userData = data
 }
+
+// GetData from conn
 func (wc *WSConn) GetData() interface{} {
 	wc.RLock()
 	defer wc.RUnlock()
 	return wc.userData
 }
+
+// SetNode for conn
 func (wc *WSConn) SetNode(node iduck.INode) {
 	wc.Lock()
 	defer wc.Unlock()
 	wc.node = node
 }
+
+// GetNode from conn
 func (wc *WSConn) GetNode() iduck.INode {
 	wc.RLock()
 	defer wc.RUnlock()

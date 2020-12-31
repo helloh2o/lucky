@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/helloh2o/lucky/core/inet"
 	"github.com/helloh2o/lucky/example/comm/msg"
+	"log"
 )
 
 func main() {
@@ -10,6 +11,6 @@ func main() {
 	if s, err := inet.NewKcpServer("localhost:2023", msg.Processor); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		log.Fatal(s.Run())
 	}
 }

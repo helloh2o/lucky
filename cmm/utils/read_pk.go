@@ -12,7 +12,7 @@ import (
 // 保留两位小数
 var r = rand.New(rand.NewSource(uint64(time.Now().UnixNano())))
 
-// @average money/amount
+// DispatchReadPK  random || @average money/amount
 func DispatchReadPK(money float64, amount int, average bool) (pks []float64) {
 	if money == 0 || amount == 0 {
 		log.Error("money & amount must bigger than 0.")

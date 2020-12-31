@@ -14,6 +14,7 @@ import (
 	"time"
 )
 
+// QuicStream is warped udp conn for luck
 type QuicStream struct {
 	sync.RWMutex
 	uuid string
@@ -31,6 +32,7 @@ type QuicStream struct {
 	closeFlag int64
 }
 
+// NewQuicStream return new udp conn
 func NewQuicStream(stream quic.Stream, processor iduck.Processor) *QuicStream {
 	if processor == nil || stream == nil {
 		return nil
@@ -83,11 +85,12 @@ func NewQuicStream(stream quic.Stream, processor iduck.Processor) *QuicStream {
 	return s
 }
 
+// GetUuid get uuid of conn
 func (s *QuicStream) GetUuid() string {
 	return s.uuid
 }
 
-// read | write end -> write | read end -> conn end
+// ReadMsg read | write end -> write | read end -> conn end
 func (s *QuicStream) ReadMsg() {
 	defer func() {
 		s.logicQueue <- nil
@@ -138,6 +141,7 @@ func (s *QuicStream) ReadMsg() {
 	}
 }
 
+// WriteMsg warp msg base on conn's processor
 func (s *QuicStream) WriteMsg(message interface{}) {
 	err, pkg := s.processor.WarpMsg(message)
 	if err != nil {
@@ -157,6 +161,7 @@ func (s *QuicStream) WriteMsg(message interface{}) {
 	}
 }
 
+// Close the conn
 func (s *QuicStream) Close() error {
 	s.Lock()
 	defer func() {
@@ -174,31 +179,40 @@ func (s *QuicStream) Close() error {
 	return s.Close()
 }
 
+// IsClosed return the status of conn
 func (s *QuicStream) IsClosed() bool {
 	return atomic.LoadInt64(&s.closeFlag) != 0
 }
 
+// AfterClose conn call back
 func (s *QuicStream) AfterClose(cb func()) {
 	s.Lock()
 	defer s.Unlock()
 	s.closeCb = cb
 }
 
+// SetData for conn
 func (s *QuicStream) SetData(data interface{}) {
 	s.Lock()
 	defer s.Unlock()
 	s.userData = data
 }
+
+// GetData from conn
 func (s *QuicStream) GetData() interface{} {
 	s.RLock()
 	defer s.RUnlock()
 	return s.userData
 }
+
+// SetNode for conn
 func (s *QuicStream) SetNode(node iduck.INode) {
 	s.Lock()
 	defer s.Unlock()
 	s.node = node
 }
+
+// GetNode from conn
 func (s *QuicStream) GetNode() iduck.INode {
 	s.RLock()
 	defer s.RUnlock()

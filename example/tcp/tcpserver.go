@@ -23,6 +23,6 @@ func main() {
 	if s, err := inet.NewTcpServer("localhost:2021", msg.Processor); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		stdlog.Fatal(s.Run())
 	}
 }

@@ -26,6 +26,7 @@ const (
 	printFatalLevel   = "[fatal  ] "
 )
 
+// Logger warp
 type Logger struct {
 	level      int
 	baseLogger *log.Logger
@@ -41,6 +42,8 @@ func init() {
 		baseLogger: log.New(os.Stdout, "", log.LstdFlags|log.Lshortfile),
 	}
 }
+
+// New a logger
 func New(strLevel string, pathname string, flag int) (*Logger, error) {
 	// level
 	var level int
@@ -93,7 +96,7 @@ func New(strLevel string, pathname string, flag int) (*Logger, error) {
 	return logger, nil
 }
 
-// It's dangerous to call the method on logging
+// Close It's dangerous to call the method on logging
 func (logger *Logger) Close() {
 	if logger.BaseFile != nil {
 		logger.BaseFile.Close()
@@ -119,45 +122,54 @@ func (logger *Logger) doPrintf(level int, printLevel string, format string, a ..
 	}
 }
 
+// Debug log
 func (logger *Logger) Debug(format string, a ...interface{}) {
 	logger.doPrintf(debugLevel, printDebugLevel, format, a...)
 }
 
+// Release log
 func (logger *Logger) Release(format string, a ...interface{}) {
 	logger.doPrintf(releaseLevel, printReleaseLevel, format, a...)
 }
 
+// Error log
 func (logger *Logger) Error(format string, a ...interface{}) {
 	logger.doPrintf(errorLevel, printErrorLevel, format, a...)
 }
 
+// Fatal panic
 func (logger *Logger) Fatal(format string, a ...interface{}) {
 	logger.doPrintf(fatalLevel, printFatalLevel, format, a...)
 }
 
-// It's dangerous to call the method on logging
+// Export It's dangerous to call the method on logging
 func Export(logger *Logger) {
 	if logger != nil {
 		defaultLogger = logger
 	}
 }
 
+// Debug print
 func Debug(format string, a ...interface{}) {
 	defaultLogger.doPrintf(debugLevel, printDebugLevel, format, a...)
 }
 
+// Release print
 func Release(format string, a ...interface{}) {
 	defaultLogger.doPrintf(releaseLevel, printReleaseLevel, format, a...)
 }
 
+// Error print
 func Error(format string, a ...interface{}) {
 	defaultLogger.doPrintf(errorLevel, printErrorLevel, format, a...)
 }
 
+// Fatal print
 func Fatal(format string, a ...interface{}) {
 	defaultLogger.doPrintf(fatalLevel, printFatalLevel, format, a...)
 }
 
+// Close default logger
 func Close() {
 	defaultLogger.Close()
 }

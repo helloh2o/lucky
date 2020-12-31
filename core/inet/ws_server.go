@@ -37,7 +37,7 @@ func (h *wsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	go h.HandlerWsConn(conn)
 }
 
-// goroutine handle connection
+// HandlerWsConn goroutine handle connection
 func (h *wsHandler) HandlerWsConn(conn *websocket.Conn) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -49,6 +49,7 @@ func (h *wsHandler) HandlerWsConn(conn *websocket.Conn) {
 	ic.ReadMsg()
 }
 
+// NewWsServer return new wsServer
 func NewWsServer(addr string, processor iduck.Processor) (s *wsServer, err error) {
 	wss := new(wsServer)
 	wss.addr = addr
@@ -63,6 +64,7 @@ func NewWsServer(addr string, processor iduck.Processor) (s *wsServer, err error
 	return wss, err
 }
 
+// Run the ws server
 func (s *wsServer) Run() error {
 	log.Release("Starting websocket server on %s", s.addr)
 	httpServer := &http.Server{
@@ -79,4 +81,5 @@ func (s *wsServer) Run() error {
 	return httpServer.Serve(s.ln)
 }
 
+// Handle
 func (s *wsServer) Handle(conn net.Conn) {}

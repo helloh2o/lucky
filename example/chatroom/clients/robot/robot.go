@@ -36,7 +36,7 @@ func runClient(id int) {
 	// 解析协议JSON
 	p := iproto.NewJSONProcessor()
 	wc := inet.NewWSConn(ws, p)
-	p.RegisterHandler(jsonmsg.Join_Success, &jsonmsg.JoinRoomSuccess{}, func(args ...interface{}) {
+	p.RegisterHandler(jsonmsg.JoinSuccessCode, &jsonmsg.JoinRoomSuccess{}, func(args ...interface{}) {
 		go func() {
 			atomic.AddInt64(&chatting, 1)
 			for {
@@ -49,11 +49,11 @@ func runClient(id int) {
 			}
 		}()
 	})
-	p.RegisterHandler(jsonmsg.Chat_Message, &jsonmsg.ChatMessage{}, func(args ...interface{}) {
+	p.RegisterHandler(jsonmsg.ChatMessageCode, &jsonmsg.ChatMessage{}, func(args ...interface{}) {
 		msg := args[iproto.Msg].(*jsonmsg.ChatMessage)
 		log.Release("机器人：%s, 发消息：%s", msg.FromName, msg.Content)
 	})
-	p.RegisterHandler(jsonmsg.Enter_Room, &jsonmsg.EnterRoom{}, nil)
+	p.RegisterHandler(jsonmsg.EnterRoomCode, &jsonmsg.EnterRoom{}, nil)
 	// 进入房间
 	wc.WriteMsg(&jsonmsg.EnterRoom{})
 	go func() {

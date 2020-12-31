@@ -1,8 +1,10 @@
 package conf
 
+import "C"
 import "sync"
 
 var (
+	// C is the config
 	C    *Data
 	once sync.Once
 )
@@ -19,7 +21,7 @@ func init() {
 	}
 }
 
-// please set this before startup server
+// Set this before startup server
 func Set(cfg *Data) {
 	once.Do(func() {
 		C = cfg
@@ -32,6 +34,7 @@ func Set(cfg *Data) {
 	})
 }
 
+// Data is the config struct
 type Data struct {
 	// 单个连接未处理消息包缓存队列大小
 	// 注意：[超过这个大小，包将丢弃，视为当前系统无法处理，默认100]

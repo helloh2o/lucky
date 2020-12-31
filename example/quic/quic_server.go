@@ -9,6 +9,7 @@ import (
 	"github.com/helloh2o/lucky/core/inet"
 	"github.com/helloh2o/lucky/example/comm/msg"
 	"io/ioutil"
+	"log"
 	"math/big"
 	"os"
 )
@@ -35,6 +36,9 @@ func main() {
 		panic(err)
 	}
 	pem, err := tls.LoadX509KeyPair("./c.cert", "./k.key")
+	if err != nil {
+		panic(err)
+	}
 	tlsConfig := &tls.Config{
 		Certificates: []tls.Certificate{pem},
 		NextProtos:   []string{"quic-hello-example"},
@@ -42,6 +46,6 @@ func main() {
 	if s, err := inet.NewQUICServer("localhost:2024", msg.Processor, tlsConfig); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		log.Fatal(s.Run())
 	}
 }

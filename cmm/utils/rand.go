@@ -9,6 +9,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
+// RandString by len
 func RandString(len int) string {
 	bytes := make([]byte, len)
 	for i := 0; i < len; i++ {
@@ -18,6 +19,7 @@ func RandString(len int) string {
 	return string(bytes)
 }
 
+// RandGroup by []unit32
 func RandGroup(p ...uint32) int {
 	if p == nil {
 		panic("args not found")
@@ -47,6 +49,7 @@ func RandGroup(p ...uint32) int {
 	panic("bug")
 }
 
+// RandInterval b1 to b2
 func RandInterval(b1, b2 int32) int32 {
 	if b1 == b2 {
 		return b1
@@ -59,6 +62,7 @@ func RandInterval(b1, b2 int32) int32 {
 	return int32(rand.Int63n(max-min+1) + min)
 }
 
+// RandIntervalN b1, b2, n
 func RandIntervalN(b1, b2 int32, n uint32) []int32 {
 	if b1 == b2 {
 		return []int32{b1}

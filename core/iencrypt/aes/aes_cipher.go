@@ -8,10 +8,12 @@ import (
 	"github.com/helloh2o/lucky/log"
 )
 
+// AESCipher one of Encryptor implement
 type AESCipher struct {
 	key []byte
 }
 
+// NewAESCipher return a AESCipher
 func NewAESCipher(key string) *AESCipher {
 	size := len(key) / 8
 	if size < 2 {
@@ -24,6 +26,7 @@ func NewAESCipher(key string) *AESCipher {
 	return &AESCipher{key: []byte(key)}
 }
 
+// Decode src
 func (aes *AESCipher) Decode(src []byte) []byte {
 	encrypt, err := aesDeCrypt(src, aes.key)
 	if err != nil {
@@ -33,6 +36,7 @@ func (aes *AESCipher) Decode(src []byte) []byte {
 	return encrypt
 }
 
+// Encode src
 func (aes *AESCipher) Encode(src []byte) []byte {
 	encrypt, err := aesEcrypt(src, aes.key)
 	if err != nil {

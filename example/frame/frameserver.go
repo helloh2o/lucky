@@ -4,6 +4,7 @@ import (
 	"github.com/helloh2o/lucky/core/inet"
 	"github.com/helloh2o/lucky/example/comm/msg"
 	"github.com/helloh2o/lucky/example/comm/node"
+	"log"
 	"net/http"
 	_ "net/http/pprof"
 )
@@ -18,6 +19,6 @@ func main() {
 	if s, err := inet.NewKcpServer("localhost:2024", msg.Processor); err != nil {
 		panic(err)
 	} else {
-		err = s.Run()
+		log.Fatal(s.Run())
 	}
 }

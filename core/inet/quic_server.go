@@ -18,6 +18,7 @@ type quicServer struct {
 	processor iduck.Processor
 }
 
+// NewQUICServer return new quicServer
 func NewQUICServer(addr string, processor iduck.Processor, config *tls.Config) (s *quicServer, err error) {
 	ts := new(quicServer)
 	ts.addr = addr

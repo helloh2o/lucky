@@ -14,6 +14,7 @@ import (
 	"time"
 )
 
+// TCPConn is warped tcp conn for luck
 type TCPConn struct {
 	sync.RWMutex
 	uuid string
@@ -31,11 +32,12 @@ type TCPConn struct {
 	closeFlag int64
 }
 
-// 可靠的UDP，like TCP
+// KCPConn 可靠的UDP，like TCP
 type KCPConn struct {
 	*TCPConn
 }
 
+// NewKcpConn get new kcp conn
 func NewKcpConn(conn net.Conn, processor iduck.Processor) *KCPConn {
 	tcpConn := NewTcpConn(conn, processor)
 	if tcpConn != nil {
@@ -44,6 +46,7 @@ func NewKcpConn(conn net.Conn, processor iduck.Processor) *KCPConn {
 	return nil
 }
 
+// NewTcpConn return new tcp conn
 func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	if processor == nil || conn == nil {
 		return nil
@@ -97,11 +100,12 @@ func NewTcpConn(conn net.Conn, processor iduck.Processor) *TCPConn {
 	return tc
 }
 
+// GetUuid get uuid of conn
 func (tc *TCPConn) GetUuid() string {
 	return tc.uuid
 }
 
-// read | write end -> write | read end -> conn end
+// ReadMsg read | write end -> write | read end -> conn end
 func (tc *TCPConn) ReadMsg() {
 	defer func() {
 		tc.logicQueue <- nil
@@ -152,6 +156,7 @@ func (tc *TCPConn) ReadMsg() {
 	}
 }
 
+// WriteMsg warp msg base on conn's processor
 func (tc *TCPConn) WriteMsg(message interface{}) {
 	err, pkg := tc.processor.WarpMsg(message)
 	if err != nil {
@@ -171,6 +176,7 @@ func (tc *TCPConn) WriteMsg(message interface{}) {
 	}
 }
 
+// Close the conn
 func (tc *TCPConn) Close() error {
 	tc.Lock()
 	defer func() {
@@ -188,31 +194,40 @@ func (tc *TCPConn) Close() error {
 	return tc.Conn.Close()
 }
 
+// IsClosed return the status of conn
 func (tc *TCPConn) IsClosed() bool {
 	return atomic.LoadInt64(&tc.closeFlag) != 0
 }
 
+// AfterClose conn call back
 func (tc *TCPConn) AfterClose(cb func()) {
 	tc.Lock()
 	defer tc.Unlock()
 	tc.closeCb = cb
 }
 
+// SetData for conn
 func (tc *TCPConn) SetData(data interface{}) {
 	tc.Lock()
 	defer tc.Unlock()
 	tc.userData = data
 }
+
+// GetData from conn
 func (tc *TCPConn) GetData() interface{} {
 	tc.RLock()
 	defer tc.RUnlock()
 	return tc.userData
 }
+
+// SetNode for conn
 func (tc *TCPConn) SetNode(node iduck.INode) {
 	tc.Lock()
 	defer tc.Unlock()
 	tc.node = node
 }
+
+// GetNode from conn
 func (tc *TCPConn) GetNode() iduck.INode {
 	tc.RLock()
 	defer tc.RUnlock()
