@@ -1,10 +1,9 @@
 package conf
 
-import "C"
 import "sync"
 
 var (
-	// C is the config
+	// C is the config instance
 	C    *Data
 	once sync.Once
 )
