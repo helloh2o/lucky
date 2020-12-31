@@ -37,9 +37,6 @@ type FrameNode struct {
 	closeFlag    int64
 }
 
-// closedFrameErr is closed error
-var closedFrameErr = errors.New("FrameNode is closed")
-
 // NewFrameNode return a new FrameNode
 func NewFrameNode() *FrameNode {
 	return &FrameNode{
@@ -127,7 +124,7 @@ func (gr *FrameNode) OnRawMessage(msg []byte) error {
 	if gr.available() {
 		gr.onMessage <- msg
 	}
-	return closedFrameErr
+	return errFoo
 }
 
 // OnProtocolMessage interface
@@ -148,7 +145,7 @@ func (gr *FrameNode) AddConn(conn iduck.IConnection) error {
 		gr.addConnChan <- conn
 		return nil
 	}
-	return closedFrameErr
+	return errFoo
 }
 
 // DelConn by key
@@ -157,7 +154,7 @@ func (gr *FrameNode) DelConn(key string) error {
 		gr.delConnChan <- key
 		return nil
 	}
-	return closedFrameErr
+	return errFoo
 }
 
 // Complete sync
@@ -166,7 +163,7 @@ func (gr *FrameNode) Complete() error {
 		gr.completeChan <- struct{}{}
 		return nil
 	}
-	return closedFrameErr
+	return errFoo
 }
 
 // Destroy the node
@@ -178,7 +175,7 @@ func (gr *FrameNode) Destroy() error {
 		}()
 		return nil
 	}
-	return closedFrameErr
+	return errFoo
 }
 
 func (gr *FrameNode) available() bool {

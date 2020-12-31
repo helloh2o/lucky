@@ -12,6 +12,6 @@ type Processor interface {
 	GetBigEndian() bool
 	SetEncryptor(enc Encryptor)
 	OnReceivedPackage(interface{}, []byte)
-	WarpMsg(interface{}) (error, []byte)
+	WarpMsg(interface{}) ([]byte, error)
 	RegisterHandler(id int, entity interface{}, handle func(args ...interface{}))
 }

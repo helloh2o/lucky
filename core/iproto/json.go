@@ -3,7 +3,6 @@ package iproto
 import (
 	"encoding/binary"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/helloh2o/lucky/core/iduck"
 	"github.com/helloh2o/lucky/log"
@@ -64,15 +63,15 @@ func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 }
 
 // WarpMsg format the interface message to []byte
-func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
+func (jp *JsonProcessor) WarpMsg(message interface{}) ([]byte, error) {
 	data, err := json.Marshal(message)
 	if err != nil {
-		return err, data
+		return data, err
 	}
 	tp := reflect.TypeOf(message)
 	id, ok := jp.msgTypes[tp]
 	if !ok {
-		return errors.New(fmt.Sprintf("not register %v", tp)), nil
+		return nil, fmt.Errorf("not register %v", tp)
 	}
 	protocol := JsonProtocol{
 		Id:      id,
@@ -80,7 +79,7 @@ func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
 	}
 	data, err = json.Marshal(&protocol)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	if jp.enc != nil {
 		//log.Debug("before encode:: %v", data)
@@ -95,7 +94,7 @@ func (jp *JsonProcessor) WarpMsg(message interface{}) (error, []byte) {
 		binary.LittleEndian.PutUint16(head, uint16(len(data)))
 	}
 	pkg := append(head, data...)
-	return nil, pkg
+	return pkg, nil
 }
 
 // RegisterHandler for logic

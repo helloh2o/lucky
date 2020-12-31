@@ -158,7 +158,7 @@ func (tc *TCPConn) ReadMsg() {
 
 // WriteMsg warp msg base on conn's processor
 func (tc *TCPConn) WriteMsg(message interface{}) {
-	err, pkg := tc.processor.WarpMsg(message)
+	pkg, err := tc.processor.WarpMsg(message)
 	if err != nil {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {

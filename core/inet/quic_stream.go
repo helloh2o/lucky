@@ -143,7 +143,7 @@ func (s *QuicStream) ReadMsg() {
 
 // WriteMsg warp msg base on conn's processor
 func (s *QuicStream) WriteMsg(message interface{}) {
-	err, pkg := s.processor.WarpMsg(message)
+	pkg, err := s.processor.WarpMsg(message)
 	if err != nil {
 		log.Error("Quic Steam OnWarpMsg package error %s", err)
 	} else {

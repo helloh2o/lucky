@@ -10,7 +10,7 @@ import (
 const (
 	// EnterRoomCode NO.
 	EnterRoomCode = 1001
-	// LeaveRoomCode NO.
+	// ChatMessageCode NO.
 	ChatMessageCode = 1002
 	// LeaveRoomCode NO.
 	LeaveRoomCode = 1003
@@ -50,16 +50,16 @@ func init() {
 		conn.WriteMsg(&JoinRoomSuccess{})
 		// 房间的最近20条历史消息
 		msgs := <-chatnode.GetRoom().GetAllMessage()
-		record := make([]interface{}, 0)
+		var record []interface{}
 		if len(msgs) > 20 {
-			record = append(record, msgs[:20]...)
+			record = msgs[:20]
 		} else {
 			record = msgs
-			for _, m := range record {
-				conn.WriteMsg(m)
-			}
-			log.Debug("write %d history message.", len(record))
 		}
+		for _, m := range record {
+			conn.WriteMsg(m)
+		}
+		log.Debug("write %d history message.", len(record))
 	})
 
 	// 将聊天消息转发给节点

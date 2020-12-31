@@ -60,12 +60,11 @@ func pKCS7UnPadding(origData []byte) ([]byte, error) {
 	length := len(origData)
 	if length == 0 {
 		return nil, errors.New("pKCS7UnPadding error")
-	} else {
-		//获取填充字符串长度
-		unpadding := int(origData[length-1])
-		//截取切片，删除填充字节，并且返回明文
-		return origData[:(length - unpadding)], nil
 	}
+	//获取填充字符串长度
+	unpadding := int(origData[length-1])
+	//截取切片，删除填充字节，并且返回明文
+	return origData[:(length - unpadding)], nil
 }
 
 //实现加密

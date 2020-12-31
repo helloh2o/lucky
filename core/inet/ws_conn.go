@@ -129,7 +129,7 @@ func (wc *WSConn) ReadMsg() {
 
 // WriteMsg warp msg base on conn's processor
 func (wc *WSConn) WriteMsg(message interface{}) {
-	err, pkg := wc.processor.WarpMsg(message)
+	pkg, err := wc.processor.WarpMsg(message)
 	if err != nil {
 		log.Error("OnWarpMsg package error %s", err)
 	} else {

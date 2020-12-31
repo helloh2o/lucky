@@ -27,9 +27,10 @@ type BroadcastNode struct {
 	closeFlag   int64
 }
 
-// closedErr node closed error
-var closedErr = errors.New("broadcast node closed")
+// errFoo node closed error
+var errFoo = errors.New("node closed")
 
+// NewBroadcastNode return a new BroadcastNode
 func NewBroadcastNode() *BroadcastNode {
 	return &BroadcastNode{
 		Connections: make(map[interface{}]iduck.IConnection),
@@ -106,7 +107,7 @@ func (bNode *BroadcastNode) OnProtocolMessage(msg interface{}) error {
 	if bNode.available() {
 		bNode.onMessage <- msg
 	}
-	return closedErr
+	return errFoo
 }
 
 // GetAllMessage return  chan []interface{}
@@ -122,7 +123,7 @@ func (bNode *BroadcastNode) AddConn(conn iduck.IConnection) error {
 		bNode.addConnChan <- conn
 		return nil
 	}
-	return closedErr
+	return errFoo
 }
 
 // DelConn by key
@@ -131,7 +132,7 @@ func (bNode *BroadcastNode) DelConn(key string) error {
 		bNode.delConnChan <- key
 		return nil
 	}
-	return closedErr
+	return errFoo
 }
 
 // Complete sync
@@ -147,7 +148,7 @@ func (bNode *BroadcastNode) Destroy() error {
 			bNode.onMessage <- nil
 		}()
 	}
-	return closedErr
+	return errFoo
 }
 
 func (bNode *BroadcastNode) available() bool {

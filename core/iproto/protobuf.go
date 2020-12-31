@@ -2,7 +2,6 @@ package iproto
 
 import (
 	"encoding/binary"
-	"errors"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"github.com/helloh2o/lucky/core/iduck"
@@ -10,14 +9,7 @@ import (
 	"reflect"
 )
 
-/*
-[msgId: other protocol]
-protocol := protocolMsg{
-MsgId:    id,
-Contents: data,
-}*/
-// protoc --go_out=. *.proto
-// PbfProcessor one of Processor implement
+// PbfProcessor one of Processor implement protoc --go_out=. *.proto
 type PbfProcessor struct {
 	bigEndian bool
 	enc       iduck.Encryptor
@@ -64,15 +56,15 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 }
 
 // WarpMsg format the interface message to []byte
-func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
+func (pbf *PbfProcessor) WarpMsg(message interface{}) ([]byte, error) {
 	data, err := proto.Marshal(message.(proto.Message))
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	tp := reflect.TypeOf(message)
 	id, ok := pbf.msgTypes[tp]
 	if !ok {
-		return errors.New(fmt.Sprintf("not register %v", tp)), nil
+		return nil, fmt.Errorf("not register %v", tp)
 	}
 	protocol := Protocol{
 		Id:      uint32(id),
@@ -80,7 +72,7 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 	}
 	data, err = proto.Marshal(&protocol)
 	if err != nil {
-		return err, nil
+		return nil, err
 	}
 	if pbf.enc != nil {
 		//log.Debug("before encode:: %v", data)
@@ -95,12 +87,12 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) (error, []byte) {
 		binary.LittleEndian.PutUint16(head, uint16(len(data)))
 	}
 	pkg := append(head, data...)
-	return nil, pkg
+	return pkg, nil
 }
 
 // WarpMsgNoHeader without header length
 func (pbf *PbfProcessor) WarpMsgNoHeader(message interface{}) ([]byte, error) {
-	err, data := pbf.WarpMsg(message)
+	data, err := pbf.WarpMsg(message)
 	if err != nil {
 		return nil, err
 	}
