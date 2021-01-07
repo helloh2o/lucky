@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="" />
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_en.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_en.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/client/tcpclient.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/tcp/tcpserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/tcp/tcpserver.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,12 +68,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\client" />
-      <recent name="C:\Users\ay\go\src\lucky\example" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ay\go\src\lucky\example" />
       <recent name="C:\Users\ay\go\src\lucky\core\inet" />
@@ -75,31 +75,46 @@
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\static" />
       <recent name="C:\Users\ay\go\src\lucky\example\frame-sync\client" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\example" />
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\client" />
+    </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build wsclient.go">
-    <configuration name="go build github.com/helloh2o/lucky/example/websocket" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/example/tcp/client">
+    <configuration name="go build github.com/helloh2o/lucky/example/http/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/example/websocket/wsserver.go" />
-      <package value="github.com/helloh2o/lucky/example/websocket" />
+      <filePath value="$PROJECT_DIR$/example/http/client/http_client.go" />
+      <package value="github.com/helloh2o/lucky/example/http/client" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/helloh2o/lucky/example/websocket/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/example/tcp" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/example/websocket/client/wsclient.go" />
-      <package value="github.com/helloh2o/lucky/example/websocket/client" />
+      <filePath value="$PROJECT_DIR$/example/tcp/tcpserver.go" />
+      <package value="github.com/helloh2o/lucky/example/tcp" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build wsclient.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/example/tcp/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/tcp/client/tcpclient.go" />
+      <package value="github.com/helloh2o/lucky/example/tcp/client" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build http_server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/example/websocket/client/wsclient.go" />
+      <filePath value="$PROJECT_DIR$/example/http/http_server.go" />
       <package value="github.com/helloh2o/lucky" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
@@ -113,24 +128,13 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestDispatchReadPK in lucky/cmm/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/cmm/utils" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="lucky/cmm/utils" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestDispatchReadPK\E$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build wsclient.go" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/example/tcp/client" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/example/tcp" />
         <item itemvalue="Go Build.go build wsserver.go" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/example/websocket/client" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/example/websocket" />
-        <item itemvalue="Go Test.TestDispatchReadPK in lucky/cmm/utils" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/example/http/client" />
+        <item itemvalue="Go Build.go build http_server.go" />
       </list>
     </recent_temporary>
   </component>
@@ -154,8 +158,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="node bug" />
-    <MESSAGE value="cache msg 100" />
     <MESSAGE value="close clean" />
     <MESSAGE value="robot chatting only read" />
     <MESSAGE value="fix no write msg bug" />
@@ -179,7 +181,9 @@
     <MESSAGE value="add mod 1.0.3" />
     <MESSAGE value="golint &amp; ineffassign" />
     <MESSAGE value="delete timer &amp; map" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete timer &amp; map" />
+    <MESSAGE value="useful files" />
+    <MESSAGE value="config fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="config fixed" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -195,11 +199,11 @@
     </state>
     <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609315895292" />
     <state x="691" y="309" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1607743948658" />
-    <state x="2660" y="0" width="804" height="811" key="CommitChangelistDialog2" timestamp="1609386744965">
+    <state x="2660" y="0" width="804" height="811" key="CommitChangelistDialog2" timestamp="1609391488844">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321223860" />
-    <state x="2660" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386744965" />
+    <state x="2660" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391488844" />
     <state x="740" y="123" width="804" height="811" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608177563446" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1607766999462">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -218,29 +222,29 @@
     </state>
     <state x="765" y="421" key="Github.CreateGistDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608542211989" />
     <state x="765" y="421" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608100484084" />
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom" timestamp="1609386833550">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="298" key="GridCell.Tab.0.bottom" timestamp="1609987707114">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321666303" />
-    <state width="1877" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386833550" />
+    <state width="1877" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609987707114" />
+    <state width="1877" height="365" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391901773" />
     <state width="1877" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.center" timestamp="1609386833550">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="298" key="GridCell.Tab.0.center" timestamp="1609987707114">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321666303" />
-    <state width="1877" height="365" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386833550" />
+    <state width="1877" height="298" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609987707114" />
+    <state width="1877" height="365" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391901773" />
     <state width="1877" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.left" timestamp="1609386833550">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="298" key="GridCell.Tab.0.left" timestamp="1609987707114">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321666303" />
-    <state width="1877" height="365" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386833550" />
+    <state width="1877" height="298" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609987707114" />
+    <state width="1877" height="365" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391901773" />
     <state width="1877" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
-    <state width="1877" height="365" key="GridCell.Tab.0.right" timestamp="1609386833550">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="298" key="GridCell.Tab.0.right" timestamp="1609987707114">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="365" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321666303" />
-    <state width="1877" height="365" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386833550" />
+    <state width="1877" height="298" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609987707114" />
+    <state width="1877" height="365" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391901773" />
     <state width="1877" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608171406844" />
     <state width="1877" height="628" key="GridCell.Tab.1.bottom" timestamp="1608283081492">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -275,15 +279,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608086095536" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1609386746605">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1609391490215">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609321260924" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609386746605" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1609391490215" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608177564769" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1608171128448">
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609987184682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1609987184682" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608171128448" />
     <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1609320780088">
       <screen x="0" y="0" width="1920" height="1040" />
