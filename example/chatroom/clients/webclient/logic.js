@@ -1,6 +1,6 @@
 let ws = new WebSocket("ws://localhost:20220");
 ws.binaryType = 'arraybuffer';
-
+// xhr.responseType = "arraybuffer";
 // message code demo
 const Enter_Room = 1001
 const Chat_Message = 1002
