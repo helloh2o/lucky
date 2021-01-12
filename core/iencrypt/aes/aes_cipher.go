@@ -11,6 +11,7 @@ import (
 // AESCipher one of Encryptor implement
 type AESCipher struct {
 	key []byte
+	iv  []byte
 }
 
 // NewAESCipher return a AESCipher
@@ -23,12 +24,12 @@ func NewAESCipher(key string) *AESCipher {
 		size = 4
 	}
 	key = key[:size*8]
-	return &AESCipher{key: []byte(key)}
+	return &AESCipher{key: []byte(key), iv: []byte(key)}
 }
 
 // Decode src
-func (aes *AESCipher) Decode(src []byte) []byte {
-	encrypt, err := aesDeCrypt(src, aes.key)
+func (cipher *AESCipher) Decode(src []byte) []byte {
+	encrypt, err := aesDeCrypt(src, cipher.key, cipher.iv)
 	if err != nil {
 		log.Error("Aes Decode error %s", err)
 		return src
@@ -37,8 +38,8 @@ func (aes *AESCipher) Decode(src []byte) []byte {
 }
 
 // Encode src
-func (aes *AESCipher) Encode(src []byte) []byte {
-	encrypt, err := aesEcrypt(src, aes.key)
+func (cipher *AESCipher) Encode(src []byte) []byte {
+	encrypt, err := aesEcrypt(src, cipher.key, cipher.iv)
 	if err != nil {
 		log.Error("Aes Encode error %s", err)
 		return src
@@ -68,7 +69,7 @@ func pKCS7UnPadding(origData []byte) ([]byte, error) {
 }
 
 //实现加密
-func aesEcrypt(origData []byte, key []byte) ([]byte, error) {
+func aesEcrypt(origData []byte, key, iv []byte) ([]byte, error) {
 	//创建加密算法实例
 	block, err := aes.NewCipher(key)
 	if err != nil {
@@ -79,7 +80,7 @@ func aesEcrypt(origData []byte, key []byte) ([]byte, error) {
 	//对数据进行填充，让数据长度满足需求
 	origData = pKCS7Padding(origData, blockSize)
 	//采用AES加密方法中CBC加密模式
-	blocMode := cipher.NewCBCEncrypter(block, key[:blockSize])
+	blocMode := cipher.NewCBCEncrypter(block, iv)
 	crypted := make([]byte, len(origData))
 	//执行加密
 	blocMode.CryptBlocks(crypted, origData)
@@ -87,16 +88,14 @@ func aesEcrypt(origData []byte, key []byte) ([]byte, error) {
 }
 
 //实现解密
-func aesDeCrypt(cypted []byte, key []byte) ([]byte, error) {
+func aesDeCrypt(cypted []byte, key, iv []byte) ([]byte, error) {
 	//创建加密算法实例
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
-	//获取块大小
-	blockSize := block.BlockSize()
 	//创建加密客户端实例
-	blockMode := cipher.NewCBCDecrypter(block, key[:blockSize])
+	blockMode := cipher.NewCBCDecrypter(block, iv)
 	origData := make([]byte, len(cypted))
 	//这个函数也可以用来解密
 	blockMode.CryptBlocks(origData, cypted)
