@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Limiter package lv default limiter
 var Limiter *LimiterMap
 
 func init() {
@@ -16,6 +17,7 @@ func init() {
 	go Limiter.Clean()
 }
 
+// NewLimiter create limiter map
 func NewLimiter(timeout int64) *LimiterMap {
 	l := &LimiterMap{
 		data:    make(map[interface{}]int64),
@@ -25,6 +27,7 @@ func NewLimiter(timeout int64) *LimiterMap {
 	return l
 }
 
+// LimiterMap for limiter
 type LimiterMap struct {
 	sync.RWMutex
 	data    map[interface{}]int64
