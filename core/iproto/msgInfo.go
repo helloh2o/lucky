@@ -4,6 +4,7 @@ import (
 	"github.com/helloh2o/lucky/log"
 	"reflect"
 	"runtime/debug"
+	"time"
 )
 
 // 回调传参常量
@@ -28,6 +29,8 @@ func execute(mInfo msgInfo, msg interface{}, writer interface{}, body []byte, id
 			log.Error("panic at msg %d handler, stack %s", id, string(debug.Stack()))
 		}
 	}()
-	log.Debug("execute logic msg %d, msgType %v", mInfo.msgId, mInfo.msgType)
+	begin := time.Now().UnixNano() / int64(time.Millisecond)
 	mInfo.msgCallback(msg, writer, body)
+	costs := time.Now().UnixNano()/int64(time.Millisecond) - begin
+	log.Debug("===> execute logic %d costs %dms, msgType %v <===", mInfo.msgId, costs, mInfo.msgType)
 }
