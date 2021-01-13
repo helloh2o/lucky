@@ -28,5 +28,6 @@ func execute(mInfo msgInfo, msg interface{}, writer interface{}, body []byte, id
 			log.Error("panic at msg %d handler, stack %s", id, string(debug.Stack()))
 		}
 	}()
+	log.Debug("execute logic msg %d, msgType %v", mInfo.msgId, mInfo.msgType)
 	mInfo.msgCallback(msg, writer, body)
 }
