@@ -33,7 +33,7 @@ func NewJSONProcessor() *JsonProcessor {
 }
 
 // OnReceivedPackage 收到完整数据包
-func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
+func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) error {
 	// 解密
 	if jp.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -44,22 +44,23 @@ func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	var pack JsonProtocol
 	if err := json.Unmarshal(body, &pack); err != nil {
 		log.Error("Can't unmarshal pack body to json Protocol, %+v", body)
-		return
+		return err
 	}
 	info, ok := jp.handlers[pack.Id]
 	if !ok {
 		log.Error("Not register msg id %d", pack.Id)
-		return
+		return nil
 	}
 	msg := reflect.New(info.msgType.Elem()).Interface()
 	msgBytes, _ := json.Marshal(pack.Content)
 	err := json.Unmarshal(msgBytes, msg)
 	if err != nil {
 		log.Error("Can't unmarshal pack content to json msg, %+v", body)
-		return
+		return err
 	}
 	// 执行逻辑
 	execute(info, msg, writer, body, uint32(pack.Id))
+	return nil
 }
 
 // WarpMsg format the interface message to []byte

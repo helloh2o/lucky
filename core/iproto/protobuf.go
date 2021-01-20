@@ -26,8 +26,8 @@ func NewPBProcessor() *PbfProcessor {
 	return &pb
 }
 
-// OnReceivedPackage 收到完整数据包
-func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
+// OnReceivedPackage 收到完整数据包, 返回解包错误
+func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) error {
 	// 解密
 	if pbf.enc != nil {
 		//log.Debug("before decode:: %v", body)
@@ -38,21 +38,23 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) {
 	var pack Protocol
 	if err := proto.UnmarshalMerge(body, &pack); err != nil {
 		log.Error("Can't unmarshal pack body to protocolMsg, %+v", body)
-		return
+		return err
 	}
 	info, ok := pbf.handlers[int(pack.Id)]
 	if !ok {
 		log.Error("Not register msg id %d", pack.Id)
-		return
+		// handler not found, not a dead err
+		return nil
 	}
 	msg := reflect.New(info.msgType.Elem()).Interface()
 	err := proto.UnmarshalMerge(pack.Content, msg.(proto.Message))
 	if err != nil {
 		log.Error("UnmarshalMerge pack.contents error by id %d", pack.Id)
-		return
+		return err
 	}
 	// 执行逻辑
 	execute(info, msg, writer, body, pack.Id)
+	return nil
 }
 
 // WarpMsg format the interface message to []byte
