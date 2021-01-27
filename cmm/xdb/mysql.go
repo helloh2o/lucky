@@ -6,6 +6,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"time"
 )
 
 var (
@@ -34,6 +35,8 @@ func OpenMysqlDB(dbUrl string, config *gorm.Config, maxIdleConns, maxOpenConns i
 	if sqlDB, err = db.DB(); err == nil {
 		sqlDB.SetMaxIdleConns(maxIdleConns)
 		sqlDB.SetMaxOpenConns(maxOpenConns)
+		sqlDB.SetConnMaxLifetime(time.Hour)
+		sqlDB.SetConnMaxIdleTime(time.Hour)
 	} else {
 		log.Error("%v", err)
 	}
