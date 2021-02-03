@@ -17,7 +17,7 @@ func main() {
 		hello := args[iproto.Msg].(*protobuf.Hello)
 		log.Debug(hello.Hello)
 		ctx := args[iproto.Conn].(*context.Context)
-		data, err := httpProcessor.WarpMsgNoHeader(hello)
+		data, err := httpProcessor.WrapMsgNoHeader(hello)
 		if err != nil {
 			panic(err)
 		}

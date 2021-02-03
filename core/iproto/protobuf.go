@@ -57,9 +57,9 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) erro
 	return nil
 }
 
-// WarpMsg format the interface message to []byte
-func (pbf *PbfProcessor) WarpMsg(message interface{}) ([]byte, error) {
-	log.Debug("===> Protobuf processor warp %v for write", reflect.TypeOf(message))
+// WrapMsg format the interface message to []byte
+func (pbf *PbfProcessor) WrapMsg(message interface{}) ([]byte, error) {
+	log.Debug("===> Protobuf processor wrap %v for write", reflect.TypeOf(message))
 	data, err := proto.Marshal(message.(proto.Message))
 	if err != nil {
 		return nil, err
@@ -93,9 +93,9 @@ func (pbf *PbfProcessor) WarpMsg(message interface{}) ([]byte, error) {
 	return pkg, nil
 }
 
-// WarpMsgNoHeader without header length
-func (pbf *PbfProcessor) WarpMsgNoHeader(message interface{}) ([]byte, error) {
-	data, err := pbf.WarpMsg(message)
+// WrapMsgNoHeader without header length
+func (pbf *PbfProcessor) WrapMsgNoHeader(message interface{}) ([]byte, error) {
+	data, err := pbf.WrapMsg(message)
 	if err != nil {
 		return nil, err
 	}

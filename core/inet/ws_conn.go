@@ -129,9 +129,9 @@ func (wc *WSConn) ReadMsg() {
 
 // WriteMsg warp msg base on conn's processor
 func (wc *WSConn) WriteMsg(message interface{}) {
-	pkg, err := wc.processor.WarpMsg(message)
+	pkg, err := wc.processor.WrapMsg(message)
 	if err != nil {
-		log.Error("OnWarpMsg package error %s", err)
+		log.Error("OnWrapMsg package error %s", err)
 	} else {
 		// ws write data only ,not need data length
 	push:

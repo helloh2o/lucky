@@ -63,8 +63,8 @@ func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) erro
 	return nil
 }
 
-// WarpMsg format the interface message to []byte
-func (jp *JsonProcessor) WarpMsg(message interface{}) ([]byte, error) {
+// WrapMsg format the interface message to []byte
+func (jp *JsonProcessor) WrapMsg(message interface{}) ([]byte, error) {
 	log.Debug("===> JSON processor warp %v for write", reflect.TypeOf(message))
 	data, err := json.Marshal(message)
 	if err != nil {

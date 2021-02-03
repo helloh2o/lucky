@@ -143,9 +143,9 @@ func (s *QuicStream) ReadMsg() {
 
 // WriteMsg warp msg base on conn's processor
 func (s *QuicStream) WriteMsg(message interface{}) {
-	pkg, err := s.processor.WarpMsg(message)
+	pkg, err := s.processor.WrapMsg(message)
 	if err != nil {
-		log.Error("Quic Steam OnWarpMsg package error %s", err)
+		log.Error("Quic Steam OnWrapMsg package error %s", err)
 	} else {
 	push:
 		select {
