@@ -59,6 +59,7 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) erro
 
 // WarpMsg format the interface message to []byte
 func (pbf *PbfProcessor) WarpMsg(message interface{}) ([]byte, error) {
+	log.Debug("===> Protobuf processor warp %v for write", reflect.TypeOf(message))
 	data, err := proto.Marshal(message.(proto.Message))
 	if err != nil {
 		return nil, err
