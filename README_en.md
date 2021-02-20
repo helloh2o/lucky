@@ -1,4 +1,4 @@
-# Use Lucky to create game or app server by simple, fast, security
+# Use Lucky to create server by simple, fast, security
 [**Github**](https://github.com/helloh2o/lucky) <<=>> [**Gitee**](https://gitee.com/helloh2o/lucky)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/helloh2o/lucky)](https://goreportcard.com/report/github.com/helloh2o/lucky)
