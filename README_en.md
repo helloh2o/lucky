@@ -39,7 +39,7 @@ MaxHeaderLen: 1024,
 2. Please refer to the http, tcp, websocket, kcp, and kcp frame synchronization examples under the example
 3. The frame synchronization part needs to be further improved, which is just a basic realization
 4. Chat room example, source code example/chatroom
-![Image text](https://gitee.com/helloh2o/lucky/raw/master/examples/chatroom/demo.png)
+![Image text](https://raw.githubusercontent.com/helloh2o/lucky/master/examples/chatroom/demo.png)
 
 #### Welcome to participate :)
 1. Welcome to submit PR and Issue
