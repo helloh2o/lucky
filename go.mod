@@ -25,5 +25,6 @@ require (
 	golang.org/x/exp v0.0.0-20190121172915-509febef88a4
 	google.golang.org/protobuf v1.25.0
 	gorm.io/driver/mysql v1.0.3
-	gorm.io/gorm v1.20.4
+	gorm.io/driver/postgres v1.0.8
+	gorm.io/gorm v1.20.12
 )
