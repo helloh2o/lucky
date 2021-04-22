@@ -44,7 +44,7 @@ lucky.SetConf(&lucky.Data{
 #### 欢迎参与 :)
 1. 欢迎提交PR 和 Issue
 2. 开源不易，觉得不错就给个小星星✮吧 
-3. 该框架已先在生产项目中使用，DAU≈10w
+3. 该框架正在多个 DAU>10w 商业项目中使用
 
 #### 快速开始
 > Run as tcp server
