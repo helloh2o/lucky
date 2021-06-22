@@ -6,45 +6,43 @@ import (
 	"time"
 )
 
-// Limiter package lv default limiter
 var Limiter *LimiterMap
 
 func init() {
 	Limiter = &LimiterMap{
-		data:  make(map[interface{}]int64),
+		data:  make(map[interface{}]limitItem),
 		tiker: time.NewTicker(time.Second * 30),
 	}
 	go Limiter.Clean()
 }
 
-// NewLimiter create limiter map
-func NewLimiter(timeout int64) *LimiterMap {
-	l := &LimiterMap{
-		data:    make(map[interface{}]int64),
-		tiker:   time.NewTicker(time.Second * time.Duration(timeout)),
-		timeout: timeout,
-	}
-	return l
-}
-
-// LimiterMap for limiter
 type LimiterMap struct {
 	sync.RWMutex
-	data    map[interface{}]int64
-	tiker   *time.Ticker
-	timeout int64
+	data  map[interface{}]limitItem
+	tiker *time.Ticker
 }
 
-func (l *LimiterMap) Add(key interface{}) {
+type limitItem struct {
+	t     time.Time
+	limit int64
+}
+
+func (l *LimiterMap) Add(key interface{}, limit int64) {
 	l.Lock()
 	defer l.Unlock()
-	l.data[key] = time.Now().Unix()
+	l.data[key] = limitItem{
+		time.Now(),
+		limit,
+	}
 	log.Debug("Limiter Add key %v", key)
 }
 
-func (l *LimiterMap) UnSafeDel(key interface{}) {
-	log.Debug("Limiter UnSafeDel key %v", key)
-	delete(l.data, key)
+func (l *LimiterMap) UnsafeAdd(key interface{}, limit int64) {
+	l.data[key] = limitItem{
+		time.Now(),
+		limit,
+	}
+	log.Debug("Limiter Add key %v", key)
 }
 
 func (l *LimiterMap) Del(key interface{}) {
@@ -54,21 +52,27 @@ func (l *LimiterMap) Del(key interface{}) {
 	log.Debug("Limiter Del key %v", key)
 }
 
+func (l *LimiterMap) UnSafeDel(key interface{}) {
+	log.Debug("Limiter UnSafeDel key %v", key)
+	delete(l.data, key)
+}
+
 func (l *LimiterMap) IsLimited(key interface{}, seconds int64) bool {
-	l.RLock()
+	l.Lock()
+	defer l.Unlock()
 	// read
 	v, ok := l.data[key]
-	l.RUnlock()
 	if !ok {
 		// safe write
-		l.Add(key)
+		l.UnsafeAdd(key, seconds)
 		return false
 	}
-	if time.Now().Unix()-v < seconds {
+	if time.Now().Before(v.t.Add(time.Second * time.Duration(seconds))) {
 		return true
+	} else if time.Now().After(v.t) {
+		// repeat
+		l.UnsafeAdd(key, v.limit)
 	}
-	// safe delete
-	l.Del(key)
 	return false
 }
 
@@ -79,9 +83,8 @@ func (l *LimiterMap) Clean() {
 		// read need clean keys
 		timeoutKeys := make([]interface{}, 0)
 		l.RLock()
-		now := time.Now().Unix()
 		for k, v := range l.data {
-			if now-v >= l.timeout {
+			if time.Now().After(v.t.Add(time.Second * time.Duration(v.limit))) {
 				timeoutKeys = append(timeoutKeys, k)
 			}
 		}
