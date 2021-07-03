@@ -60,7 +60,7 @@ func NewWSConn(conn *websocket.Conn, processor Processor) *WSConn {
 		}
 		// write over or error
 		_ = wc.Close()
-		log.Release("Conn %s <=> %s closed.", wc.conn.LocalAddr(), wc.conn.RemoteAddr())
+		log.Debug("Conn %s <=> %s closed.", wc.conn.LocalAddr(), wc.conn.RemoteAddr())
 	}()
 	// logic q
 	go func() {
