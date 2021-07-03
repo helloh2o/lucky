@@ -53,7 +53,7 @@ func NewWSConn(conn *websocket.Conn, processor Processor) *WSConn {
 			}
 			err := wc.conn.WriteMessage(websocket.BinaryMessage, pkg)
 			if err != nil {
-				log.Error("websocket write %v", err)
+				log.Debug("websocket write %v", err)
 				break
 			}
 			_ = wc.conn.SetWriteDeadline(time.Time{})
@@ -103,7 +103,7 @@ func (wc *WSConn) ReadMsg() {
 		_ = wc.conn.SetReadDeadline(time.Now().Add(timeout))
 		_type, body, err := wc.conn.ReadMessage()
 		if err != nil {
-			log.Error("WSConn read message error %s", err.Error())
+			log.Debug("WSConn read message error %s", err.Error())
 			break
 		}
 		switch _type {
