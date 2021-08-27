@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-// lazyQueue 排队保存，重复的数据只排一次，时效性一般的情况，场景：降低数据库写压力
-type lazyQueue struct {
+// LazyQueue 排队保存，重复的数据只排一次，时效性一般的情况，场景：降低数据库写压力
+type LazyQueue struct {
 	sync.RWMutex
 	saveQueue chan interface{}
 	queued    map[interface{}]struct{}
@@ -17,7 +17,7 @@ type lazyQueue struct {
 	qps       int
 }
 
-func NewLazyQueue(qps, size int, cf func(interface{}) error) (*lazyQueue, error) {
+func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error) {
 	if cf == nil {
 		errMsg := "nil callback is invalid"
 		log.Error(errMsg)
@@ -29,7 +29,7 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*lazyQueue, error)
 	if qps <= 0 {
 		return nil, errors.New("lazy queue qps is too small")
 	}
-	lq := &lazyQueue{
+	lq := &LazyQueue{
 		RWMutex:   sync.RWMutex{},
 		saveQueue: make(chan interface{}, size),
 		queued:    make(map[interface{}]struct{}),
@@ -40,7 +40,7 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*lazyQueue, error)
 }
 
 // Run 启动LazySave 并返回错误
-func (lazy *lazyQueue) Run() {
+func (lazy *LazyQueue) Run() {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Error("panic %s", string(debug.Stack()))
@@ -58,7 +58,7 @@ func (lazy *lazyQueue) Run() {
 }
 
 // PushToQueue 将不重要的对象加入保存队列
-func (lazy *lazyQueue) PushToQueue(key interface{}) {
+func (lazy *LazyQueue) PushToQueue(key interface{}) {
 	lazy.RLock()
 	if _, ok := lazy.queued[key]; ok {
 		log.Debug("queued key ->%v", key)
@@ -78,7 +78,7 @@ func (lazy *lazyQueue) PushToQueue(key interface{}) {
 }
 
 // OutOfQueue 解除对象慢保存排队
-func (lazy *lazyQueue) OutOfQueue(key interface{}) {
+func (lazy *LazyQueue) OutOfQueue(key interface{}) {
 	lazy.Lock()
 	defer lazy.Unlock()
 	if _, ok := lazy.queued[key]; ok {
@@ -94,7 +94,7 @@ func (lazy *lazyQueue) OutOfQueue(key interface{}) {
 }
 
 // 处理数据
-func (lazy *lazyQueue) callback(key interface{}) {
+func (lazy *LazyQueue) callback(key interface{}) {
 	defer func() {
 		lazy.Lock()
 		defer lazy.Unlock()
