@@ -45,6 +45,8 @@ lucky.SetConf(&lucky.Data{
 1. 欢迎提交PR 和 Issue
 2. 开源不易，觉得不错就给个小星星✮吧 
 3. 该框架正在多个 DAU>10w 商业项目中使用
+4. 新增utils.LazyQueue可对高频操作进行管理，如数据库写。
+5. 新增utils.RkPool可对任意数据进行排序，如排行榜。
 
 #### 快速开始
 > Run as tcp server
