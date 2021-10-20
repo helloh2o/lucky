@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"github.com/google/uuid"
 	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"sync"
@@ -12,7 +13,7 @@ import (
 type LazyQueue struct {
 	sync.RWMutex
 	saveQueue chan interface{}
-	queued    map[interface{}]struct{}
+	queued    map[interface{}]string
 	call      func(interface{}) error
 	qps       int
 }
@@ -32,7 +33,7 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error)
 	lq := &LazyQueue{
 		RWMutex:   sync.RWMutex{},
 		saveQueue: make(chan interface{}, size),
-		queued:    make(map[interface{}]struct{}),
+		queued:    make(map[interface{}]string),
 		qps:       qps,
 	}
 	lq.call = cf
@@ -60,17 +61,25 @@ func (lazy *LazyQueue) Run() {
 // PushToQueue 将不重要的对象加入保存队列
 func (lazy *LazyQueue) PushToQueue(key interface{}) {
 	lazy.RLock()
-	if _, ok := lazy.queued[key]; ok {
-		log.Debug("queued key ->%v", key)
-		lazy.RUnlock()
-		return
-	}
+	val, ok := lazy.queued[key]
 	lazy.RUnlock()
+	if ok {
+		// key is in processing or not
+		done := SyncObjByStr(val)
+		defer done()
+		lazy.RLock()
+		_, ok := lazy.queued[key]
+		if ok {
+			lazy.RUnlock()
+			return
+		}
+		lazy.RUnlock()
+	}
 	select {
 	case lazy.saveQueue <- key:
 		lazy.Lock()
 		defer lazy.Unlock()
-		lazy.queued[key] = struct{}{}
+		lazy.queued[key] = uuid.New().String()
 	default:
 		// 队列已满
 		log.Error("lazy queue is full %d", len(lazy.saveQueue))
@@ -100,8 +109,16 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		defer lazy.Unlock()
 		delete(lazy.queued, key)
 	}()
-	if err := lazy.call(key); err != nil {
-		log.Error("lazy call error:: %s", err.Error())
+	lazy.RLock()
+	val, ok := lazy.queued[key]
+	defer lazy.RUnlock()
+	if ok {
+		// key is in processing
+		done := SyncObjByStr(val)
+		defer done()
+		if err := lazy.call(key); err != nil {
+			log.Error("lazy call error:: %s", err.Error())
+		}
 	}
 	log.Debug("queue left size %d", len(lazy.saveQueue))
 }

@@ -16,12 +16,12 @@ func TestNewLazyQueue(t *testing.T) {
 	go lq.Run()
 	go func() {
 		for i := 1; i < 1000; i++ {
-			lq.PushToQueue(i)
+			go lq.PushToQueue(i)
 		}
 	}()
 	go func() {
 		for i := 1; i < 1000; i++ {
-			lq.PushToQueue(i)
+			go lq.PushToQueue(i)
 		}
 	}()
 	select {}

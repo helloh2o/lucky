@@ -15,6 +15,7 @@ require (
 	github.com/lucas-clemente/quic-go v0.19.3
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mmcloughlin/avo v0.0.0-20201130012700-45c8ae10fd12 // indirect
+	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/templexxx/cpufeat v0.0.0-20180724012125-cef66df7f161 // indirect
 	github.com/templexxx/xor v0.0.0-20191217153810-f85b25db303b // indirect
