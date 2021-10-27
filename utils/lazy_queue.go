@@ -94,11 +94,6 @@ func (lazy *LazyQueue) OutOfQueue(key interface{}) {
 		// 删除
 		delete(lazy.queued, key)
 		log.Debug("delete from queue :: %v", key)
-		// 取走一个位置
-		select {
-		case <-lazy.saveQueue:
-		default:
-		}
 	}
 }
 
