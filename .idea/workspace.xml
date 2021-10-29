@@ -20,13 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="add limiter by list">
-      <change afterPath="$PROJECT_DIR$/utils/sync.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/sync_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/cmd.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/file.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/ipaddr.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/signal.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/time.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/lazy_queue.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/lazy_queue.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/lazy_queue_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/lazy_queue_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +89,7 @@
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)">
+  <component name="RunManager" selected="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -101,16 +100,18 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/helloh2o/lucky/examples/kcp/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$" />
+      <working_directory value="$PROJECT_DIR$/utils" />
+      <framework value="gotest" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/examples/kcp/client/kcpclient.go" />
-      <package value="github.com/helloh2o/lucky/examples/kcp/client" />
+      <package value="github.com/helloh2o/lucky/utils" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestNewLazyQueue\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils" />
       <framework value="gotest" />
@@ -167,11 +168,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)" />
         <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)" />
         <item itemvalue="Go Test.TestSyncObjByStr in github.com/helloh2o/lucky/utils" />
         <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils" />
         <item itemvalue="Go Test.TestTestaa in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/kcp/client" />
       </list>
     </recent_temporary>
   </component>
@@ -195,7 +196,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="replace local pkg" />
     <MESSAGE value="add mod 1.0.3" />
     <MESSAGE value="golint &amp; ineffassign" />
     <MESSAGE value="delete timer &amp; map" />
@@ -220,7 +220,8 @@
     <MESSAGE value="add limiter by list" />
     <MESSAGE value="add safe lazy queue" />
     <MESSAGE value="Add RankPool &amp; public LazyQueue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add RankPool &amp; public LazyQueue" />
+    <MESSAGE value="SyncStrWithTimeout" />
+    <option name="LAST_COMMIT_MESSAGE" value="SyncStrWithTimeout" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -231,36 +232,40 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" key="CommitChangelistDialog2" timestamp="1630034894548">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2858" y="115" width="804" height="925" key="CommitChangelistDialog2" timestamp="1635498311728">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1630034894548" />
-    <state x="2478" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626848198203" />
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1634726829472">
+    <state x="2858" y="115" width="804" height="925" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498311728" />
+    <state width="1877" height="434" key="GridCell.Tab.0.bottom" timestamp="1634886873939">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="434" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
+    <state width="1877" height="434" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
+    <state width="1877" height="434" key="GridCell.Tab.0.center" timestamp="1634886873939">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="434" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
+    <state width="1877" height="434" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
+    <state width="1877" height="434" key="GridCell.Tab.0.left" timestamp="1634886873939">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="434" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
+    <state width="1877" height="434" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
+    <state width="1877" height="434" key="GridCell.Tab.0.right" timestamp="1634886873939">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="434" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
+    <state width="1877" height="434" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
+    <state x="797" y="138" key="RollbackChangesDialog" timestamp="1634869590253">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634726829472" />
-    <state width="1877" height="488" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626850520708" />
-    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1634726829472">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634726829472" />
-    <state width="1877" height="488" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626850520708" />
-    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1634726829472">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634726829472" />
-    <state width="1877" height="488" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626850520708" />
-    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1634726829472">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634726829472" />
-    <state width="1877" height="488" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626850520708" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1630034897447">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="797" y="138" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869590253" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1635498313246">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1630034897447" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1626848201430" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498313246" />
     <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1634723006473">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
