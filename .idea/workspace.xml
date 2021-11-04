@@ -19,13 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="add limiter by list">
-      <change afterPath="$PROJECT_DIR$/utils/cmd.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/file.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/ipaddr.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/signal.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/time.go" afterDir="false" />
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imessage.go" beforeDir="false" afterPath="$PROJECT_DIR$/imessage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/protobuf.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +194,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add mod 1.0.3" />
     <MESSAGE value="golint &amp; ineffassign" />
     <MESSAGE value="delete timer &amp; map" />
     <MESSAGE value="useful files" />
@@ -221,7 +218,8 @@
     <MESSAGE value="add safe lazy queue" />
     <MESSAGE value="Add RankPool &amp; public LazyQueue" />
     <MESSAGE value="SyncStrWithTimeout" />
-    <option name="LAST_COMMIT_MESSAGE" value="SyncStrWithTimeout" />
+    <MESSAGE value="some useful func" />
+    <option name="LAST_COMMIT_MESSAGE" value="some useful func" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -232,10 +230,10 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2858" y="115" width="804" height="925" key="CommitChangelistDialog2" timestamp="1635498311728">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="558" y="0" width="804" height="925" key="CommitChangelistDialog2" timestamp="1635498772303">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1630034894548" />
+    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1635498772303" />
     <state x="2858" y="115" width="804" height="925" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498311728" />
     <state width="1877" height="434" key="GridCell.Tab.0.bottom" timestamp="1634886873939">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -261,10 +259,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="797" y="138" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869590253" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1635498313246">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1635498773822">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1630034897447" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1635498773822" />
     <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498313246" />
     <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1634723006473">
       <screen x="0" y="0" width="1920" height="1040" />

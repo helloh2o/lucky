@@ -13,5 +13,6 @@ type Processor interface {
 	SetEncryptor(enc Encryptor)
 	OnReceivedPackage(interface{}, []byte) error
 	WrapMsg(interface{}) ([]byte, error)
+	WrapIdMsg(id uint32, data interface{}) ([]byte, error)
 	RegisterHandler(id int, entity interface{}, handle func(args ...interface{}))
 }

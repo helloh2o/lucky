@@ -92,6 +92,37 @@ func (pbf *PbfProcessor) WrapMsg(message interface{}) ([]byte, error) {
 	return pkg, nil
 }
 
+// WrapIdMsg format the interface message to []byte with id
+func (pbf *PbfProcessor) WrapIdMsg(id uint32, message interface{}) ([]byte, error) {
+	log.Debug("===> Protobuf processor wrap %v for write", reflect.TypeOf(message))
+	data, err := proto.Marshal(message.(proto.Message))
+	if err != nil {
+		return nil, err
+	}
+	protocol := Protocol{
+		Id:      id,
+		Content: data,
+	}
+	data, err = proto.Marshal(&protocol)
+	if err != nil {
+		return nil, err
+	}
+	if pbf.enc != nil {
+		//log.Debug("before encode:: %v", data)
+		data = pbf.enc.Encode(data)
+		//log.Debug("after  encode:: %v", data)
+	}
+	// head
+	head := make([]byte, 2)
+	if pbf.bigEndian {
+		binary.BigEndian.PutUint16(head, uint16(len(data)))
+	} else {
+		binary.LittleEndian.PutUint16(head, uint16(len(data)))
+	}
+	pkg := append(head, data...)
+	return pkg, nil
+}
+
 // WrapMsgNoHeader without header length
 func (pbf *PbfProcessor) WrapMsgNoHeader(message interface{}) ([]byte, error) {
 	data, err := pbf.WrapMsg(message)

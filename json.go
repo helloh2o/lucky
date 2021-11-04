@@ -98,6 +98,37 @@ func (jp *JsonProcessor) WrapMsg(message interface{}) ([]byte, error) {
 	return pkg, nil
 }
 
+// WrapIdMsg format the interface message to []byte with id
+func (jp *JsonProcessor) WrapIdMsg(id uint32, message interface{}) ([]byte, error) {
+	log.Debug("===> JSON processor warp %v for write", reflect.TypeOf(message))
+	data, err := json.Marshal(message)
+	if err != nil {
+		return data, err
+	}
+	protocol := JsonProtocol{
+		Id:      int(id),
+		Content: message,
+	}
+	data, err = json.Marshal(&protocol)
+	if err != nil {
+		return nil, err
+	}
+	if jp.enc != nil {
+		//log.Debug("before encode:: %v", data)
+		data = jp.enc.Encode(data)
+		//log.Debug("after  encode:: %v", data)
+	}
+	// head
+	head := make([]byte, 2)
+	if jp.bigEndian {
+		binary.BigEndian.PutUint16(head, uint16(len(data)))
+	} else {
+		binary.LittleEndian.PutUint16(head, uint16(len(data)))
+	}
+	pkg := append(head, data...)
+	return pkg, nil
+}
+
 // RegisterHandler for logic
 func (jp *JsonProcessor) RegisterHandler(id int, entity interface{}, handle func(args ...interface{})) {
 	if _, ok := jp.handlers[id]; ok {
