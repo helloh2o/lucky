@@ -33,27 +33,36 @@ func TestLimiterMap_IsLimited(t *testing.T) {
 
 func TestLimiterMap_IsV2Limited(t *testing.T) {
 	log.New("release", "", 0)
-	duration := time.Second
+	duration := time.Second * 5
+	max := int64(3)
 	//log.Release("%t", Limiter.IsV2Limited("/ffff", duration))
 	// 每duration只有一个 /fff 请求可以被接收
 	for {
 		log.Release("================================================")
 		go func() {
-			ok, n := Limiter.IsV2Limited("/ffff", duration)
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
 			log.Release("%t-> %d", ok, n)
 		}()
 		go func() {
-			ok, n := Limiter.IsV2Limited("/ffff", duration)
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
 			log.Release("%t-> %d", ok, n)
 		}()
 		go func() {
-			ok, n := Limiter.IsV2Limited("/ffff", duration)
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
 			log.Release("%t-> %d", ok, n)
 		}()
 		go func() {
-			ok, n := Limiter.IsV2Limited("/ffff", duration)
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
 			log.Release("%t-> %d", ok, n)
 		}()
-		time.Sleep(duration / 3)
+		go func() {
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
+			log.Release("%t-> %d", ok, n)
+		}()
+		go func() {
+			ok, n := Limiter.IsV2Limited("/ffff", duration, max)
+			log.Release("%t-> %d", ok, n)
+		}()
+		time.Sleep(time.Second)
 	}
 }
