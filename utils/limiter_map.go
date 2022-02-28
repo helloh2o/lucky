@@ -3,10 +3,13 @@ package utils
 import (
 	"github.com/helloh2o/lucky/log"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
 var Limiter *LimiterMap
+
+const FirstTrigger = 1
 
 func init() {
 	Limiter = &LimiterMap{
@@ -24,23 +27,26 @@ type LimiterMap struct {
 
 type limitItem struct {
 	t     time.Time
-	limit int64
+	limit time.Duration
+	times int64
 }
 
-func (l *LimiterMap) Add(key interface{}, limit int64) {
+func (l *LimiterMap) Add(key interface{}, duration time.Duration) {
 	l.Lock()
 	defer l.Unlock()
 	l.data[key] = limitItem{
 		time.Now(),
-		limit,
+		duration,
+		FirstTrigger,
 	}
 	log.Debug("Limiter Add key %v", key)
 }
 
-func (l *LimiterMap) UnsafeAdd(key interface{}, limit int64) {
+func (l *LimiterMap) UnsafeAdd(key interface{}, duration time.Duration) {
 	l.data[key] = limitItem{
 		time.Now(),
-		limit,
+		duration,
+		FirstTrigger,
 	}
 	log.Debug("Limiter Add key %v", key)
 }
@@ -64,16 +70,39 @@ func (l *LimiterMap) IsLimited(key interface{}, seconds int64) bool {
 	v, ok := l.data[key]
 	if !ok {
 		// safe write
-		l.UnsafeAdd(key, seconds)
+		l.UnsafeAdd(key, time.Second*time.Duration(seconds))
 		return false
 	}
 	if time.Now().Before(v.t.Add(time.Second * time.Duration(seconds))) {
+		atomic.AddInt64(&v.times, FirstTrigger)
+		l.data[key] = v
 		return true
 	} else if time.Now().After(v.t) {
 		// repeat
 		l.UnsafeAdd(key, v.limit)
 	}
 	return false
+}
+
+func (l *LimiterMap) IsV2Limited(key interface{}, duration time.Duration) (bool, int64) {
+	l.Lock()
+	defer l.Unlock()
+	// read
+	v, ok := l.data[key]
+	if !ok {
+		// safe write
+		l.UnsafeAdd(key, duration)
+		return false, FirstTrigger
+	}
+	if time.Now().Before(v.t.Add(duration)) {
+		atomic.AddInt64(&v.times, FirstTrigger)
+		l.data[key] = v
+		return true, v.times
+	} else if time.Now().After(v.t) {
+		// repeat
+		l.UnsafeAdd(key, v.limit)
+	}
+	return false, FirstTrigger
 }
 
 // Clean self clean
@@ -84,7 +113,7 @@ func (l *LimiterMap) Clean() {
 		timeoutKeys := make([]interface{}, 0)
 		l.RLock()
 		for k, v := range l.data {
-			if time.Now().After(v.t.Add(time.Second * time.Duration(v.limit))) {
+			if time.Now().After(v.t.Add(v.limit)) {
 				timeoutKeys = append(timeoutKeys, k)
 			}
 		}
