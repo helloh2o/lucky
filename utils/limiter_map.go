@@ -13,7 +13,7 @@ const tiktok = 1
 
 func init() {
 	Limiter = &LimiterMap{
-		data:  make(map[interface{}]limitItem),
+		data:  make(map[interface{}]*limitItem),
 		tiker: time.NewTicker(time.Second * 30),
 	}
 	go Limiter.Clean()
@@ -21,7 +21,7 @@ func init() {
 
 type LimiterMap struct {
 	sync.RWMutex
-	data  map[interface{}]limitItem
+	data  map[interface{}]*limitItem
 	tiker *time.Ticker
 }
 
@@ -34,7 +34,7 @@ type limitItem struct {
 func (l *LimiterMap) Add(key interface{}, duration time.Duration) {
 	l.Lock()
 	defer l.Unlock()
-	l.data[key] = limitItem{
+	l.data[key] = &limitItem{
 		time.Now(),
 		duration,
 		tiktok,
@@ -43,7 +43,7 @@ func (l *LimiterMap) Add(key interface{}, duration time.Duration) {
 }
 
 func (l *LimiterMap) UnsafeAdd(key interface{}, duration time.Duration) {
-	l.data[key] = limitItem{
+	l.data[key] = &limitItem{
 		time.Now(),
 		duration,
 		tiktok,
@@ -75,7 +75,6 @@ func (l *LimiterMap) IsLimited(key interface{}, seconds int64) bool {
 	}
 	atomic.AddInt64(&v.times, tiktok)
 	if time.Now().Before(v.t.Add(time.Second * time.Duration(seconds))) {
-		l.data[key] = v
 		return true
 	} else {
 		// repeat
@@ -95,7 +94,6 @@ func (l *LimiterMap) IsV2Limited(key interface{}, duration time.Duration, max in
 		return false, tiktok
 	}
 	atomic.AddInt64(&v.times, tiktok)
-	l.data[key] = v
 	if time.Now().Before(v.t.Add(duration)) {
 		log.Release("v.times:%d , the max:%d", v.times, max)
 		if v.times > max {
