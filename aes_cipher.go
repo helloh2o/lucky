@@ -24,7 +24,7 @@ func NewAESCipher(key string) *AESCipher {
 		size = 4
 	}
 	key = key[:size*8]
-	return &AESCipher{key: []byte(key), iv: []byte(key)}
+	return &AESCipher{key: []byte(key), iv: []byte(key[:16])}
 }
 
 // Decode src
