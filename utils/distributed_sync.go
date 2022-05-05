@@ -42,6 +42,8 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			waiter.channnels[key] = wc
 		}
 		return func() {
+			waiter.Lock()
+			defer waiter.Unlock()
 			cache.RedisC.Del(context.Background(), key)
 			select {
 			case waiter.channnels[key] <- struct{}{}:
