@@ -16,6 +16,7 @@ type LazyQueue struct {
 	queued    map[interface{}]string
 	call      func(interface{}) error
 	qps       int
+	size      int
 }
 
 func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error) {
@@ -35,6 +36,7 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error)
 		saveQueue: make(chan interface{}, size),
 		queued:    make(map[interface{}]string),
 		qps:       qps,
+		size:      size,
 	}
 	lq.call = cf
 	return lq, nil
@@ -58,31 +60,45 @@ func (lazy *LazyQueue) Run() {
 	}
 }
 
-// PushToQueue 将不重要的对象加入保存队列
-func (lazy *LazyQueue) PushToQueue(key interface{}) {
+// PushToQueue 对象加入保存队列
+func (lazy *LazyQueue) PushToQueue(obj interface{}) {
+	lazy.push(obj, false)
+}
+
+// PushToQueueWait 对象同步加入保存队列
+func (lazy *LazyQueue) PushToQueueWait(obj interface{}) {
+	lazy.push(obj, true)
+}
+
+func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 	lazy.RLock()
-	val, ok := lazy.queued[key]
+	val, ok := lazy.queued[obj]
 	lazy.RUnlock()
 	if ok {
-		// key is in processing or not
+		// obj is in processing or not
 		done := SyncObjByStr(val)
 		defer done()
 		lazy.RLock()
-		_, ok := lazy.queued[key]
+		_, ok := lazy.queued[obj]
 		if ok {
 			lazy.RUnlock()
 			return
 		}
 		lazy.RUnlock()
 	}
-	select {
-	case lazy.saveQueue <- key:
-		lazy.Lock()
-		defer lazy.Unlock()
-		lazy.queued[key] = uuid.New().String()
-	default:
-		// 队列已满
-		log.Error("lazy queue is full %d", len(lazy.saveQueue))
+	// 是否等待
+	if wait {
+		lazy.saveQueue <- obj
+	} else {
+		select {
+		case lazy.saveQueue <- obj:
+			lazy.Lock()
+			defer lazy.Unlock()
+			lazy.queued[obj] = uuid.New().String()
+		default:
+			// 队列已满
+			log.Error("lazy queue is full %d", len(lazy.saveQueue))
+		}
 	}
 }
 
@@ -95,6 +111,19 @@ func (lazy *LazyQueue) OutOfQueue(key interface{}) {
 		delete(lazy.queued, key)
 		log.Debug("delete from queue :: %v", key)
 	}
+}
+
+// Length 队列长度
+func (lazy *LazyQueue) Length() int {
+	return len(lazy.saveQueue)
+}
+
+// Reset 重置队列
+func (lazy *LazyQueue) Reset() {
+	lazy.RLock()
+	defer lazy.RUnlock()
+	lazy.saveQueue = make(chan interface{}, lazy.size)
+	lazy.queued = make(map[interface{}]string)
 }
 
 // 处理数据
