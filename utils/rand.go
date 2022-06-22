@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"errors"
+	"github.com/helloh2o/lucky/log"
 	"math/rand"
 	"time"
 )
@@ -101,4 +103,30 @@ func RandIntervalN(b1, b2 int32, n uint32) []int32 {
 	}
 
 	return r
+}
+
+//根据权重随机 RandItemWeight
+func RandItemWeight(data map[interface{}]int64) (interface{}, error) {
+	items := make(map[interface{}][]int64)
+	// 随机
+	max := int64(0)
+	for item, weight := range data {
+		size := weight
+		from := max
+		to := max + size - 1
+		items[item] = []int64{from, to}
+		max += size
+	}
+	// 随机位置
+	randWeight := rand.Int63n(max)
+	// 概率
+	probRecord := float64(randWeight) / float64(max)
+	log.Release("Item rand, index:%d, max:%d, weight:%v", randWeight, max, probRecord)
+	// 随机到的物品
+	for item, pos := range items {
+		if randWeight >= pos[0] && randWeight <= pos[1] {
+			return item, nil
+		}
+	}
+	return nil, errors.New("no rand items")
 }
