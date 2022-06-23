@@ -121,7 +121,7 @@ func RandItemWeight(data map[interface{}]int64) (interface{}, error) {
 	randWeight := rand.Int63n(max)
 	// 概率
 	probRecord := float64(randWeight) / float64(max)
-	log.Release("Item rand, index:%d, max:%d, weight:%v", randWeight, max, probRecord)
+	log.Debug("Item rand, index:%d, max:%d, weight:%v", randWeight, max, probRecord)
 	// 随机到的物品
 	for item, pos := range items {
 		if randWeight >= pos[0] && randWeight <= pos[1] {
