@@ -47,6 +47,8 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			cache.RedisC.Del(context.Background(), key)
 			select {
 			case waiter.channnels[key] <- struct{}{}:
+				// clean on wait over
+				delete(waiter.channnels, key)
 			default:
 			}
 		}, true, nil
