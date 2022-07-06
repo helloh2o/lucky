@@ -8,15 +8,14 @@ import (
 	"time"
 )
 
-//==================================== 基于redis的可等待分布式锁 =================================================//
-
 // 等待者
 type Waiter struct {
 	sync.Mutex
 	channnels map[string]chan struct{}
+	wk        map[string]int
 }
 
-var waiter = Waiter{channnels: make(map[string]chan struct{})}
+var waiter = Waiter{channnels: make(map[string]chan struct{}), wk: make(map[string]int)}
 
 // RDLockOp redis 分布式锁, 足够的操作逻辑时间 release释放，got 是否获取锁,wait在线等待，直到获取锁
 func RDLockOp(operation string) (release func(), got bool, wait chan struct{}) {
@@ -45,14 +44,30 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			waiter.Lock()
 			defer waiter.Unlock()
 			cache.RedisC.Del(context.Background(), key)
+			if waiter.wk[key] > 0 {
+				// must bigger than 1
+				waiter.wk[key] -= 1
+			}
+			log.Debug("key:%s, waiter size:%d", key, waiter.wk[key])
 			select {
 			case waiter.channnels[key] <- struct{}{}:
-				// clean on wait over
-				delete(waiter.channnels, key)
+				// del on all req wait done
+				if waiter.wk[key] == 0 {
+					delete(waiter.channnels, key)
+					delete(waiter.wk, key)
+					log.Debug("key:%s, all req wait done", key)
+				}
 			default:
 			}
 		}, true, nil
 	} else {
+		// 等待着数量
+		if _, ok := waiter.wk[key]; ok {
+			waiter.wk[key] += 1
+		} else {
+			// at least 2 op
+			waiter.wk[key] = 2
+		}
 		// 这里可能没有，读取redis ttl
 		if wc, ok = waiter.channnels[key]; !ok {
 			wc = make(chan struct{}, 1)
