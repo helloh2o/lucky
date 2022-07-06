@@ -86,15 +86,19 @@ func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 		}
 		lazy.RUnlock()
 	}
+	queued := func() {
+		lazy.Lock()
+		defer lazy.Unlock()
+		lazy.queued[obj] = uuid.New().String()
+	}
 	// 是否等待
 	if wait {
 		lazy.saveQueue <- obj
+		queued()
 	} else {
 		select {
 		case lazy.saveQueue <- obj:
-			lazy.Lock()
-			defer lazy.Unlock()
-			lazy.queued[obj] = uuid.New().String()
+			queued()
 		default:
 			// 队列已满
 			log.Error("lazy queue is full %d", len(lazy.saveQueue))
