@@ -24,6 +24,7 @@ require (
 	github.com/xtaci/lossyconn v0.0.0-20200209145036-adba10fffc37 // indirect
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 	golang.org/x/exp v0.0.0-20190121172915-509febef88a4
+	golang.org/x/sys v0.0.0-20201028094953-708e7fb298ac
 	google.golang.org/protobuf v1.25.0
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/driver/postgres v1.0.8

@@ -21,9 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imessage.go" beforeDir="false" afterPath="$PROJECT_DIR$/imessage.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/json.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/protobuf.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Go Application" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
         <option value="Go File" />
       </list>
     </option>
@@ -72,13 +69,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ay\go\src\lucky\utils" />
-      <recent name="C:\Users\ay\go\src\lucky" />
-      <recent name="C:\Users\ay\go\src\lucky\example" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ay\go\src\lucky\utils" />
       <recent name="C:\Users\ay\go\src\lucky\example" />
@@ -86,8 +76,15 @@
       <recent name="C:\Users\ay\go\src\lucky\core\ihttp" />
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\static" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\utils" />
+      <recent name="C:\Users\ay\go\src\lucky" />
+      <recent name="C:\Users\ay\go\src\lucky\example" />
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
+      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
+    </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)">
+  <component name="RunManager" selected="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -98,29 +95,25 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/examples/chatroom" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/utils" />
-      <framework value="gotest" />
+      <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/utils" />
+      <filePath value="$PROJECT_DIR$/examples/chatroom/chat_server.go" />
+      <package value="github.com/helloh2o/lucky/examples/chatroom" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestNewLazyQueue\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/examples/chatroom/clients/robot" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/utils" />
-      <framework value="gotest" />
+      <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/utils" />
+      <filePath value="$PROJECT_DIR$/examples/chatroom/clients/robot/robot.go" />
+      <package value="github.com/helloh2o/lucky/examples/chatroom/clients/robot" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestNewLazyQueue\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewLazyQueue in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestNewAuthValidator in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils" />
       <framework value="gotest" />
@@ -128,10 +121,10 @@
       <package value="github.com/helloh2o/lucky/utils" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestNewLazyQueue\E$" />
+      <pattern value="^\QTestNewAuthValidator\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestSyncObjByStr in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestRandItemWeight in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils" />
       <framework value="gotest" />
@@ -139,18 +132,18 @@
       <package value="github.com/helloh2o/lucky/utils" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestSyncObjByStr\E$" />
+      <pattern value="^\QTestRandItemWeight\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestTestaa in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/utils" />
+      <working_directory value="$PROJECT_DIR$/utils/proxy" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/utils" />
+      <package value="github.com/helloh2o/lucky/utils/proxy" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestTestaa\E$" />
+      <pattern value="^\QTestSetProxyForWin\E$" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -166,11 +159,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (2)" />
-        <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils (1)" />
-        <item itemvalue="Go Test.TestSyncObjByStr in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Test.TestNewLazyQueue in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Test.TestTestaa in github.com/helloh2o/lucky/utils" />
+        <item itemvalue="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy" />
+        <item itemvalue="Go Test.TestNewAuthValidator in github.com/helloh2o/lucky/utils" />
+        <item itemvalue="Go Test.TestRandItemWeight in github.com/helloh2o/lucky/utils" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/chatroom/clients/robot" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/chatroom" />
       </list>
     </recent_temporary>
   </component>
@@ -194,15 +187,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="golint &amp; ineffassign" />
-    <MESSAGE value="delete timer &amp; map" />
-    <MESSAGE value="useful files" />
-    <MESSAGE value="config fixed" />
-    <MESSAGE value="Add quick start" />
-    <MESSAGE value="responseType" />
-    <MESSAGE value="added encrypt js client demo" />
-    <MESSAGE value="default iv key" />
-    <MESSAGE value="add debug execute msg info" />
     <MESSAGE value="add action limiter" />
     <MESSAGE value="add logic costs time" />
     <MESSAGE value="add some notes" />
@@ -219,7 +203,16 @@
     <MESSAGE value="Add RankPool &amp; public LazyQueue" />
     <MESSAGE value="SyncStrWithTimeout" />
     <MESSAGE value="some useful func" />
-    <option name="LAST_COMMIT_MESSAGE" value="some useful func" />
+    <MESSAGE value="wrap msg with id by self, no need register first" />
+    <MESSAGE value="limiter v2, count times in duration" />
+    <MESSAGE value="a wait distributed sync by redis" />
+    <MESSAGE value="optimize lazy queue" />
+    <MESSAGE value="rand by weight" />
+    <MESSAGE value="auth validator" />
+    <MESSAGE value="fix rd_lock mem leak" />
+    <MESSAGE value="fix lazy q bug :)" />
+    <MESSAGE value="fix redis lock bug :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix redis lock bug :)" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -230,44 +223,64 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="558" y="0" width="804" height="925" key="CommitChangelistDialog2" timestamp="1635498772303">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="558" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1635498772303" />
-    <state x="2858" y="115" width="804" height="925" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498311728" />
-    <state width="1877" height="434" key="GridCell.Tab.0.bottom" timestamp="1634886873939">
+    <state x="2478" y="0" key="CommitChangelistDialog2" timestamp="1657107682928">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="434" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
-    <state width="1877" height="434" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
-    <state width="1877" height="434" key="GridCell.Tab.0.center" timestamp="1634886873939">
+    <state x="2478" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657107682928" />
+    <state width="1877" height="631" key="GridCell.Tab.0.bottom" timestamp="1656657589023">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="434" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
-    <state width="1877" height="434" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
-    <state width="1877" height="434" key="GridCell.Tab.0.left" timestamp="1634886873939">
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
+    <state width="1877" height="631" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.0.center" timestamp="1656657589023">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="434" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
-    <state width="1877" height="434" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
-    <state width="1877" height="434" key="GridCell.Tab.0.right" timestamp="1634886873939">
+    <state width="1877" height="274" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
+    <state width="1877" height="631" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.0.left" timestamp="1656657589022">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="434" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869791434" />
-    <state width="1877" height="434" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1634886873939" />
-    <state x="797" y="138" key="RollbackChangesDialog" timestamp="1634869590253">
+    <state width="1877" height="274" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
+    <state width="1877" height="631" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589022" />
+    <state width="1877" height="631" key="GridCell.Tab.0.right" timestamp="1656657589023">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
+    <state width="1877" height="631" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.1.bottom" timestamp="1656657589023">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="63" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
+    <state width="1877" height="631" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.1.center" timestamp="1656657589023">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="63" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
+    <state width="1877" height="631" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.1.left" timestamp="1656657589023">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="63" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
+    <state width="1877" height="631" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state width="1877" height="631" key="GridCell.Tab.1.right" timestamp="1656657589023">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="63" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
+    <state width="1877" height="631" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
+    <state x="772" y="249" key="RollbackChangesDialog" timestamp="1649235416157">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="797" y="138" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634869590253" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1635498773822">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="772" y="249" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235416157" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1657107684595">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1635498773822" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1635498313246" />
-    <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1634723006473">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657107684595" />
+    <state x="2583" y="207" width="594" height="626" key="find.popup" timestamp="1657020643020">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1634723006473" />
+    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235212965" />
+    <state x="2583" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657020643020" />
+    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.999@0.0.1920.1040" timestamp="1650854003330" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
