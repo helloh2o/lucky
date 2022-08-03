@@ -6,17 +6,18 @@ import (
 )
 
 func TestNewAuthValidator(t *testing.T) {
+	// &与，|或，^异或
 	auValidator := NewAuthValidator()
-	opRead := 0x0001
-	opWrite := 0x0002
-	opFix := 0x0004
-	opUpdate := 0x0008
-	opDel := 0x0010
+	opRead := 1 << 1   //000010 2
+	opWrite := 1 << 2  //0000100 4
+	opFix := 1 << 3    //0001000 8
+	opUpdate := 1 << 4 //0010000 16
+	opDel := 1 << 5    //0100000 32
 	key := "ay"
-	auValidator.AddAuthData(key, 31)
-	log.Debug("opRead:%v", auValidator.Validate(key, opRead))
-	log.Debug("opWrite:%v", auValidator.Validate(key, opWrite))
-	log.Debug("opFix:%v", auValidator.Validate(key, opFix))
-	log.Debug("opUpdate:%v", auValidator.Validate(key, opUpdate))
-	log.Debug("opDel:%v", auValidator.Validate(key, opDel))
+	auValidator.AddAuthData(key, 48)
+	log.Debug("opRead:%v, val:%d", auValidator.Validate(key, opRead), opRead)
+	log.Debug("opWrite:%v, val:%d", auValidator.Validate(key, opWrite), opWrite)
+	log.Debug("opFix:%v, val:%d", auValidator.Validate(key, opFix), opFix)
+	log.Debug("opUpdate:%v, val:%d", auValidator.Validate(key, opUpdate), opUpdate)
+	log.Debug("opDel:%v, val:%d", auValidator.Validate(key, opDel), opDel)
 }
