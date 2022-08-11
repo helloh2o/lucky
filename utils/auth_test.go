@@ -13,6 +13,7 @@ func TestNewAuthValidator(t *testing.T) {
 	opFix := 1 << 3    //0001000 8
 	opUpdate := 1 << 4 //0010000 16
 	opDel := 1 << 5    //0100000 32
+	log.Debug("%d", 1<<50)
 	key := "ay"
 	auValidator.AddAuthData(key, 48)
 	log.Debug("opRead:%v, val:%d", auValidator.Validate(key, opRead), opRead)

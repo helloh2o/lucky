@@ -33,7 +33,7 @@ func (au *AuthValidator) GetAuth(key interface{}) int {
 }
 
 // Validate 验证操作是否有权限
-func (au *AuthValidator) Validate(key string, operation int) bool {
+func (au *AuthValidator) Validate(key interface{}, operation int) bool {
 	au.RLock()
 	defer au.RUnlock()
 	if val, ok := au.data[key]; ok {
