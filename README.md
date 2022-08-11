@@ -48,6 +48,7 @@ lucky.SetConf(&lucky.Data{
 3. 该框架正在多个 DAU>10w 商业项目中使用
 4. 新增utils.LazyQueue可对高频操作进行管理，如数据库写。
 5. 新增utils.RkPool可对任意数据进行排序，如排行榜。
+6. 新增Redis分布式锁utils.RDLockOp, 可在多进程间多协程的情景下安全操作数据
 
 #### 快速开始
 > Run as tcp server
