@@ -44,5 +44,14 @@ func (au *AuthValidator) Validate(key interface{}, operation int) bool {
 		}
 	}
 	// 没有在权限管控内
-	return true
+	return false
+}
+
+// Auth01Validate 验证操权限值和操作值
+func Auth01Validate(auth int64, operation int) bool {
+	if int(auth)&operation == operation {
+		return true
+	} else {
+		return false
+	}
 }
