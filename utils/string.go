@@ -19,3 +19,22 @@ func ReplaceKeyword(cfg, value string) string {
 	}
 	return value
 }
+
+func IsEmail(email string) bool {
+	if email != "" {
+		if isOk, _ := regexp.MatchString("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$", email); isOk {
+			return true
+		}
+	}
+	return false
+}
+
+func IsPhone(phoneStr string) bool {
+	if phoneStr != "" {
+		if isOk, _ := regexp.MatchString(`^\([\d]{3}\) [\d]{3}-[\d]{4}$`, phoneStr); isOk {
+			return isOk
+		}
+	}
+
+	return false
+}
