@@ -62,4 +62,5 @@ func GetAutoSliceDB(db *gorm.DB, userId int64, sf SP) *gorm.DB {
 		qt.Store(db.Statement.Table, struct{}{})
 	}
 	return db.Table(db.Statement.Table)
+
 }
