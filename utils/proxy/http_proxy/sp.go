@@ -18,7 +18,8 @@ import (
 )
 
 var (
-	port  = flag.String("p", "12345", "proxy listen port")
+	host  = flag.String("h", "", "proxy host")
+	port  = flag.String("p", "12345", "proxy port")
 	auth  = flag.String("auth", "", "auth string")
 	limit = flag.Int("l", 0, "conn speed kb/s")
 )
@@ -30,20 +31,18 @@ const (
 
 func main() {
 	flag.Parse()
-	li, err := net.Listen("tcp", ":"+*port)
+	addr := *host + ":" + *port
+	li, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Println("error listen  ", err)
 		panic(err)
 	}
-	defer li.Close()
-	log.Println("http proxy listen on  " + *port)
+	log.Printf("<=====================>\nproxy on:%s\nauth:%s\nlimit:%d<=====================>", addr, *auth, *limit)
 	for {
 		client, err := li.Accept()
 		if err != nil {
-			log.Println("listener err ", err)
-			return
+			panic(err)
 		}
-		go doNewConn(client)
+		go handleNewConn(client)
 	}
 }
 
@@ -74,7 +73,7 @@ func validateAuth(basicCredential string) (int, bool) {
 	return Unlimited, false
 }
 
-func doNewConn(client net.Conn) {
+func handleNewConn(client net.Conn) {
 	defer client.Close()
 	req, err := http.ReadRequest(bufio.NewReader(client))
 	if err != nil {
