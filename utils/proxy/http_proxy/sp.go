@@ -97,7 +97,7 @@ func doNewConn(client net.Conn) {
 		speed = *limit
 	}
 	req.Header.Del("Proxy-Authorization")
-	log.Printf("req host:%s,path:%s,method:%s,sheme:%s, \nreq url:%s", req.Host, req.URL.Path, req.Method, req.URL.Scheme, req.URL.String())
+	//log.Printf("req host:%s,path:%s,method:%s,sheme:%s, \nreq url:%s", req.Host, req.URL.Path, req.Method, req.URL.Scheme, req.URL.String())
 	address := req.Host
 	if !strings.Contains(address, ":") {
 		if req.Method == "CONNECT" {
@@ -112,7 +112,7 @@ func doNewConn(client net.Conn) {
 		log.Printf("dial remote:%s error:%v", address, err)
 		return
 	}
-	log.Printf("%s <=> %s connected.", client.RemoteAddr(), address)
+	//log.Printf("%s <=> %s connected.", client.RemoteAddr(), address)
 
 	if req.Method == "CONNECT" {
 		_, err = fmt.Fprint(client, "HTTP/1.1 200 Connection established\r\n\r\n")
@@ -135,19 +135,19 @@ func doNewConn(client net.Conn) {
 			data, _ := ioutil.ReadAll(req.Body)
 			if len(data) == int(req.ContentLength) {
 				rawReqHeader.Write(data)
-				log.Printf("write data:%s, len:%d", string(data), req.ContentLength)
+				//log.Printf("write data:%s, len:%d", string(data), req.ContentLength)
 			} else {
-				log.Printf("error content-len:%d, but read:%d", req.ContentLength, len(data))
+				//log.Printf("error content-len:%d, but read:%d", req.ContentLength, len(data))
 			}
 		}
-		log.Printf("rebuild header:%s", rawReqHeader.String())
+		//log.Printf("rebuild header:%s", rawReqHeader.String())
 		if _, err = rawReqHeader.WriteTo(server); err != nil {
-			log.Printf("write first data to server err:%v", err)
+			//log.Printf("write first data to server err:%v", err)
 			return
 		}
 	}
 	tunnel(client, server, speed)
-	log.Printf("tunnel stopped: %s <=> %s", client.RemoteAddr(), address)
+	//log.Printf("tunnel stopped: %s <=> %s", client.RemoteAddr(), address)
 }
 
 func tunnel(client, remote net.Conn, speed int) {
@@ -158,13 +158,13 @@ func tunnel(client, remote net.Conn, speed int) {
 		for {
 			n, er := client.Read(clientBuf)
 			if er != nil {
-				fmt.Printf("------------- client connection read error:%v -------------", er)
+				//fmt.Printf("------------- client connection read error:%v -------------", er)
 				break
 			}
 			if n > 0 {
 				_, ew := remote.Write(clientBuf[:n])
 				if ew != nil {
-					fmt.Printf("------------- remote connection write error:%v -------------,", ew)
+					//fmt.Printf("------------- remote connection write error:%v -------------,", ew)
 					break
 				}
 			}
@@ -182,13 +182,13 @@ func tunnel(client, remote net.Conn, speed int) {
 	for {
 		n, er := limitReader.Read(serverBuf)
 		if er != nil {
-			fmt.Printf("------------- remote connection read error:%v -------------", er)
+			//fmt.Printf("------------- remote connection read error:%v -------------", er)
 			break
 		}
 		if n > 0 {
 			_, ew := client.Write(serverBuf[:n])
 			if ew != nil {
-				fmt.Printf("------------- client connection write error:%v -------------,", ew)
+				//fmt.Printf("------------- client connection write error:%v -------------,", ew)
 				break
 			}
 		}
