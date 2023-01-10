@@ -18,6 +18,7 @@ func SetProxyForWin(server string, running chan struct{}) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// socks://HOST:PORT
 	err = key.SetStringValue("ProxyServer", server)
 	if err != nil {
 		log.Fatal(err)
