@@ -156,16 +156,16 @@ func tunnel(client, remote net.Conn, speed int) {
 		defer remote.Close()
 		for {
 			n, er := client.Read(clientBuf)
-			if er != nil {
-				//fmt.Printf("------------- client connection read error:%v -------------", er)
-				break
-			}
 			if n > 0 {
 				_, ew := remote.Write(clientBuf[:n])
 				if ew != nil {
 					//fmt.Printf("------------- remote connection write error:%v -------------,", ew)
 					break
 				}
+			}
+			if er != nil {
+				//fmt.Printf("------------- client connection read error:%v -------------", er)
+				break
 			}
 		}
 	}()
@@ -180,16 +180,16 @@ func tunnel(client, remote net.Conn, speed int) {
 	serverBuf := make([]byte, 8192)
 	for {
 		n, er := limitReader.Read(serverBuf)
-		if er != nil {
-			//fmt.Printf("------------- remote connection read error:%v -------------", er)
-			break
-		}
 		if n > 0 {
 			_, ew := client.Write(serverBuf[:n])
 			if ew != nil {
 				//fmt.Printf("------------- client connection write error:%v -------------,", ew)
 				break
 			}
+		}
+		if er != nil {
+			//fmt.Printf("------------- remote connection read error:%v -------------", er)
+			break
 		}
 	}
 }
