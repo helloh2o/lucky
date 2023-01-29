@@ -17,6 +17,17 @@ type Waiter struct {
 
 var waiter = Waiter{channnels: make(map[string]chan struct{}), wk: make(map[string]int)}
 
+// RDLockOpWait redis 等待分布式锁，直到获取锁
+func RDLockOpWait(operation string) func() {
+Try:
+	done, ok, wait := do(operation, time.Hour)
+	if !ok {
+		<-wait
+		goto Try
+	}
+	return done
+}
+
 // RDLockOp redis 分布式锁, 足够的操作逻辑时间 release释放，got 是否获取锁,wait在线等待，直到获取锁
 func RDLockOp(operation string) (release func(), got bool, wait chan struct{}) {
 	// 默认10秒放锁
@@ -40,9 +51,14 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			wc = make(chan struct{}, 1)
 			waiter.channnels[key] = wc
 		}
-		return func() {
+		// release resource
+		release := func() {
 			waiter.Lock()
 			defer waiter.Unlock()
+			// waiter channel is existed
+			if _, existed := waiter.channnels[key]; !existed {
+				return
+			}
 			cache.RedisC.Del(context.Background(), key)
 			if waiter.wk[key] > 0 {
 				// must bigger than 1
@@ -55,11 +71,14 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 				if waiter.wk[key] == 0 {
 					delete(waiter.channnels, key)
 					delete(waiter.wk, key)
-					log.Debug("key:%s, all req wait done", key)
+					log.Release("===> key:%s, all sync lock request wait done. <===", key)
 				}
 			default:
 			}
-		}, true, nil
+		}
+		// expired do release
+		time.AfterFunc(expired, release)
+		return release, true, nil
 	} else {
 		// 等待着数量
 		if _, ok := waiter.wk[key]; ok {
