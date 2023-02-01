@@ -8,6 +8,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -28,6 +29,7 @@ const (
 
 // Logger warp
 type Logger struct {
+	mu         sync.RWMutex
 	level      int
 	baseLogger *log.Logger
 	BaseFile   *os.File
@@ -106,8 +108,43 @@ func (logger *Logger) Close() {
 	logger.BaseFile = nil
 }
 
+// read log lv
+func (logger *Logger) GetOutputLv() int {
+	logger.mu.RLock()
+	lv := logger.level
+	defer logger.mu.RUnlock()
+	return lv
+}
+
+// update log level
+func (logger *Logger) SetLogLevel(strLevel string) {
+	logger.mu.Lock()
+	defer logger.mu.Unlock()
+	// newLogLevel
+	var newLogLevel int
+	switch strings.ToLower(strLevel) {
+	case "debug":
+		newLogLevel = debugLevel
+	case "release":
+		newLogLevel = releaseLevel
+	case "warn":
+		newLogLevel = releaseLevel
+	case "error":
+		newLogLevel = errorLevel
+	case "fatal":
+		newLogLevel = fatalLevel
+	default:
+		newLogLevel = logger.level
+	}
+	logger.level = newLogLevel
+}
+
+func SetLogLevelDefault(lv string) {
+	defaultLogger.SetLogLevel(lv)
+}
+
 func (logger *Logger) doPrintf(level int, printLevel string, format string, a ...interface{}) {
-	if level < logger.level {
+	if level < logger.GetOutputLv() {
 		return
 	}
 	if logger.baseLogger == nil {
