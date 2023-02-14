@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,8 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="simple http proxy with speed limited &amp; basic auth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,20 +35,23 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go Application" />
         <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="Go File" />
+        <option value="Go Application" />
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="C:\Go" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1lPlA9lEyAjcM3RqkMumno1IYSA" />
   <component name="ProjectLevelVcsManager">
@@ -53,96 +61,100 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DefaultGoTemplateProperty" value="Go File" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
-    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
-    <property name="go.import.settings.migrated" value="true" />
-    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/utils" />
-    <property name="settings.editor.selected.configurable" value="go.vgo" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "configurable..is.expanded": "false",
+    "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/Users/ay/go/src/lucky",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "go.vgo"
+  }
+}]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ay\go\src\lucky\utils" />
-      <recent name="C:\Users\ay\go\src\lucky\example" />
-      <recent name="C:\Users\ay\go\src\lucky\core\inet" />
-      <recent name="C:\Users\ay\go\src\lucky\core\ihttp" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\static" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\rproxy\tcp" />
       <recent name="C:\Users\ay\go\src\lucky\utils" />
       <recent name="C:\Users\ay\go\src\lucky" />
       <recent name="C:\Users\ay\go\src\lucky\example" />
       <recent name="C:\Users\ay\go\src\lucky\example\chatroom\clients\robot" />
-      <recent name="C:\Users\ay\go\src\lucky\example\chatroom\robot\robot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\lucky\xdb" />
+      <recent name="C:\Users\ay\go\src\lucky\utils" />
+      <recent name="C:\Users\ay\go\src\lucky\example" />
+      <recent name="C:\Users\ay\go\src\lucky\core\inet" />
+      <recent name="C:\Users\ay\go\src\lucky\core\ihttp" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy">
+  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/examples/websocket">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$" />
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/helloh2o/lucky/examples/chatroom" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/examples/websocket" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/examples/chatroom/chat_server.go" />
-      <package value="github.com/helloh2o/lucky/examples/chatroom" />
+      <package value="github.com/helloh2o/lucky/examples/websocket" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/websocket/wsserver.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build github.com/helloh2o/lucky/examples/chatroom/clients/robot" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build http_server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/examples/chatroom/clients/robot/robot.go" />
-      <package value="github.com/helloh2o/lucky/examples/chatroom/clients/robot" />
+      <kind value="FILE" />
+      <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/http/http_server.go" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewAuthValidator in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go build kcpserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <package value="lucky" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/kcp/kcpserver.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestNewAuthValidator in github.com/helloh2o/lucky/utils (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils" />
-      <framework value="gotest" />
       <kind value="PACKAGE" />
       <package value="github.com/helloh2o/lucky/utils" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <pattern value="^\QTestNewAuthValidator\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestRandItemWeight in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/utils" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/utils" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestRandItemWeight\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils/proxy" />
-      <framework value="gotest" />
       <kind value="PACKAGE" />
       <package value="github.com/helloh2o/lucky/utils/proxy" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <pattern value="^\QTestSetProxyForWin\E$" />
       <method v="2" />
     </configuration>
@@ -150,20 +162,20 @@
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
-      <framework value="gotest" />
       <kind value="DIRECTORY" />
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy" />
-        <item itemvalue="Go Test.TestNewAuthValidator in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Test.TestRandItemWeight in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/chatroom/clients/robot" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/chatroom" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket" />
+        <item itemvalue="Go Build.go build kcpserver.go" />
+        <item itemvalue="Go Build.go build http_server.go" />
+        <item itemvalue="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy (2)" />
+        <item itemvalue="Go Test.TestNewAuthValidator in github.com/helloh2o/lucky/utils (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -184,24 +196,8 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add action limiter" />
-    <MESSAGE value="add logic costs time" />
-    <MESSAGE value="add some notes" />
-    <MESSAGE value="return decode err" />
-    <MESSAGE value="sql conn timeout" />
-    <MESSAGE value="update test pwd" />
-    <MESSAGE value="add warp message debug" />
-    <MESSAGE value="wrap not warp" />
-    <MESSAGE value="about open files" />
-    <MESSAGE value="re-named packages" />
-    <MESSAGE value="improve limiter" />
-    <MESSAGE value="add limiter by list" />
-    <MESSAGE value="add safe lazy queue" />
-    <MESSAGE value="Add RankPool &amp; public LazyQueue" />
-    <MESSAGE value="SyncStrWithTimeout" />
     <MESSAGE value="some useful func" />
     <MESSAGE value="wrap msg with id by self, no need register first" />
     <MESSAGE value="limiter v2, count times in duration" />
@@ -212,75 +208,30 @@
     <MESSAGE value="fix rd_lock mem leak" />
     <MESSAGE value="fix lazy q bug :)" />
     <MESSAGE value="fix redis lock bug :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix redis lock bug :)" />
+    <MESSAGE value="set windows proxy" />
+    <MESSAGE value="Auth Validator" />
+    <MESSAGE value="auth" />
+    <MESSAGE value="auth fix" />
+    <MESSAGE value="some reg" />
+    <MESSAGE value="gorm2 automatic split table" />
+    <MESSAGE value="Gorm 自动分表" />
+    <MESSAGE value="simple http proxy with speed limited &amp; basic auth" />
+    <MESSAGE value="print less log" />
+    <MESSAGE value="fix log" />
+    <MESSAGE value="optimize log" />
+    <MESSAGE value="add socks5 proxy" />
+    <MESSAGE value="windows socks5" />
+    <MESSAGE value="mem leak without release()" />
+    <MESSAGE value="dynamic log level" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamic log level" />
   </component>
   <component name="VgoProject">
-    <integration-enabled>true</integration-enabled>
     <environment>
       <map>
-        <entry key="GOPROXY" value="https://goproxy.cn" />
+        <entry key="GOPROXY" value="https://goproxy.io" />
       </map>
     </environment>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="2478" y="0" key="CommitChangelistDialog2" timestamp="1657107682928">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2478" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657107682928" />
-    <state width="1877" height="631" key="GridCell.Tab.0.bottom" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
-    <state width="1877" height="631" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.0.center" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="274" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
-    <state width="1877" height="631" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.0.left" timestamp="1656657589022">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="274" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
-    <state width="1877" height="631" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589022" />
-    <state width="1877" height="631" key="GridCell.Tab.0.right" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="274" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857128" />
-    <state width="1877" height="631" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.1.bottom" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="63" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
-    <state width="1877" height="631" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.1.center" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="63" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
-    <state width="1877" height="631" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.1.left" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="63" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
-    <state width="1877" height="631" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state width="1877" height="631" key="GridCell.Tab.1.right" timestamp="1656657589023">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="63" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235857118" />
-    <state width="1877" height="631" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1656657589023" />
-    <state x="772" y="249" key="RollbackChangesDialog" timestamp="1649235416157">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="772" y="249" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235416157" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1657107684595">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657107684595" />
-    <state x="2583" y="207" width="594" height="626" key="find.popup" timestamp="1657020643020">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1649235212965" />
-    <state x="2583" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1657020643020" />
-    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.999@0.0.1920.1040" timestamp="1650854003330" />
+    <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
