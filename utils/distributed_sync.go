@@ -76,8 +76,6 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			default:
 			}
 		}
-		// expired do release
-		time.AfterFunc(expired, release)
 		return release, true, nil
 	} else {
 		// 等待着数量
