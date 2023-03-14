@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/helloh2o/lucky/cache"
 	"github.com/helloh2o/lucky/log"
+	"math/rand"
 	"sync"
 	"testing"
 	"time"
@@ -32,6 +33,23 @@ func TestRDLockOp(t *testing.T) {
 					log.Release("owner::%d, wait release ok.", owner)
 				}
 			}
+		}(i)
+	}
+	wg.Wait()
+}
+
+func TestRDLockOpWait(t *testing.T) {
+	op := "user_data_lock"
+	var wg sync.WaitGroup
+	for i := 0; i < 100; i++ {
+		wg.Add(1)
+		go func(owner int) {
+			release := RDLockOpWait(op)
+			time.AfterFunc(time.Second*time.Duration(rand.Intn(5)), func() {
+				release()
+				wg.Done()
+				log.Release("owner:%d done", owner)
+			})
 		}(i)
 	}
 	wg.Wait()
