@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"crypto/tls"
 	"encoding/base64"
 	"flag"
 	"fmt"
@@ -22,6 +23,8 @@ var (
 	port  = flag.String("p", "12345", "proxy port")
 	auth  = flag.String("auth", "", "auth string")
 	limit = flag.Int("l", 0, "conn speed kb/s")
+	cert  = flag.String("c", "", "cert file")
+	key   = flag.String("k", "", "cert key file")
 )
 
 const (
@@ -32,13 +35,31 @@ const (
 func main() {
 	flag.Parse()
 	addr := *host + ":" + *port
-	li, err := net.Listen("tcp", addr)
-	if err != nil {
-		panic(err)
+	var listener net.Listener
+	var err error
+	if *cert == EMPTY || *key == EMPTY {
+		listener, err = net.Listen("tcp", addr)
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("http on %s, c=%s, k=%s\n", addr, *cert, *key)
+	} else {
+		var pem tls.Certificate
+		pem, err = tls.LoadX509KeyPair(*cert, *key)
+		if err != nil {
+			panic(err)
+		} else {
+			config := &tls.Config{Certificates: []tls.Certificate{pem}}
+			listener, err = tls.Listen("tcp", addr, config)
+			if err != nil {
+				panic(err)
+			}
+			log.Printf("tls on %s, c=%s, k=%s\n", addr, *cert, *key)
+		}
 	}
 	log.Printf("<=====================>\nproxy on:%s\nauth:%s\nlimit:%d<=====================>", addr, *auth, *limit)
 	for {
-		client, err := li.Accept()
+		client, err := listener.Accept()
 		if err != nil {
 			panic(err)
 		}
