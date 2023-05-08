@@ -28,10 +28,11 @@ type SP struct {
 // GetAutoSliceDB 获取自动分表
 func GetAutoSliceDB(db *gorm.DB, userId int64, sf SP) *gorm.DB {
 	dbIndex := EmptyVal
-	if sf.Part == PartZero && sf.ByDate != EmptyVal {
-		dbIndex += sf.ByDate
-	} else {
+	if sf.Part > PartZero+1 {
 		dbIndex = fmt.Sprintf("%d", userId%sf.Part)
+	}
+	if sf.ByDate != EmptyVal {
+		dbIndex += sf.ByDate
 	}
 	defer func() {
 		db.Statement.Table = EmptyVal
