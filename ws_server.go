@@ -1,7 +1,7 @@
 package lucky
 
 import (
-	"github.com/gorilla/websocket"
+	"github.com/fasthttp/websocket"
 	"github.com/helloh2o/lucky/log"
 	"net"
 	"net/http"
