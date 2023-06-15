@@ -13,7 +13,7 @@ Data packet encryption method: AES128, AES192, AES256 and Byte lightweight obfus
 Data packet reading, writing, and execution logic processing are respectively in their respective goroutines. The malicious sending of a single connection can be restricted. If it exceeds ConnUndoQueueSize, it will be ignored and will not stay in the buffer.
 
 The user only needs to register the message and the callback function corresponding to the message, and process the specific logic in the callback. E.g:
-```
+```go
     //Register on the processor (message code, message body, logic code for message execution)
 Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
 ```
@@ -25,7 +25,7 @@ go get github.com/helloh2o/lucky
 #### Instructions for use
 
 1. Set configuration parameters or keep the default
-```
+```go
 lucky.SetConf(&lucky.Data{
 ConnUndoQueueSize: 100,
 ConnWriteQueueSize: 100,
@@ -48,7 +48,7 @@ MaxHeaderLen: 1024,
 
 #### Quick start
 > Run as tcp server
-```
+```go
 package main
 
 import (
@@ -93,7 +93,7 @@ log.Fatal("%v", s.Run())
 ```
 
 > go tcp client
-```
+```go
 package main
 
 import (

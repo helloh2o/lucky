@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gorilla/websocket"
+	"github.com/fasthttp/websocket"
 	"github.com/helloh2o/lucky"
 	"github.com/helloh2o/lucky/examples/chatroom/jsonmsg"
 	"github.com/helloh2o/lucky/log"

@@ -13,7 +13,7 @@
 数据包读、写、执行逻辑处理分别在各自goroutine中, 可以对单个连接恶意发包进行限制超过ConnUndoQueueSize会被忽略，不停留在缓冲区。
 
 使用者只需注册消息和消息对应的回调函数，在回调中处理具体逻辑。例如：
-```
+```go
     //在处理器上注册（消息码，消息体，消息执行的逻辑代码）
 	Processor.RegisterHandler(code.Hello, &protobuf.Hello{}, logic.Hello)
 ```
@@ -26,7 +26,7 @@ go get github.com/helloh2o/lucky
 Go version > 1.71
 
 1. 设置配置参数或保持默认
-```
+```go
 lucky.SetConf(&lucky.Data{
 		ConnUndoQueueSize:   100,
 		ConnWriteQueueSize:  100,
@@ -44,14 +44,14 @@ lucky.SetConf(&lucky.Data{
 
 #### 欢迎参与 :)
 1. 欢迎提交PR 和 Issue
-2. 开源不易，觉得不错就给个小星星✮吧 
+2. 开源不易，觉得不错就给个小星星✮吧
 3. 该框架正在多个 DAU>10w 商业项目中使用
 4. 新增utils.LazyQueue可对高频操作进行管理，如数据库写。
 5. 新增utils.RkPool可对任意数据进行排序，如排行榜。
 6. 新增Redis分布式锁utils.RDLockOp, 可在多进程间多协程的情景下安全操作数据
 
 #### Redis分布式同步锁
-```
+```go
 // 初始化Redis
 if _, err := cache.OpenRedis("redis://localhost:6379/?pwd=&db=0"); err != nil {
 	panic(err)
@@ -68,7 +68,7 @@ defer release()
 ```
 #### 快速开始
 > Run as tcp server
-```
+```go
 package main
 
 import (
@@ -113,7 +113,7 @@ func main() {
 ```
 
 > go tcp client
-```
+```go
 package main
 
 import (
