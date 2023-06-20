@@ -22,10 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="simple http proxy with speed limited &amp; basic auth">
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/quic/client/quic_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/quic/client/quic_client.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quic_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quic_stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_stream.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +44,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../../../Program Files/Go" />
+  <component name="GOROOT" url="file://D:/goland1.20.5/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
@@ -79,7 +81,8 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.vgo"
+    "settings.editor.selected.configurable": "go.sdk",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -98,7 +101,7 @@
       <recent name="C:\Users\ay\go\src\lucky\core\ihttp" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/examples/websocket">
+  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/examples/quic">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -107,6 +110,15 @@
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/helloh2o/lucky/examples/quic" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/helloh2o/lucky/examples/quic" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/examples/quic/quic_server.go" />
       <method v="2" />
     </configuration>
     <configuration name="go build github.com/helloh2o/lucky/examples/websocket" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -136,26 +148,16 @@
       <filePath value="$PROJECT_DIR$/examples/kcp/kcpserver.go" />
       <method v="2" />
     </configuration>
-    <configuration name="TestNewAuthValidator in github.com/helloh2o/lucky/utils (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestRDLockOpWait in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$/utils" />
+      <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <package value="github.com/helloh2o/lucky/utils" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestNewAuthValidator\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$/utils/proxy" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/utils/proxy" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestSetProxyForWin\E$" />
+      <pattern value="^\QTestRDLockOpWait\E$" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -171,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/quic" />
+        <item itemvalue="Go Test.TestRDLockOpWait in github.com/helloh2o/lucky/utils" />
+        <item itemvalue="Go Build.go build http_server.go" />
         <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket" />
         <item itemvalue="Go Build.go build kcpserver.go" />
-        <item itemvalue="Go Build.go build http_server.go" />
-        <item itemvalue="Go Test.TestSetProxyForWin in github.com/helloh2o/lucky/utils/proxy (2)" />
-        <item itemvalue="Go Test.TestNewAuthValidator in github.com/helloh2o/lucky/utils (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -198,10 +200,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="some useful func" />
-    <MESSAGE value="wrap msg with id by self, no need register first" />
-    <MESSAGE value="limiter v2, count times in duration" />
-    <MESSAGE value="a wait distributed sync by redis" />
     <MESSAGE value="optimize lazy queue" />
     <MESSAGE value="rand by weight" />
     <MESSAGE value="auth validator" />
@@ -223,7 +221,11 @@
     <MESSAGE value="windows socks5" />
     <MESSAGE value="mem leak without release()" />
     <MESSAGE value="dynamic log level" />
-    <option name="LAST_COMMIT_MESSAGE" value="dynamic log level" />
+    <MESSAGE value="upgrade to 1.71" />
+    <MESSAGE value="RDLockOpWait" />
+    <MESSAGE value="add tls proxy" />
+    <MESSAGE value="slice tb" />
+    <option name="LAST_COMMIT_MESSAGE" value="slice tb" />
   </component>
   <component name="VgoProject">
     <environment>

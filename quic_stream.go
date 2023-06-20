@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"github.com/google/uuid"
 	"github.com/helloh2o/lucky/log"
-	"github.com/lucas-clemente/quic-go"
+	"github.com/quic-go/quic-go"
 	"io"
 	"runtime/debug"
 	"sync"

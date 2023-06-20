@@ -9,7 +9,7 @@ import (
 	"github.com/helloh2o/lucky/examples/comm/msg/code"
 	"github.com/helloh2o/lucky/examples/comm/protobuf"
 	"github.com/helloh2o/lucky/log"
-	"github.com/lucas-clemente/quic-go"
+	"github.com/quic-go/quic-go"
 	"io"
 	"time"
 )
@@ -29,7 +29,7 @@ func runClient(id int) error {
 		InsecureSkipVerify: true,
 		NextProtos:         []string{"quic-hello-example"},
 	}
-	session, err := quic.DialAddr("localhost:2024", tlsConfig, nil)
+	session, err := quic.DialAddr(context.Background(), "localhost:2024", tlsConfig, nil)
 	if err != nil {
 		log.Error(err.Error())
 		return err

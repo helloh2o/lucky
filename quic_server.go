@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"github.com/helloh2o/lucky/log"
-	"github.com/lucas-clemente/quic-go"
+	"github.com/quic-go/quic-go"
 	"net"
 	"runtime/debug"
 	"sync"
@@ -13,7 +13,7 @@ import (
 type quicServer struct {
 	mu        sync.Mutex
 	addr      string
-	ln        quic.Listener
+	ln        *quic.Listener
 	processor Processor
 }
 
