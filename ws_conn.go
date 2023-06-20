@@ -1,8 +1,8 @@
 package lucky
 
 import (
+	"github.com/fasthttp/websocket"
 	"github.com/google/uuid"
-	"github.com/gorilla/websocket"
 	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"sync"
