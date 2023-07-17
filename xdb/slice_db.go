@@ -1,4 +1,4 @@
-package db
+package xdb
 
 import (
 	"fmt"
@@ -8,13 +8,12 @@ import (
 	"gorm.io/gorm/schema"
 	"strings"
 	"sync"
-	"yz-servers/entity"
 )
 
 const (
-	EmptyVal      = ""
-	PartZero      = 0
-	PartOnlyOne   = 1
+	EmptyVal    = ""
+	PartZero    = 0
+	PartOnlyOne = 1
 )
 
 var (
