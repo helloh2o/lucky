@@ -12,15 +12,6 @@ import (
 )
 
 const (
-	// 表
-	TBRedCash     = "t_red_cash_change_log"
-	TBOrder       = "t_box_order"
-	TBSellerOrder = "t_cw_seller_order"
-	TBOpenBox     = "t_open_box_record"
-	TBBoxItemBK   = "t_box_item_bak"
-	TBExchange    = "t_exchange_log"
-	TBOpenCard    = "t_open_card_record"
-	TBCardItemBK  = "t_card_box_item_bak"
 	EmptyVal      = ""
 	PartZero      = 0
 	PartOnlyOne   = 1
@@ -29,16 +20,6 @@ const (
 var (
 	qt = new(sync.Map)
 )
-
-// GetSliceDB 获取分表DB
-func GetSliceDB(db *gorm.DB, userId int64, tb string) *gorm.DB {
-	dbIndex := userId % 20
-	if dbIndex < 0 {
-		dbIndex = 0
-	}
-	tbName := fmt.Sprintf("%s%d", tb, dbIndex)
-	return db.Table(tbName)
-}
 
 type SP struct {
 	Value  interface{}
@@ -87,23 +68,4 @@ func GetAutoSliceDB(db *gorm.DB, userId int64, sf SP) *gorm.DB {
 		qt.Store(db.Statement.Table, struct{}{})
 	}
 	return db.Table(db.Statement.Table)
-}
-func hasTable(gb *gorm.DB, tableName string) bool {
-	var count int64
-	gb.Raw("SELECT count(*) FROM information_schema.tables WHERE table_name = ? AND table_type = ?", tableName, "BASE TABLE").Row().Scan(&count)
-	return count > 0
-}
-
-// CopyOldData2New 拷贝数据导新表
-func CopyOldData2New(userId int64) {
-	dbIndex := userId % 20
-	if dbIndex == 0 {
-		return
-	}
-}
-
-// GetTables 需要注册的表
-func GetTables() []interface{} {
-	return []interface{}{
-	}
 }
