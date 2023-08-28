@@ -6,13 +6,13 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"gorm.io/gorm/schema"
+	"reflect"
 	"strings"
 	"sync"
 )
 
 const (
 	EmptyVal    = ""
-	PartZero    = 0
 	PartOnlyOne = 1
 )
 
@@ -28,6 +28,9 @@ type SP struct {
 
 // GetAutoSliceDB 获取自动分表
 func GetAutoSliceDB(db *gorm.DB, userId int64, sf SP) *gorm.DB {
+	if sf.Value == nil {
+		return nil
+	}
 	dbIndex := EmptyVal
 	switch {
 	case sf.Part <= PartOnlyOne:
@@ -38,33 +41,32 @@ func GetAutoSliceDB(db *gorm.DB, userId int64, sf SP) *gorm.DB {
 	if sf.ByDate != EmptyVal {
 		dbIndex += "_" + sf.ByDate
 	}
-	defer func() {
-		db.Statement.Table = EmptyVal
-	}()
-	db = db.Session(&gorm.Session{})
-	stmt := &gorm.Statement{
-		DB:       db,
-		ConnPool: db.Statement.ConnPool,
-		Context:  db.Statement.Context,
-		Clauses:  map[string]clause.Clause{},
-		Vars:     make([]interface{}, 0, 8),
+	// table key
+	tk := reflect.TypeOf(sf.Value).String() + dbIndex
+	tableName, ok := qt.Load(tk)
+	if !ok {
+		if tableName = autoMigrateTable(dbIndex, sf.Value); tableName != nil {
+			qt.Store(tk, tableName)
+		}
 	}
-	db.Statement = stmt
+	log.Debug("slice table name:%v, key:%s", tableName, tk)
+	return db.Table(tableName.(string))
+}
+
+// autoMigrateTable 自动迁移表, 在使用之前完成
+func autoMigrateTable(dbIndex, ett interface{}) interface{} {
+	tdb := QpsDB()
 	var err error
-	if stmt.Schema, err = schema.Parse(sf.Value, qt, stmt.DB.NamingStrategy); err == nil && stmt.Table == "" {
-		if tables := strings.Split(stmt.Schema.Table, "."); len(tables) == 2 {
-			stmt.TableExpr = &clause.Expr{SQL: stmt.Quote(stmt.Schema.Table)}
-			stmt.Table = tables[1]
+	if tdb.Statement.Schema, err = schema.Parse(ett, qt, tdb.NamingStrategy); err == nil && tdb.Statement.Table == "" {
+		if tables := strings.Split(tdb.Statement.Schema.Table, "."); len(tables) == 2 {
+			tdb.Statement.TableExpr = &clause.Expr{SQL: tdb.Statement.Quote(tdb.Statement.Schema.Table)}
+			tdb.Statement.Table = tables[1]
 		}
-		stmt.Table = stmt.Schema.Table
-	}
-	db.Statement.Table = fmt.Sprintf("%s%s", db.Statement.Table, dbIndex)
-	if _, ok := qt.Load(db.Statement.Table); !ok {
-		if err := db.Migrator().AutoMigrate(sf.Value); err != nil {
+		target := fmt.Sprintf("%s%s", tdb.Statement.Schema.Table, dbIndex)
+		if err = tdb.Table(target).Migrator().AutoMigrate(ett); err != nil {
 			log.Error("migrator error %v", err)
-			return nil
 		}
-		qt.Store(db.Statement.Table, struct{}{})
+		return target
 	}
-	return db.Table(db.Statement.Table)
+	return nil
 }

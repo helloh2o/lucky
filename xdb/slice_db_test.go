@@ -23,7 +23,7 @@ type UserFeedback struct {
 }
 
 func TestGetSliceDBAuto(t *testing.T) {
-	if _, err := OpenMysqlDB(MYSQL, "root:123456@tcp(127.0.0.1:3306)/zxmh_db?charset=utf8mb4&parseTime=True&loc=Local", &gorm.Config{}, 10, 20,
+	if _, err := OpenMysqlDB(MYSQL, "root:123456@tcp(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=True&loc=Local", &gorm.Config{}, 10, 20,
 		[]interface{}{}...,
 	); err != nil {
 		panic(err)
@@ -35,7 +35,7 @@ func TestGetSliceDBAuto(t *testing.T) {
 		for i := 1; i < 13; i++ {
 			byMoth := fmt.Sprintf("%d-%02d", y, i)
 			// UserFeedback 自动分成20表
-			if sdb := GetAutoSliceDB(QqsDB(), int64(i), SP{&UserFeedback{}, PartZero, byMoth}); sdb == nil {
+			if sdb := GetAutoSliceDB(QpsDB(), int64(i), SP{&UserFeedback{}, PartOnlyOne, byMoth}); sdb == nil {
 				panic("get auto slice db nil")
 			} else {
 				sdb.Debug().Save(&UserFeedback{
@@ -55,7 +55,7 @@ func TestGetSliceDBAuto(t *testing.T) {
 	}()
 	for i := 0; i < 100; i++ {
 		// 通过用户的ID（i），UserFeedback 自动分成20表
-		if sdb := GetAutoSliceDB(QqsDB(), int64(i), SP{&UserFeedback{}, 20, EmptyVal}); sdb == nil {
+		if sdb := GetAutoSliceDB(QpsDB(), int64(i), SP{&UserFeedback{}, 20, EmptyVal}); sdb == nil {
 			panic("get auto slice db nil")
 		} else {
 			sdb.Debug().Save(&UserFeedback{
