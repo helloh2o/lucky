@@ -51,6 +51,13 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			wc = make(chan struct{}, 1)
 			waiter.channnels[key] = wc
 		}
+		// write wc channel at redis expired nx
+		time.AfterFunc(expired, func() {
+			select {
+			case waiter.channels[key] <- struct{}{}:
+			default:
+			}
+		})
 		// release resource
 		release := func() {
 			waiter.Lock()
