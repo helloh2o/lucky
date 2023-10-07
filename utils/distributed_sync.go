@@ -28,6 +28,22 @@ Try:
 	return done
 }
 
+// RDLockOpCancel redis 等待分布式锁，直到超时取消获取锁
+func RDLockOpCancel(operation string, timeout time.Duration) (func(), bool) {
+	tk := time.NewTicker(timeout)
+Try:
+	done, ok, wait := do(operation, time.Hour*6)
+	if !ok {
+		select {
+		case <-tk.C:
+			return func() {}, true
+		case <-wait:
+			goto Try
+		}
+	}
+	return done, false
+}
+
 // RDLockOp redis 分布式锁, 足够的操作逻辑时间 release释放，got 是否获取锁,wait在线等待，直到获取锁
 func RDLockOp(operation string) (release func(), got bool, wait chan struct{}) {
 	// 默认10秒放锁
@@ -51,6 +67,15 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			wc = make(chan struct{}, 1)
 			waiter.channnels[key] = wc
 		}
+		// write wc channel at redis expired nx
+		time.AfterFunc(expired, func() {
+			waiter.Lock()
+			defer waiter.Unlock()
+			select {
+			case waiter.channels[key] <- struct{}{}:
+			default:
+			}
+		})
 		// release resource
 		release := func() {
 			waiter.Lock()
