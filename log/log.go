@@ -24,7 +24,7 @@ const (
 const (
 	printDebugLevel   = "[debug  ] "
 	printReleaseLevel = "[release] "
-	printWarnLevel    = "[warn] "
+	printWarnLevel    = "[warn   ] "
 	printErrorLevel   = "[error  ] "
 	printFatalLevel   = "[fatal  ] "
 )
