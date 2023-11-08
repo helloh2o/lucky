@@ -105,7 +105,7 @@ func RandIntervalN(b1, b2 int32, n uint32) []int32 {
 	return r
 }
 
-//根据权重随机 RandItemWeight
+// 根据权重随机 RandItemWeight
 func RandItemWeight(data map[interface{}]int64) (interface{}, error) {
 	items := make(map[interface{}][]int64)
 	// 随机
@@ -116,6 +116,9 @@ func RandItemWeight(data map[interface{}]int64) (interface{}, error) {
 		to := max + size - 1
 		items[item] = []int64{from, to}
 		max += size
+	}
+	if max <= 0 {
+		return nil, errors.New("no rand by weight 0")
 	}
 	// 随机位置
 	randWeight := rand.Int63n(max)
