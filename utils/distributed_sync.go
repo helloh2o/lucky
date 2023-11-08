@@ -11,11 +11,11 @@ import (
 // 等待者
 type Waiter struct {
 	sync.Mutex
-	channnels map[string]chan struct{}
-	wk        map[string]int
+	channels map[string]chan struct{}
+	wk       map[string]int
 }
 
-var waiter = Waiter{channnels: make(map[string]chan struct{}), wk: make(map[string]int)}
+var waiter = Waiter{channels: make(map[string]chan struct{}), wk: make(map[string]int)}
 
 // RDLockOpWait redis 等待分布式锁，直到获取锁
 func RDLockOpWait(operation string) func() {
@@ -63,9 +63,9 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 	waiter.Lock()
 	defer waiter.Unlock()
 	if cache.RedisC.SetNX(context.Background(), key, 1, expired).Val() {
-		if wc, ok = waiter.channnels[key]; !ok {
+		if wc, ok = waiter.channels[key]; !ok {
 			wc = make(chan struct{}, 1)
-			waiter.channnels[key] = wc
+			waiter.channels[key] = wc
 		}
 		// write wc channel at redis expired nx
 		time.AfterFunc(expired, func() {
@@ -81,7 +81,7 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			waiter.Lock()
 			defer waiter.Unlock()
 			// waiter channel is existed
-			if _, existed := waiter.channnels[key]; !existed {
+			if _, existed := waiter.channels[key]; !existed {
 				return
 			}
 			cache.RedisC.Del(context.Background(), key)
@@ -91,10 +91,10 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			}
 			log.Debug("key:%s, waiter size:%d", key, waiter.wk[key])
 			select {
-			case waiter.channnels[key] <- struct{}{}:
+			case waiter.channels[key] <- struct{}{}:
 				// del on all req wait done
 				if waiter.wk[key] == 0 {
-					delete(waiter.channnels, key)
+					delete(waiter.channels, key)
 					delete(waiter.wk, key)
 					log.Release("===> key:%s, all sync lock request wait done. <===", key)
 				}
@@ -111,9 +111,9 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 			waiter.wk[key] = 2
 		}
 		// 这里可能没有，读取redis ttl
-		if wc, ok = waiter.channnels[key]; !ok {
+		if wc, ok = waiter.channels[key]; !ok {
 			wc = make(chan struct{}, 1)
-			waiter.channnels[key] = wc
+			waiter.channels[key] = wc
 			left := cache.RedisC.TTL(context.Background(), key).Val()
 			log.Release("key::%s, ttl:%d s", key, left/time.Second)
 			time.AfterFunc(left, func() {
