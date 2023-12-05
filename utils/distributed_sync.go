@@ -30,12 +30,12 @@ Try:
 
 // RDLockOpCancel redis 等待分布式锁，直到超时取消获取锁
 func RDLockOpCancel(operation string, timeout time.Duration) (func(), bool) {
-	tk := time.NewTicker(timeout)
+	tk := time.Tick(timeout)
 Try:
 	done, ok, wait := do(operation, time.Hour*6)
 	if !ok {
 		select {
-		case <-tk.C:
+		case <-tk:
 			return func() {}, true
 		case <-wait:
 			goto Try
