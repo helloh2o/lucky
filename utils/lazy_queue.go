@@ -12,11 +12,13 @@ import (
 // LazyQueue 排队保存，重复的数据只排一次，时效性一般的情况，场景：降低数据库写压力
 type LazyQueue struct {
 	sync.RWMutex
-	saveQueue chan interface{}
-	queued    map[interface{}]string
-	call      func(interface{}) error
-	qps       int
-	size      int
+	saveQueue  chan interface{}
+	queued     map[interface{}]string
+	call       func(interface{}) error
+	qps        int
+	size       int
+	queuedBack func() // 排队后回调
+	callBack   func() // 执行后回调
 }
 
 func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error) {
@@ -90,6 +92,7 @@ func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 		lazy.Lock()
 		defer lazy.Unlock()
 		lazy.queued[obj] = uuid.New().String()
+		lazy.queuedBack()
 	}
 	// 是否等待
 	if wait {
@@ -136,6 +139,7 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		lazy.Lock()
 		defer lazy.Unlock()
 		delete(lazy.queued, key)
+		lazy.callBack()
 	}()
 	lazy.RLock()
 	val, ok := lazy.queued[key]
@@ -149,4 +153,22 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		}
 	}
 	log.Debug("queue left size %d", len(lazy.saveQueue))
+}
+
+// Queued 已排队
+func (lazy *LazyQueue) Queued(f func()) {
+	if f == nil {
+		lazy.queuedBack = func() {}
+	} else {
+		lazy.queuedBack = f
+	}
+}
+
+// Executed 已执行
+func (lazy *LazyQueue) Executed(f func()) {
+	if f == nil {
+		lazy.queuedBack = func() {}
+	} else {
+		lazy.callBack = f
+	}
 }
