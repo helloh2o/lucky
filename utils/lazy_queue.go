@@ -2,7 +2,6 @@ package utils
 
 import (
 	"errors"
-	"github.com/google/uuid"
 	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"sync"
@@ -17,8 +16,8 @@ type LazyQueue struct {
 	call       func(interface{}) error
 	qps        int
 	size       int
-	queuedBack func() // 排队后回调
-	callBack   func() // 执行后回调
+	queuedBack func(interface{}) // 排队后回调
+	callBack   func(interface{}) // 执行后回调
 }
 
 func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error) {
@@ -91,8 +90,8 @@ func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 	queued := func() {
 		lazy.Lock()
 		defer lazy.Unlock()
-		lazy.queued[obj] = uuid.New().String()
-		lazy.queuedBack()
+		lazy.queued[obj] = ""
+		lazy.queuedBack(obj)
 	}
 	// 是否等待
 	if wait {
@@ -139,7 +138,7 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		lazy.Lock()
 		defer lazy.Unlock()
 		delete(lazy.queued, key)
-		lazy.callBack()
+		lazy.callBack(key)
 	}()
 	lazy.RLock()
 	val, ok := lazy.queued[key]
@@ -156,18 +155,18 @@ func (lazy *LazyQueue) callback(key interface{}) {
 }
 
 // Queued 已排队
-func (lazy *LazyQueue) Queued(f func()) {
+func (lazy *LazyQueue) Queued(f func(k interface{})) {
 	if f == nil {
-		lazy.queuedBack = func() {}
+		lazy.queuedBack = func(interface{}) {}
 	} else {
 		lazy.queuedBack = f
 	}
 }
 
 // Executed 已执行
-func (lazy *LazyQueue) Executed(f func()) {
+func (lazy *LazyQueue) Executed(f func(k interface{})) {
 	if f == nil {
-		lazy.queuedBack = func() {}
+		lazy.queuedBack = func(interface{}) {}
 	} else {
 		lazy.callBack = f
 	}
