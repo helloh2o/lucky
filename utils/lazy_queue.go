@@ -16,8 +16,8 @@ type LazyQueue struct {
 	call       func(interface{}) error
 	qps        int
 	size       int
-	queuedBack func(interface{}) // 排队后回调
-	callBack   func(interface{}) // 执行后回调
+	queuedBack func(interface{})        // 排队后回调
+	callBack   func(interface{}, error) // 执行后回调
 }
 
 func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error) {
@@ -39,7 +39,7 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error)
 		qps:        qps,
 		size:       size,
 		queuedBack: func(interface{}) {},
-		callBack:   func(interface{}) {},
+		callBack:   func(interface{}, error) {},
 	}
 	lq.call = cf
 	return lq, nil
@@ -136,11 +136,12 @@ func (lazy *LazyQueue) Reset() {
 
 // 处理数据
 func (lazy *LazyQueue) callback(key interface{}) {
+	var err error
 	defer func() {
 		lazy.Lock()
 		defer lazy.Unlock()
 		delete(lazy.queued, key)
-		lazy.callBack(key)
+		lazy.callBack(key, err)
 	}()
 	lazy.RLock()
 	val, ok := lazy.queued[key]
@@ -149,7 +150,7 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		// key is in processing
 		done := SyncObjByStr(val)
 		defer done()
-		if err := lazy.call(key); err != nil {
+		if err = lazy.call(key); err != nil {
 			log.Error("lazy call error:: %s", err.Error())
 		}
 	}
@@ -157,14 +158,14 @@ func (lazy *LazyQueue) callback(key interface{}) {
 }
 
 // Queued 已排队
-func (lazy *LazyQueue) Queued(f func(k interface{})) {
+func (lazy *LazyQueue) Queued(f func(interface{})) {
 	if f != nil {
 		lazy.queuedBack = f
 	}
 }
 
 // Executed 已执行
-func (lazy *LazyQueue) Executed(f func(k interface{})) {
+func (lazy *LazyQueue) Executed(f func(interface{}, error)) {
 	if f != nil {
 		lazy.callBack = f
 	}
