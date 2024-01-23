@@ -33,11 +33,13 @@ func NewLazyQueue(qps, size int, cf func(interface{}) error) (*LazyQueue, error)
 		return nil, errors.New("lazy queue qps is too small")
 	}
 	lq := &LazyQueue{
-		RWMutex:   sync.RWMutex{},
-		saveQueue: make(chan interface{}, size),
-		queued:    make(map[interface{}]string),
-		qps:       qps,
-		size:      size,
+		RWMutex:    sync.RWMutex{},
+		saveQueue:  make(chan interface{}, size),
+		queued:     make(map[interface{}]string),
+		qps:        qps,
+		size:       size,
+		queuedBack: func(interface{}) {},
+		callBack:   func(interface{}) {},
 	}
 	lq.call = cf
 	return lq, nil
@@ -156,18 +158,14 @@ func (lazy *LazyQueue) callback(key interface{}) {
 
 // Queued 已排队
 func (lazy *LazyQueue) Queued(f func(k interface{})) {
-	if f == nil {
-		lazy.queuedBack = func(interface{}) {}
-	} else {
+	if f != nil {
 		lazy.queuedBack = f
 	}
 }
 
 // Executed 已执行
 func (lazy *LazyQueue) Executed(f func(k interface{})) {
-	if f == nil {
-		lazy.queuedBack = func(interface{}) {}
-	} else {
+	if f != nil {
 		lazy.callBack = f
 	}
 }
