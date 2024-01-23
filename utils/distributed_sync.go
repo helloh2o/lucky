@@ -123,7 +123,7 @@ func do(key string, expired time.Duration) (func(), bool, chan struct{}) {
 		return release, true, nil
 	} else {
 		// 等待着数量
-		if _, ok := waiter.wk[key]; ok {
+		if _, ok = waiter.wk[key]; ok {
 			waiter.wk[key] += 1
 		} else {
 			// at least 2 op
