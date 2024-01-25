@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"fmt"
 	"github.com/helloh2o/lucky/log"
 	"runtime/debug"
 	"sync"
@@ -75,14 +76,11 @@ func (lazy *LazyQueue) PushToQueueWait(obj interface{}) {
 
 func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 	lazy.RLock()
-	val, ok := lazy.queued[obj]
+	_, ok := lazy.queued[obj]
 	lazy.RUnlock()
 	if ok {
-		// obj is in processing or not
-		done := SyncObjByStr(val)
-		defer done()
 		lazy.RLock()
-		_, ok := lazy.queued[obj]
+		_, ok = lazy.queued[obj]
 		if ok {
 			lazy.RUnlock()
 			return
@@ -92,7 +90,7 @@ func (lazy *LazyQueue) push(obj interface{}, wait bool) {
 	queued := func() {
 		lazy.Lock()
 		defer lazy.Unlock()
-		lazy.queued[obj] = ""
+		lazy.queued[obj] = fmt.Sprintf("%p", &obj)
 		lazy.queuedBack(obj)
 	}
 	// 是否等待
@@ -144,12 +142,10 @@ func (lazy *LazyQueue) callback(key interface{}) {
 		lazy.callBack(key, err)
 	}()
 	lazy.RLock()
-	val, ok := lazy.queued[key]
+	_, ok := lazy.queued[key]
 	defer lazy.RUnlock()
 	if ok {
 		// key is in processing
-		done := SyncObjByStr(val)
-		defer done()
 		if err = lazy.call(key); err != nil {
 			log.Error("lazy call error:: %s", err.Error())
 		}
