@@ -105,29 +105,42 @@ func RandIntervalN(b1, b2 int32, n uint32) []int32 {
 	return r
 }
 
-// 根据权重随机 RandItemWeight
-func RandItemWeight(data map[interface{}]int64) (interface{}, error) {
+// RandItemWeight 根据权重随机
+func RandItemWeight(rd *rand.Rand, data map[interface{}]int64) (interface{}, error) {
+	// 无元素
+	if len(data) == 0 {
+		return nil, errors.New("no rand item")
+	}
+	// 只有一个
+	if len(data) == 1 {
+		for v, _ := range data {
+			return v, nil
+		}
+	}
 	items := make(map[interface{}][]int64)
 	// 随机
 	max := int64(0)
 	for item, weight := range data {
 		size := weight
 		from := max
-		to := max + size - 1
+		to := max + size
 		items[item] = []int64{from, to}
 		max += size
 	}
+	// 总权重为0, MAP遍历返回第一个
 	if max <= 0 {
-		return nil, errors.New("no rand by weight 0")
+		for v, _ := range data {
+			return v, nil
+		}
 	}
 	// 随机位置
-	randWeight := rand.Int63n(max)
+	randWeight := rd.Int63n(max)
 	// 概率
 	probRecord := float64(randWeight) / float64(max)
 	log.Debug("Item rand, index:%d, max:%d, weight:%v", randWeight, max, probRecord)
 	// 随机到的物品
 	for item, pos := range items {
-		if randWeight >= pos[0] && randWeight <= pos[1] {
+		if randWeight >= pos[0] && randWeight < pos[1] {
 			return item, nil
 		}
 	}
