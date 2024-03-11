@@ -2,20 +2,20 @@ package utils
 
 import (
 	"github.com/patrickmn/go-cache"
+	"sync"
 	"time"
 )
 
-var syncObjChan = cache.New(time.Minute, time.Minute*5)
+var (
+	lk          sync.Mutex
+	syncObjChan = cache.New(time.Minute, time.Minute*5)
+	tenMinutes  = time.Minute * 10
+)
 
 // SyncObjByStr 锁定一个字符串的同步操作
 func SyncObjByStr(objKey string) func() {
-	chObj, ok := syncObjChan.Get(objKey)
-	if !ok {
-		chObj = make(chan struct{}, 1)
-		syncObjChan.Set(objKey, chObj, time.Minute)
-	}
 	// lock the objKey
-	objChan := chObj.(chan struct{})
+	objChan := getChannel(objKey, tenMinutes)
 	objChan <- struct{}{}
 	return func() {
 		// release the objChan
@@ -23,15 +23,21 @@ func SyncObjByStr(objKey string) func() {
 	}
 }
 
+func getChannel(objKey string, dur time.Duration) chan struct{} {
+	lk.Lock()
+	defer lk.Unlock()
+	chObj, ok := syncObjChan.Get(objKey)
+	if !ok {
+		chObj = make(chan struct{}, 1)
+	}
+	syncObjChan.Set(objKey, chObj, dur)
+	return chObj.(chan struct{})
+}
+
 // SyncStrWithTimeout 锁定一个字符串的同步操作,允许过期
 func SyncStrWithTimeout(objKey string, duration time.Duration) func() {
-	_, ok := syncObjChan.Get(objKey)
-	if !ok {
-		syncObjChan.Set(objKey, make(chan struct{}, 1), duration)
-	}
-	chObj, _ := syncObjChan.Get(objKey)
 	// lock the objKey
-	objChan := chObj.(chan struct{})
+	objChan := getChannel(objKey, duration)
 	objChan <- struct{}{}
 	return func() {
 		// release the objChan
