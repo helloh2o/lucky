@@ -2,6 +2,7 @@ package cache
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-redis/redis/v8"
 	"net/url"
 	"strconv"
@@ -41,4 +42,28 @@ func OpenRedis(rURL string) (*redis.Client, error) {
 		RedisC = instance
 	}
 	return instance, nil
+}
+
+// NewSentinelClient 哨兵模式
+func NewSentinelClient(sentinelGroup []string) {
+	rdb := redis.NewFailoverClient(&redis.FailoverOptions{MasterName: "master", SentinelAddrs: sentinelGroup})
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		fmt.Println("Connect sentinel fail：", err)
+		return
+	}
+}
+
+// NewClusterClient 集群模式
+func NewClusterClient(clusterGroup []string) {
+	rdb := redis.NewClusterClient(&redis.ClusterOptions{Addrs: clusterGroup})
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		fmt.Println("Connect cluster fail：", err)
+		return
+	}
 }
