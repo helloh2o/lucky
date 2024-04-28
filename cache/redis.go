@@ -57,9 +57,35 @@ func NewSentinelClient(sentinelGroup []string) (*redis.Client, error) {
 	return rdb, nil
 }
 
+// NewSentinelClientOption 哨兵模式
+func NewSentinelClientOption(option *redis.FailoverOptions) (*redis.Client, error) {
+	rdb := redis.NewFailoverClient(option)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		fmt.Println("Connect sentinel fail：", err)
+		return nil, err
+	}
+	return rdb, nil
+}
+
 // NewClusterClient 集群模式
 func NewClusterClient(clusterGroup []string) (*redis.ClusterClient, error) {
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{Addrs: clusterGroup})
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+	defer cancel()
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		fmt.Println("Connect cluster fail：", err)
+		return nil, err
+	}
+	return rdb, nil
+}
+
+// NewClusterClientOption 集群模式
+func NewClusterClientOption(option *redis.ClusterOptions) (*redis.ClusterClient, error) {
+	rdb := redis.NewClusterClient(option)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 	_, err := rdb.Ping(ctx).Result()
