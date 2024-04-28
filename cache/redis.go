@@ -45,25 +45,27 @@ func OpenRedis(rURL string) (*redis.Client, error) {
 }
 
 // NewSentinelClient 哨兵模式
-func NewSentinelClient(sentinelGroup []string) {
+func NewSentinelClient(sentinelGroup []string) (*redis.Client, error) {
 	rdb := redis.NewFailoverClient(&redis.FailoverOptions{MasterName: "master", SentinelAddrs: sentinelGroup})
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 	_, err := rdb.Ping(ctx).Result()
 	if err != nil {
 		fmt.Println("Connect sentinel fail：", err)
-		return
+		return nil, err
 	}
+	return rdb, nil
 }
 
 // NewClusterClient 集群模式
-func NewClusterClient(clusterGroup []string) {
+func NewClusterClient(clusterGroup []string) (*redis.ClusterClient, error) {
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{Addrs: clusterGroup})
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 	_, err := rdb.Ping(ctx).Result()
 	if err != nil {
 		fmt.Println("Connect cluster fail：", err)
-		return
+		return nil, err
 	}
+	return rdb, nil
 }
