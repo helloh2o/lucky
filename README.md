@@ -23,7 +23,7 @@
 go get github.com/helloh2o/lucky
 
 #### 使用说明
-Go version > 1.71
+Go version >= 1.20
 
 1. 设置配置参数或保持默认
 ```go
