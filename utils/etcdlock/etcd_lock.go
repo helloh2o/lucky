@@ -5,22 +5,53 @@ import (
 	"errors"
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/clientv3/concurrency"
-	"github.com/helloh2o/lucky/log"
 	"sync"
 	"time"
 )
 
+var etcdLock *EtcdLock
+
+// InitDefault 初始化默认锁
+func InitDefault(endpoints []string) func() {
+	if endpoints == nil || len(endpoints) == 0 {
+		endpoints = []string{"127.0.0.1:2379"}
+	}
+	cli, err := clientv3.New(clientv3.Config{
+		Endpoints:           endpoints,
+		PermitWithoutStream: true,
+		DialTimeout:         5 * time.Second,
+		AutoSyncInterval:    10 * time.Second,
+	})
+	if err != nil {
+		panic(err)
+	}
+	l, release := NewDistributedLock(cli)
+	if l == nil {
+		panic("etcd lock not init")
+	}
+	etcdLock = l
+	return release
+}
+
+// D 返回默认锁
+func D() *EtcdLock {
+	if etcdLock == nil {
+		panic("etcd lock not init")
+	}
+	return etcdLock
+}
+
 // EtcdLock 基于ETCD KV的分布式锁
 type EtcdLock struct {
 	mx       sync.Mutex
-	cli      *clientv3.Client
+	Cli      *clientv3.Client
 	emptyFun func()
 	lockMap  map[*concurrency.Mutex]*concurrency.Session
 }
 
 // NewDistributedLock 创建新分布式对象
 func NewDistributedLock(c *clientv3.Client) (*EtcdLock, func()) {
-	el := &EtcdLock{cli: c, emptyFun: func() {}, lockMap: make(map[*concurrency.Mutex]*concurrency.Session)}
+	el := &EtcdLock{Cli: c, emptyFun: func() {}, lockMap: make(map[*concurrency.Mutex]*concurrency.Session)}
 	return el, el.Release
 }
 
@@ -39,24 +70,22 @@ func (el *EtcdLock) LockWithTimeout(op string, duration time.Duration) (func(), 
 func (el *EtcdLock) lock(ctx context.Context, op string) (func(), error) {
 	var err error
 	var session *concurrency.Session
-	if el.cli == nil {
+	if el.Cli == nil {
 		return el.emptyFun, errors.New("etcd client is nil")
 	}
-	if session, err = concurrency.NewSession(el.cli); err == nil {
+	if session, err = concurrency.NewSession(el.Cli); err == nil {
 		mtx := concurrency.NewMutex(session, op)
 		if err = mtx.Lock(ctx); err == nil {
 			el.mx.Lock()
 			defer el.mx.Unlock()
 			el.lockMap[mtx] = session
-			lockKey := mtx.Key()
-			log.Debug("add lock key %s", lockKey)
 			return func() {
 				el.mx.Lock()
 				defer el.mx.Unlock()
 				_ = mtx.Unlock(context.TODO())
 				_ = session.Close()
 				delete(el.lockMap, mtx)
-				log.Debug("release key %s", lockKey)
+				//log.Printf("op done delete key %s", op)
 			}, nil
 		}
 	}
@@ -67,12 +96,11 @@ func (el *EtcdLock) lock(ctx context.Context, op string) (func(), error) {
 func (el *EtcdLock) Release() {
 	el.mx.Lock()
 	defer el.mx.Unlock()
-	log.Debug("lock map size:%d", len(el.lockMap))
+	//log.Printf("lock map size:%d", len(el.lockMap))
 	for mtx, session := range el.lockMap {
-		log.Debug("final release all unlock %s", mtx.Key())
+		//log.Printf("final release all unlock %s", mtx.Key())
 		_ = mtx.Unlock(context.TODO())
 		_ = session.Close()
 		delete(el.lockMap, mtx)
 	}
-	_ = el.cli.Close()
 }
