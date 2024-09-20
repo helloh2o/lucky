@@ -3,8 +3,9 @@ package etcdlock
 import (
 	"context"
 	"errors"
-	"github.com/coreos/etcd/clientv3"
-	"github.com/coreos/etcd/clientv3/concurrency"
+	clientv3 "go.etcd.io/etcd/client/v3"
+	"go.etcd.io/etcd/client/v3/concurrency"
+	"log"
 	"sync"
 	"time"
 )
@@ -12,7 +13,7 @@ import (
 var etcdLock *EtcdLock
 
 // InitDefault 初始化默认锁
-func InitDefault(endpoints []string) func() {
+func InitDefault(endpoints ...string) func() {
 	if endpoints == nil || len(endpoints) == 0 {
 		endpoints = []string{"127.0.0.1:2379"}
 	}
@@ -96,9 +97,9 @@ func (el *EtcdLock) lock(ctx context.Context, op string) (func(), error) {
 func (el *EtcdLock) Release() {
 	el.mx.Lock()
 	defer el.mx.Unlock()
-	//log.Printf("lock map size:%d", len(el.lockMap))
+	log.Printf("lock map size:%d", len(el.lockMap))
 	for mtx, session := range el.lockMap {
-		//log.Printf("final release all unlock %s", mtx.Key())
+		log.Printf("final release all unlock %s", mtx.Key())
 		_ = mtx.Unlock(context.TODO())
 		_ = session.Close()
 		delete(el.lockMap, mtx)

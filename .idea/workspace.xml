@@ -24,14 +24,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/quic/client/quic_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/quic/client/quic_client.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quic_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quic_stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/etcdlock/etcd_lock.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/etcdlock/etcd_lock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/etcdlock/etcd_lock_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/etcdlock/etcd_lock_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="true" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -44,7 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://D:/goland1.20.5/go" />
+  <component name="GOROOT" url="file://C:/Program Files/Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
@@ -55,6 +54,12 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
   <component name="ProjectId" id="1lPlA9lEyAjcM3RqkMumno1IYSA" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -65,6 +70,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Go Build.go build github.com/helloh2o/lucky/examples/websocket.executor": "Run",
+    "Go Build.go build github.com/helloh2o/lucky/examples/websocket/client.executor": "Run",
+    "Go Test.TestEtcdLock_Lock in github.com/helloh2o/lucky/utils/etcdlock.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
@@ -75,13 +83,14 @@
     "WebServerToolWindowFactoryState": "false",
     "configurable..is.expanded": "false",
     "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/ay/go/src/lucky",
+    "last_opened_file_path": "D:/dev/lucky",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.sdk",
+    "settings.editor.selected.configurable": "project.propVCSSupport.ChangelistConflict",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -101,7 +110,7 @@
       <recent name="C:\Users\ay\go\src\lucky\core\ihttp" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/examples/quic">
+  <component name="RunManager" selected="Go Build.go build github.com/helloh2o/lucky/examples/websocket/client">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -130,22 +139,25 @@
       <filePath value="$PROJECT_DIR$/examples/websocket/wsserver.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build http_server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build github.com/helloh2o/lucky/examples/websocket/client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="lucky" />
+      <kind value="PACKAGE" />
+      <package value="github.com/helloh2o/lucky/examples/websocket/client" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/examples/http/http_server.go" />
+      <filePath value="$PROJECT_DIR$/examples/websocket/client/wsclient.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build kcpserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TestEtcdLock_Lock in github.com/helloh2o/lucky/utils/etcdlock" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
-      <package value="lucky" />
+      <working_directory value="$PROJECT_DIR$/utils/etcdlock" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/helloh2o/lucky/utils/etcdlock" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/examples/kcp/kcpserver.go" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestEtcdLock_Lock\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestRDLockOpWait in github.com/helloh2o/lucky/utils" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -173,13 +185,21 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket/client" />
+        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket" />
+        <item itemvalue="Go Test.TestEtcdLock_Lock in github.com/helloh2o/lucky/utils/etcdlock" />
         <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/quic" />
         <item itemvalue="Go Test.TestRDLockOpWait in github.com/helloh2o/lucky/utils" />
-        <item itemvalue="Go Build.go build http_server.go" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket" />
-        <item itemvalue="Go Build.go build kcpserver.go" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.21829.220" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-GO-242.21829.220" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SshConsoleOptionsProvider">
@@ -189,11 +209,50 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="fd9de33d-aeb9-41ef-8e6a-ada18df6ea0b" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="fd9de33d-aeb9-41ef-8e6a-ada18df6ea0b">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
