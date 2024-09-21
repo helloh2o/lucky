@@ -54,7 +54,7 @@ lucky.SetConf(&lucky.Data{
 ```go
 
 // 初始化ETCD锁
-onProcExitRelease := InitDefault("localhost:2379")
+onProcExitRelease := etcdlock.InitDefault("localhost:2379")
 // 程序异常退出时该函数释放当前进程持有的锁
 _ = onProcExitRelease 
 // 获得同步锁
