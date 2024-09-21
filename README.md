@@ -50,6 +50,23 @@ lucky.SetConf(&lucky.Data{
 5. 新增utils.RkPool可对任意数据进行排序，如排行榜。
 6. 新增Redis分布式锁utils.RDLockOp, 可在多进程间多协程的情景下安全操作数据
 
+#### Etcd分布式互斥锁
+```go
+
+// 初始化ETCD锁
+onProcExitRelease := InitDefault("localhost:2379")
+// 程序异常退出时该函数释放当前进程持有的锁
+_ = onProcExitRelease 
+// 获得同步锁
+op := "lock_user_data"
+release, _ := etcdlock.D().Lock(testOpKey)
+// 主动释放锁
+defer release()
+// 同步逻辑代码
+// 安全操作
+
+```   
+
 #### Redis分布式同步锁
 ```go
 // 初始化Redis
