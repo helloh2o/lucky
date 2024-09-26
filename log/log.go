@@ -145,16 +145,30 @@ func SetLogLevelDefault(lv string) {
 	defaultLogger.SetLogLevel(lv)
 }
 
-func (logger *Logger) doPrintf(level int, printLevel string, format string, a ...interface{}) {
-	if level < logger.GetOutputLv() {
+func (logger *Logger) doPrintf(level int, printLevel string, a ...interface{}) {
+	empty := ""
+	if level < logger.GetOutputLv() || len(a) == 0 {
 		return
+	}
+	format := empty
+	if len(a) > 1 {
+		format, _ = a[0].(string)
 	}
 	if logger.baseLogger == nil {
 		panic("logger closed")
 	}
-
-	format = printLevel + format
-	logger.baseLogger.Output(3, fmt.Sprintf(format, a...))
+	content := empty
+	if format != empty {
+		format = printLevel + format
+		content = fmt.Sprintf(format, a[1:]...)
+	} else {
+		sb := strings.Builder{}
+		for _, v := range a {
+			sb.WriteString(fmt.Sprintf("%+v", v))
+		}
+		content = printLevel + sb.String()
+	}
+	logger.baseLogger.Output(3, content)
 
 	if level == fatalLevel {
 		os.Exit(1)
@@ -162,28 +176,28 @@ func (logger *Logger) doPrintf(level int, printLevel string, format string, a ..
 }
 
 // Debug log
-func (logger *Logger) Debug(format string, a ...interface{}) {
-	logger.doPrintf(debugLevel, printDebugLevel, format, a...)
+func (logger *Logger) Debug(a ...interface{}) {
+	logger.doPrintf(debugLevel, printDebugLevel, a...)
 }
 
 // Release log
-func (logger *Logger) Release(format string, a ...interface{}) {
-	logger.doPrintf(releaseLevel, printReleaseLevel, format, a...)
+func (logger *Logger) Release(a ...interface{}) {
+	logger.doPrintf(releaseLevel, printReleaseLevel, a...)
 }
 
 // Warn log
-func (logger *Logger) Warn(format string, a ...interface{}) {
-	logger.doPrintf(warnLevel, printWarnLevel, format, a...)
+func (logger *Logger) Warn(a ...interface{}) {
+	logger.doPrintf(warnLevel, printWarnLevel, a...)
 }
 
 // Error log
-func (logger *Logger) Error(format string, a ...interface{}) {
-	logger.doPrintf(errorLevel, printErrorLevel, format, a...)
+func (logger *Logger) Error(a ...interface{}) {
+	logger.doPrintf(errorLevel, printErrorLevel, a...)
 }
 
 // Fatal panic
-func (logger *Logger) Fatal(format string, a ...interface{}) {
-	logger.doPrintf(fatalLevel, printFatalLevel, format, a...)
+func (logger *Logger) Fatal(a ...interface{}) {
+	logger.doPrintf(fatalLevel, printFatalLevel, a...)
 }
 
 // Export It's dangerous to call the method on logging
@@ -194,28 +208,28 @@ func Export(logger *Logger) {
 }
 
 // Debug print
-func Debug(format string, a ...interface{}) {
-	defaultLogger.doPrintf(debugLevel, printDebugLevel, format, a...)
+func Debug(a ...interface{}) {
+	defaultLogger.doPrintf(debugLevel, printDebugLevel, a...)
 }
 
 // Release print
-func Release(format string, a ...interface{}) {
-	defaultLogger.doPrintf(releaseLevel, printReleaseLevel, format, a...)
+func Release(a ...interface{}) {
+	defaultLogger.doPrintf(releaseLevel, printReleaseLevel, a...)
 }
 
 // Warn print
-func Warn(format string, a ...interface{}) {
-	defaultLogger.doPrintf(warnLevel, printWarnLevel, format, a...)
+func Warn(a ...interface{}) {
+	defaultLogger.doPrintf(warnLevel, printWarnLevel, a...)
 }
 
 // Error print
-func Error(format string, a ...interface{}) {
-	defaultLogger.doPrintf(errorLevel, printErrorLevel, format, a...)
+func Error(a ...interface{}) {
+	defaultLogger.doPrintf(errorLevel, printErrorLevel, a...)
 }
 
 // Fatal print
-func Fatal(format string, a ...interface{}) {
-	defaultLogger.doPrintf(fatalLevel, printFatalLevel, format, a...)
+func Fatal(a ...interface{}) {
+	defaultLogger.doPrintf(fatalLevel, printFatalLevel, a...)
 }
 
 // Close default logger
