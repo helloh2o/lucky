@@ -22,19 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="pub msg">
-      <change afterPath="$PROJECT_DIR$/im/initialize/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/initialize/log.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/constants/msg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/constants/resp.go" afterDir="false" />
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="sub/pub chat messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/im/server/connect/gg_gate.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/connect/gg_gate.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/server/immsg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/immsg/msg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/server/route/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/route/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/server/service/gg_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/service/gg_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imessage.go" beforeDir="false" afterPath="$PROJECT_DIR$/imessage.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/json.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/protobuf.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,8 +106,8 @@
       <recent name="C:\Users\ay\go\src\lucky\utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\dev\lucky\im\server\route" />
       <recent name="D:\dev\lucky\im\server" />
+      <recent name="D:\dev\lucky\im\server\route" />
       <recent name="D:\dev\lucky\im" />
       <recent name="D:\dev\lucky" />
       <recent name="C:\Users\ay\go\src\lucky\rproxy\tcp" />
@@ -277,7 +267,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="set windows proxy" />
     <MESSAGE value="Auth Validator" />
     <MESSAGE value="auth" />
     <MESSAGE value="auth fix" />
@@ -302,7 +291,8 @@
     <MESSAGE value="luck log optimize" />
     <MESSAGE value="im service init" />
     <MESSAGE value="pub msg" />
-    <option name="LAST_COMMIT_MESSAGE" value="pub msg" />
+    <MESSAGE value="sub/pub chat messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="sub/pub chat messages" />
   </component>
   <component name="VgoProject">
     <environment>

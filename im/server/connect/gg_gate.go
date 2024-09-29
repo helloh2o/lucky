@@ -18,6 +18,8 @@ import (
 
 var confPath = flag.String("conf", "./config.yaml", "config file path")
 
+// git config --global https.proxy http://127.0.0.1:33
+// git config --global --unset https.proxy
 func main() {
 	flag.Parse()
 	cfg := config.Initialize(*confPath)
