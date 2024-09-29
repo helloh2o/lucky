@@ -26,7 +26,7 @@ type INode interface {
 type IConnection interface {
 	GetUuid() string
 	ReadMsg()
-	WriteMsg(message interface{})
+	WriteMsg(message interface{}) error
 	Close() error
 	AfterClose(func())
 	// 设置自定义数据

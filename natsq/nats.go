@@ -64,7 +64,7 @@ func Subscribe(subject string, callback func(m *stan.Msg)) {
 }
 
 // SubscribeDurable 持久化订阅
-func SubscribeDurable(subject, durableName string, callback func(m *stan.Msg)) *stan.Subscription {
+func SubscribeDurable(subject, durableName string, callback func(m *stan.Msg)) stan.Subscription {
 	if ns == nil {
 		return nil
 	}
@@ -78,7 +78,7 @@ func SubscribeDurable(subject, durableName string, callback func(m *stan.Msg)) *
 		log.Error("Sub %s ,err %v", subject, err)
 		return nil
 	}
-	return &subscription
+	return subscription
 }
 
 // Pub 发布

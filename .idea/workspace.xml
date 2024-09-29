@@ -22,18 +22,25 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="etcd lock">
-      <change afterPath="$PROJECT_DIR$/im/server/connect/gg_connector.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/entity/msg.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/service/gg_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/storage/gg_storage.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/log/log_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/natsq/nats.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/natsq/nats_test.go" afterDir="false" />
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="luck log optimize">
+      <change afterPath="$PROJECT_DIR$/im/server/config/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/constants/types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/route/code.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/route/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/route/processor.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/exit.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/log.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/connect/gg_connector.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/connect/gg_gate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/entity/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/immsg/msg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/service/gg_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/service/gg_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inetwork.go" beforeDir="false" afterPath="$PROJECT_DIR$/inetwork.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/log_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/log_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/natsq/nats.go" beforeDir="false" afterPath="$PROJECT_DIR$/natsq/nats.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/protobuf.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quic_stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_stream.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/tcp_conn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/ws_conn.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +86,7 @@
     "DefaultGoTemplateProperty": "Go File",
     "Go Build.go build github.com/helloh2o/lucky/examples/websocket.executor": "Run",
     "Go Build.go build github.com/helloh2o/lucky/examples/websocket/client.executor": "Run",
+    "Go Test.TestDebug in github.com/helloh2o/lucky/log (1).executor": "Run",
     "Go Test.TestDebug in github.com/helloh2o/lucky/log.executor": "Debug",
     "Go Test.TestEtcdLock_Lock in github.com/helloh2o/lucky/utils/etcdlock.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -94,7 +102,7 @@
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "D:/dev/lucky/chat",
+    "last_opened_file_path": "D:/dev/lucky/utils",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -104,21 +112,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\lucky\utils" />
       <recent name="D:\dev\lucky\chat" />
       <recent name="C:\Users\ay\go\src\lucky\xdb" />
       <recent name="C:\Users\ay\go\src\lucky\utils" />
       <recent name="C:\Users\ay\go\src\lucky\example" />
-      <recent name="C:\Users\ay\go\src\lucky\core\inet" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\dev\lucky" />
+      <recent name="D:\dev\lucky\im\server\route" />
       <recent name="D:\dev\lucky\im\server" />
+      <recent name="D:\dev\lucky\im" />
+      <recent name="D:\dev\lucky" />
       <recent name="C:\Users\ay\go\src\lucky\rproxy\tcp" />
-      <recent name="C:\Users\ay\go\src\lucky\utils" />
-      <recent name="C:\Users\ay\go\src\lucky" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestDebug in github.com/helloh2o/lucky/log">
+  <component name="RunManager" selected="Go Test.TestDebug in github.com/helloh2o/lucky/log (1)">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="lucky" />
       <working_directory value="$PROJECT_DIR$" />
@@ -127,15 +135,6 @@
       <package value="lucky" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build github.com/helloh2o/lucky/examples/quic" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="lucky" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/helloh2o/lucky/examples/quic" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/examples/quic/quic_server.go" />
       <method v="2" />
     </configuration>
     <configuration name="go build github.com/helloh2o/lucky/examples/websocket" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -154,6 +153,18 @@
       <package value="github.com/helloh2o/lucky/examples/websocket/client" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/examples/websocket/client/wsclient.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestDebug in github.com/helloh2o/lucky/log (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="lucky" />
+      <working_directory value="$PROJECT_DIR$/log" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/helloh2o/lucky/log" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestDebug\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestDebug in github.com/helloh2o/lucky/log" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -193,19 +204,19 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestDebug in github.com/helloh2o/lucky/log (1)" />
         <item itemvalue="Go Test.TestDebug in github.com/helloh2o/lucky/log" />
         <item itemvalue="Go Test.TestEtcdLock_Lock in github.com/helloh2o/lucky/utils/etcdlock" />
         <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket/client" />
         <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/websocket" />
-        <item itemvalue="Go Build.go build github.com/helloh2o/lucky/examples/quic" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.22855.85" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-GO-242.22855.85" />
+        <option value="bundled-gosdk-5df93f7ad4aa-df9ad98b711f-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-242.23339.24" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-GO-242.23339.24" />
       </set>
     </attachedChunks>
   </component>
@@ -267,7 +278,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix rd_lock mem leak" />
     <MESSAGE value="fix lazy q bug :)" />
     <MESSAGE value="fix redis lock bug :)" />
     <MESSAGE value="set windows proxy" />
@@ -292,7 +302,8 @@
     <MESSAGE value="etcd_lock_go&#10;&#10;etcd_lock_go" />
     <MESSAGE value="update" />
     <MESSAGE value="etcd lock" />
-    <option name="LAST_COMMIT_MESSAGE" value="etcd lock" />
+    <MESSAGE value="luck log optimize" />
+    <option name="LAST_COMMIT_MESSAGE" value="luck log optimize" />
   </component>
   <component name="VgoProject">
     <environment>

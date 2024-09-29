@@ -58,6 +58,10 @@ func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) erro
 
 // WrapMsg format the interface message to []byte
 func (pbf *PbfProcessor) WrapMsg(message interface{}) ([]byte, error) {
+	// add []byte assert
+	if _, ok := message.([]byte); ok {
+		return message.([]byte), nil
+	}
 	log.Debug("===> Protobuf processor wrap %v for write", reflect.TypeOf(message))
 	data, err := proto.Marshal(message.(proto.Message))
 	if err != nil {

@@ -2,6 +2,7 @@ package lucky
 
 import (
 	"encoding/binary"
+	"errors"
 	"github.com/google/uuid"
 	"github.com/helloh2o/lucky/log"
 	"github.com/quic-go/quic-go"
@@ -140,23 +141,25 @@ func (s *QuicStream) ReadMsg() {
 }
 
 // WriteMsg warp msg base on conn's processor
-func (s *QuicStream) WriteMsg(message interface{}) {
+func (s *QuicStream) WriteMsg(message interface{}) error {
 	pkg, err := s.processor.WrapMsg(message)
 	if err != nil {
 		log.Error("Quic Steam OnWrapMsg package error %s", err)
+		return err
 	} else {
 	push:
 		select {
 		case s.writeQueue <- pkg:
 		default:
 			if s.IsClosed() {
-				return
+				return errors.New("Quic Steam WriteMsg closed")
 			}
 			time.Sleep(time.Millisecond * 50)
 			// re push
 			goto push
 		}
 	}
+	return nil
 }
 
 // Close the conn

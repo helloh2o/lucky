@@ -20,4 +20,5 @@ func TestDebug(t *testing.T) {
 		struct{ HH string }{HH: "hh log"},
 	})
 	Debug("test format %v, %d, %s, %.2f", true, 1, "xx", 13.2222)
+	Debug("test format", 1, true)
 }

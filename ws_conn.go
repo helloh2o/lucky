@@ -1,6 +1,7 @@
 package lucky
 
 import (
+	"errors"
 	"github.com/fasthttp/websocket"
 	"github.com/google/uuid"
 	"github.com/helloh2o/lucky/log"
@@ -44,9 +45,6 @@ func NewWSConn(conn *websocket.Conn, processor Processor) *WSConn {
 	// write q
 	go func() {
 		for pkg := range wc.writeQueue {
-			if pkg == nil {
-				break
-			}
 			// Binary=1 Text=0
 			if C.ConnWriteTimeout > 0 {
 				_ = wc.conn.SetWriteDeadline(time.Now().Add(time.Second * time.Duration(C.ConnWriteTimeout)))
@@ -65,10 +63,6 @@ func NewWSConn(conn *websocket.Conn, processor Processor) *WSConn {
 	// logic q
 	go func() {
 		for pkg := range wc.logicQueue {
-			// logic over
-			if pkg == nil {
-				break
-			}
 			// processor handle the package
 			func() {
 				defer func() {
@@ -91,8 +85,8 @@ func (wc *WSConn) GetUuid() string {
 // ReadMsg read | write end -> write | read end -> conn end
 func (wc *WSConn) ReadMsg() {
 	defer func() {
-		wc.logicQueue <- nil
-		wc.writeQueue <- nil
+		close(wc.logicQueue)
+		close(wc.writeQueue)
 		// force close conn
 		if !wc.IsClosed() {
 			_ = wc.conn.Close()
@@ -126,10 +120,11 @@ func (wc *WSConn) ReadMsg() {
 }
 
 // WriteMsg warp msg base on conn's processor
-func (wc *WSConn) WriteMsg(message interface{}) {
+func (wc *WSConn) WriteMsg(message interface{}) error {
 	pkg, err := wc.processor.WrapMsg(message)
 	if err != nil {
 		log.Error("OnWrapMsg package error %s", err)
+		return err
 	} else {
 		// ws write data only ,not need data length
 	push:
@@ -137,7 +132,7 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 		case wc.writeQueue <- pkg[2:]:
 		default:
 			if wc.IsClosed() {
-				return
+				return errors.New("websocket closed")
 			}
 			time.Sleep(time.Millisecond * 50)
 			// re push
@@ -145,6 +140,7 @@ func (wc *WSConn) WriteMsg(message interface{}) {
 		}
 
 	}
+	return nil
 }
 
 // Close the conn
