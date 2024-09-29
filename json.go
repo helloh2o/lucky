@@ -33,10 +33,15 @@ func NewJSONProcessor() *JsonProcessor {
 
 // OnReceivedPackage 收到完整数据包
 func (jp *JsonProcessor) OnReceivedPackage(writer interface{}, body []byte) error {
+	return jp.OnReceivedPackageEC(writer, body, jp.enc)
+}
+
+// OnReceivedPackageEC 收到完整数据包,附带解析器
+func (jp *JsonProcessor) OnReceivedPackageEC(writer interface{}, body []byte, ec Encryptor) error {
 	// 解密
-	if jp.enc != nil {
+	if ec != nil {
 		//log.Debug("before decode:: %v", body)
-		body = jp.enc.Decode(body)
+		body = ec.Decode(body)
 		//log.Debug("after decode:: %v", body)
 	}
 	// 解码

@@ -4,6 +4,7 @@ import (
 	"flag"
 	"github.com/helloh2o/lucky"
 	"github.com/helloh2o/lucky/examples/chatroom/jsonmsg"
+	"github.com/helloh2o/lucky/im/initialize"
 	"github.com/helloh2o/lucky/im/server/config"
 	"github.com/helloh2o/lucky/im/server/constants"
 	"github.com/helloh2o/lucky/im/server/immsg"
@@ -23,6 +24,7 @@ func main() {
 	jsp := route.JsonHandler()
 	_ = natsq.InitOneClient("chat_msg_ns", cfg.NatsUrl, config.Get().ServerId)
 	release := etcdlock.InitDefault(cfg.ETCDClusterList...)
+	initialize.InitLog()
 	jsp.RegisterHandler(constants.GATE_MSG, &immsg.ConnectMsg{}, func(args ...interface{}) {
 		// 链接建立，订阅自己的频道
 		msg := args[lucky.Msg].(*immsg.ConnectMsg)
@@ -50,8 +52,8 @@ func main() {
 					}
 				})
 			}
-			// 回去消息
-			_ = conn.WriteMsg(&immsg.BaseMsg{Type: constants.Connected})
+			// 返回数据，返回随机加密串
+			_ = conn.WriteMsg(&immsg.BaseMsg{Type: constants.Connected, Raw: []byte(lucky.RandLittlePassword())})
 		}
 	})
 	lucky.SetConf(&lucky.Data{

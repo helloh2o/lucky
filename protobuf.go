@@ -27,10 +27,15 @@ func NewPBProcessor() *PbfProcessor {
 
 // OnReceivedPackage 收到完整数据包, 返回解包错误
 func (pbf *PbfProcessor) OnReceivedPackage(writer interface{}, body []byte) error {
+	return pbf.OnReceivedPackageEC(writer, body, pbf.enc)
+}
+
+// OnReceivedPackageEC 收到完整数据包,附带解析器
+func (pbf *PbfProcessor) OnReceivedPackageEC(writer interface{}, body []byte, ec Encryptor) error {
 	// 解密
-	if pbf.enc != nil {
+	if ec != nil {
 		//log.Debug("before decode:: %v", body)
-		body = pbf.enc.Decode(body)
+		body = ec.Decode(body)
 		//log.Debug("after decode:: %v", body)
 	}
 	// 解码

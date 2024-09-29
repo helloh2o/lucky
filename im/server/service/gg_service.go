@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"github.com/helloh2o/lucky"
+	"github.com/helloh2o/lucky/im/initialize"
 	"github.com/helloh2o/lucky/im/server/config"
 	"github.com/helloh2o/lucky/im/server/route"
 	"github.com/helloh2o/lucky/log"
@@ -10,9 +11,13 @@ import (
 	"github.com/helloh2o/lucky/utils"
 	"github.com/helloh2o/lucky/utils/etcdlock"
 	"github.com/kataras/iris/v12/context"
+	"sync"
 )
 
-var confPath = flag.String("conf", "./config.yaml", "config file path")
+var (
+	confPath   = flag.String("conf", "./config.yaml", "config file path")
+	encryptors sync.Map
+)
 
 func main() {
 	flag.Parse()
@@ -20,18 +25,37 @@ func main() {
 	jsp := route.JsonHandler()
 	_ = natsq.InitOneClient("chat_msg_ns", cfg.NatsUrl, config.Get().ServerId)
 	release := etcdlock.InitDefault(cfg.ETCDClusterList...)
+	initialize.InitLog()
+	initialize.InitRDB()
 	// 跨越
 	lucky.EnableCrossOrigin()
-	// API注册
-	lucky.Post("/msg/send", func(context *context.Context) {
-		body, err := context.GetBody()
+	// 消息服务
+	lucky.Post("/msg/service", func(ctx *context.Context) {
+		signature := ctx.FormValue("signature")
+		body, err := ctx.GetBody()
 		if err != nil {
 			log.Error("Read body error %v", err)
 			return
 		} else {
-			err = jsp.OnReceivedPackage(context, body)
+			// 解密器
+			var ec lucky.Encryptor
+			if signature == "" {
+				if val, ok := encryptors.Load(signature); ok {
+					ec = val.(lucky.Encryptor)
+				} else {
+					if pwd, ep := lucky.ParseLittlePassword(signature); ep == nil {
+						ec = lucky.NewLittleCipher(pwd)
+						encryptors.Store(signature, ec)
+					}
+				}
+			}
+			err = jsp.OnReceivedPackageEC(ctx, body, ec)
 			log.Error(err)
 		}
+	})
+	// 文件服务
+	lucky.Post("/file/upload", func(ctx *context.Context) {
+		//TODO
 	})
 	// 处理逻辑注册
 	route.InitHandler()

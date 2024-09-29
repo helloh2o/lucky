@@ -5,10 +5,13 @@ type Msg interface {
 }
 
 type BaseMsg struct {
-	Raw     []byte `json:"data"`
-	Url     string `json:"url"`
-	TimeFmt string `json:"time_fmt"`
-	Type    int    `json:"type"`
+	FromId   string `json:"from_id"`
+	FromName string `json:"from_name"`
+	Avatar   string `json:"avatar"`
+	Raw      []byte `json:"data"`
+	Url      string `json:"url"`
+	Type     int    `json:"type"`
+	TimeFmt  string `json:"time_fmt"`
 }
 
 func (m BaseMsg) String() string {
@@ -23,13 +26,11 @@ type ConnectMsg struct {
 
 type PeerMsg struct {
 	BaseMsg
-	From string `json:"from"`
-	To   string `json:"to"`
+	ToUser string `json:"to_user"`
 }
 
 type PeerGroupMsg struct {
 	BaseMsg
-	From    string `json:"from"`
-	GroupId string `json:"group"`
+	ToGroup string `json:"to_group"`
 	AtList  string `json:"at_list"`
 }

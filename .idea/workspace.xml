@@ -22,25 +22,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="luck log optimize">
-      <change afterPath="$PROJECT_DIR$/im/server/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/constants/types.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/route/code.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/route/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/im/server/route/processor.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/exit.go" afterDir="false" />
+    <list default="true" id="4550d2d2-1116-42a4-a612-e800ab051978" name="Default Changelist" comment="pub msg">
+      <change afterPath="$PROJECT_DIR$/im/initialize/db.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/initialize/log.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/constants/msg.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/im/server/constants/resp.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/server/connect/gg_connector.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/connect/gg_gate.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/im/server/entity/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/immsg/msg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/connect/gg_gate.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/connect/gg_gate.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/immsg/msg.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/immsg/msg.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/im/server/route/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/route/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/im/server/service/gg_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/im/server/service/gg_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inetwork.go" beforeDir="false" afterPath="$PROJECT_DIR$/inetwork.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imessage.go" beforeDir="false" afterPath="$PROJECT_DIR$/imessage.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/json.go" beforeDir="false" afterPath="$PROJECT_DIR$/json.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/log_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/log/log_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/natsq/nats.go" beforeDir="false" afterPath="$PROJECT_DIR$/natsq/nats.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/protobuf.go" beforeDir="false" afterPath="$PROJECT_DIR$/protobuf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quic_stream.go" beforeDir="false" afterPath="$PROJECT_DIR$/quic_stream.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcp_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/tcp_conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ws_conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/ws_conn.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +57,9 @@
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="GoVcsConfiguration">
+    <option name="GO_FMT" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -102,7 +99,7 @@
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "D:/dev/lucky/utils",
+    "last_opened_file_path": "D:/dev/lucky/im/initialize",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -112,11 +109,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\lucky\im\initialize" />
       <recent name="D:\dev\lucky\utils" />
       <recent name="D:\dev\lucky\chat" />
       <recent name="C:\Users\ay\go\src\lucky\xdb" />
       <recent name="C:\Users\ay\go\src\lucky\utils" />
-      <recent name="C:\Users\ay\go\src\lucky\example" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\lucky\im\server\route" />
@@ -278,8 +275,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix lazy q bug :)" />
-    <MESSAGE value="fix redis lock bug :)" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="set windows proxy" />
     <MESSAGE value="Auth Validator" />
     <MESSAGE value="auth" />
@@ -303,7 +300,9 @@
     <MESSAGE value="update" />
     <MESSAGE value="etcd lock" />
     <MESSAGE value="luck log optimize" />
-    <option name="LAST_COMMIT_MESSAGE" value="luck log optimize" />
+    <MESSAGE value="im service init" />
+    <MESSAGE value="pub msg" />
+    <option name="LAST_COMMIT_MESSAGE" value="pub msg" />
   </component>
   <component name="VgoProject">
     <environment>
