@@ -81,20 +81,27 @@ func SubscribeDurable(subject, durableName string, callback func(m *stan.Msg)) s
 	return subscription
 }
 
-// Pub 发布
-func Pub(subject string, msg []byte) error {
+// Pub 发布消息
+func Pub(subject string, msg []byte, async bool) error {
 	if ns == nil {
 		log.Error("pub error:%s", "nats client is nil")
 		return errors.New("ns is nil")
 	}
-	// Simple Synchronous Publisher
-	guid, err := ns.PublishAsync(subject, msg, func(s string, err error) {
-		if err != nil {
-			log.Error("pub error: subugot sub ack %s, err:%v", s, err)
-		} else {
-			log.Release("client act msg:%s", s)
-		}
-	})
+	var err error
+	var guid string
+	if async {
+		// Publish MSG wait for ack
+		guid, err = ns.PublishAsync(subject, msg, func(s string, err error) {
+			if err != nil {
+				log.Error("pub error: subugot sub ack %s, err:%v", s, err)
+			} else {
+				log.Release("client act msg:%s", s)
+			}
+		})
+	} else {
+		// Publish MSG wait for ack
+		err = ns.Publish(subject, msg)
+	}
 	if err != nil {
 		log.Error("pub error: %v", err)
 		return err
