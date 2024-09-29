@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"github.com/helloh2o/lucky"
-	"github.com/helloh2o/lucky/im/initialize"
 	"github.com/helloh2o/lucky/im/server/config"
+	initialize2 "github.com/helloh2o/lucky/im/server/initialize"
 	"github.com/helloh2o/lucky/im/server/route"
 	"github.com/helloh2o/lucky/log"
 	"github.com/helloh2o/lucky/natsq"
@@ -25,8 +25,8 @@ func main() {
 	jsp := route.JsonHandler()
 	_ = natsq.InitOneClient("chat_msg_ns", cfg.NatsUrl, config.Get().ServerId)
 	release := etcdlock.InitDefault(cfg.ETCDClusterList...)
-	initialize.InitLog()
-	initialize.InitRDB()
+	initialize2.InitLog()
+	initialize2.InitRDB()
 	// 跨越
 	lucky.EnableCrossOrigin()
 	// 消息服务
