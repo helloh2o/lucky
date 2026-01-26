@@ -58,7 +58,7 @@ func TestKeepLock(t *testing.T) {
 	<-quit
 }
 
-func TestKeepLock(t *testing.T) {
+func TestKeepLock2(t *testing.T) {
 	done := Init("K0")
 	defer done()
 	timeoutCtx, cancel := context.WithTimeout(context.Background(), time.Second*5)
